@@ -1,9 +1,362 @@
 <template>
   <div>
-    <h1>Hello!</h1>
+    <main class="container home-head">
+      <div class="home-head__left">
+        <div class="home-head__social">
+          <a href="#"><img src="~/assets/img/logo-vk.svg" alt="vk" width="27" height="27"></a>
+          <a href="#"><img src="~/assets/img/logo-instagram.svg" alt="instagram" width="27" height="27"></a>
+          <a href="#"><img src="~/assets/img/logo-youtube.svg" alt="youtube" width="25" height="25"></a>
+        </div>
+        <div class="home-head__scroll">Листай ниже</div>
+      </div>
+      <div class="home-head__body">
+        <div class="home-head__title title">только <span class="title_green">свежие</span><br>ингредиенты</div>
+        <div class="home-head__slogan">и вкусная пицца, роллы и десерты</div>
+        <button class="home-head__button button_shadow button">Закажи доставку</button>
+        <div class="home-head__time">
+          <span>ЕЖЕДНЕВНО</span><br/>
+          С 10:00 ДО 00:00
+        </div>
+        <div class="home-head__contacts">
+          <div class="home-head__address">ул. Омелькова, 21</div>
+          <div class="home-head__phone"><a href="tel:+79180576767">+7 (918) 057 67 67</a></div>
+        </div>
+      </div>
+    </main>
+    <section>
+      <div class="container">
+        <div class="current-action">
+          <div class="current-action__item">
+            <div class="section-title">Свежие <span>акции</span></div>
+            <div class="section-intro current-action__intro">Наши лучшие предложения, которые не оставят Вас равнодушными к нам :)</div>
+          </div>
+          <div class="current-action__item">
+            <a href="#"><img src="~/assets/img/action-main.png" alt="action"></a>
+          </div>
+          <div class="current-action__item">
+            <a href="#"><img src="~/assets/img/action-main1.png" alt="action"></a>
+          </div>
+          <div class="current-action__item">
+            <a href="#"><img src="~/assets/img/action-main1.png" alt="action"></a>
+          </div>
+        </div>
+        <div class="application-action">
+          <a href="#"><img src="~/assets/img/application-action.png" alt="action"></a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="section-title">Быстрое <span>меню</span></div>
+        <div class="section-intro">Все самое нужное прямо перед глазами на самой главной странице ;)</div>
+        <div class="fast-menu">
+          <div class="fast-menu__col">
+            <div class="fast-menu__item substrate">
+              <div class="fast-menu__icon">
+                <img src="~/assets/img/pizza.svg" alt="icon">
+              </div>
+              <div class="fast-menu__data">
+                <div class="fast-menu__title"><span>Пицца</span><br>Горячая, вкусная и сочная</div>
+                <a href="#" class="button-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="fast-menu__col">
+            <div class="fast-menu__item substrate">
+              <div class="fast-menu__icon">
+                <img src="~/assets/img/rolls.svg" alt="icon">
+              </div>
+              <div class="fast-menu__data">
+                <div class="fast-menu__title"><span>Роллы</span><br>Много вкусной начинки</div>
+                <a href="#" class="button-link"></a>
+              </div>
+            </div>
+          </div>
+          <div class="fast-menu__col">
+            <div class="fast-menu__item substrate">
+              <div class="fast-menu__icon">
+                <img src="~/assets/img/sushi.svg" alt="icon">
+              </div>
+              <div class="fast-menu__data">
+                <div class="fast-menu__title"><span>Сеты и комбо</span><br>Горячая, вкусная и сочная</div>
+                <a href="#" class="button-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 export default {}
 </script>
+
+<style lang="scss">
+.home-head {
+  &__left {
+    display: none;
+  }
+
+  &__button {
+    margin: 30px 0;
+  }
+
+  &__time {
+    display: none;
+  }
+
+  &__contacts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__address {
+    font-weight: 300;
+  }
+
+  &__phone {
+    font-weight: 500;
+
+    > a {
+      color: #fff;
+    }
+  }
+
+  &__social {
+    display: none;
+  }
+
+  &__title {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  @include media-tablet {
+    display: flex;
+    padding-bottom: 100px;
+
+    &__left {
+      display: block;
+      padding-right: 50px;
+    }
+
+    &__social {
+      display: block;
+
+      > a {
+        display: block;
+        padding: 0 0 6px 0;
+      }
+    }
+
+    &__scroll {
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      font-size: 14px;
+      position: relative;
+      font-weight: 300;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: -33px;
+        width: 1px;
+        height: 20px;
+        background: #fff;
+      }
+    }
+
+    &__contacts {
+      display: none;
+    }
+
+    &__button {
+      margin: 45px 0 0 0;
+    }
+  }
+
+  @include media-laptop {
+    &__slogan {
+      font-size: 28px;
+    }
+
+    &__button {
+      font-weight: 700;
+      font-size: 30px;
+    }
+
+    &__scroll {
+      font-size: 16px;
+      margin-top: 10px;
+
+      &::after {
+        left: 11px;
+        top: -63px;
+        width: 1px;
+        height: 44px;
+      }
+    }
+
+    &__title {
+      font-size: 60px;
+      line-height: 72px;
+    }
+  }
+
+  @include media-desktop {
+    padding-bottom: 175px;
+
+    &__left {
+      padding-right: 80px;
+    }
+
+    &__time {
+      display: block;
+      position: relative;
+      z-index: 5;
+      font-size: 36px;
+      line-height: 50px;
+      margin-top: 80px;
+
+      span {
+        color: #3cd52e;
+      }
+    }
+
+    &__slogan {
+      font-size: 38px;
+    }
+
+    &__social {
+      > a {
+        padding: 14px 0;
+      }
+    }
+
+    &__button {
+      margin: 80px 0 0 0;
+    }
+
+    &__scroll {
+      font-size: 18px;
+
+      &::after {
+        left: 11px;
+        top: -118px;
+        width: 1px;
+        height: 81px;
+      }
+    }
+
+    &__title {
+      font-size: 84px;
+      line-height: 95px;
+    }
+  }
+}
+
+.current-action {
+  &__intro {
+    padding-bottom: 0;
+  }
+
+  &__item {
+    margin: 0 0 30px 0;
+  }
+
+  @include media-tablet {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-between;
+
+    &__item {
+      width: 45%;
+    }
+  }
+
+  @include media-desktop {
+    &__item {
+      width: 580px;
+    }
+  }
+}
+
+.application-action {
+  @include media-desktop {
+    margin-top: 64px;
+  }
+}
+
+.fast-menu {
+  &__col {
+    margin-bottom: 30px;
+  }
+
+  &__icon {
+    text-align: center;
+    margin-bottom: 15px;
+
+    > img {
+      width: 150px;
+    }
+  }
+
+  &__data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    > span {
+      font-weight: bold;
+      color: #3cd52e;
+    }
+  }
+
+  @include media-tablet {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-around;
+
+    &__col {
+      width: 45%;
+    }
+  }
+
+  @include media-laptop {
+    justify-content: space-between;
+
+    &__col {
+      width: 30%;
+    }
+  }
+
+  @include media-desktop {
+    &__col {
+      width: 366px;
+    }
+
+    &__icon {
+      > img {
+        width: auto;
+      }
+    }
+
+    &__title {
+      line-height: 30px;
+      > span {
+        font-size: 36px;
+      }
+    }
+  }
+}
+</style>

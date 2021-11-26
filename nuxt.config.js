@@ -23,6 +23,13 @@ export default {
     '~/assets/scss/global.scss'
   ],
 
+  styleResources: {
+    scss: [
+      '~assets/scss/variables.scss',
+      '~assets/scss/mixins/media.scss'
+    ]
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
@@ -35,7 +42,8 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

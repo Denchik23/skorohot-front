@@ -23,3 +23,61 @@ export default {
   name: 'NavTop'
 }
 </script>
+
+<style lang="scss">
+.nav-top {
+  display: none;
+
+  @include media-tablet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__links li {
+      display: inline-block;
+      margin-right: 8px;
+
+      > a {
+        padding: 0 5px 5px 5px;
+        font-size: 16px;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .nav-top__basket {
+      font-size: 22px;
+    }
+
+    .nav-top__button {
+      font-size: 18px;
+      margin-left: 30px;
+    }
+  }
+
+  @include media-laptop {
+    position: relative;
+    z-index: 1;
+
+    &__links li {
+      margin-right: 8px;
+
+      > a {
+        font-size: 24px;
+      }
+    }
+  }
+
+  @include media-desktop {
+    &__links li {
+      margin-right: 40px;
+    }
+
+    .nav-top__button {
+      margin-left: 98px;
+    }
+  }
+}
+</style>

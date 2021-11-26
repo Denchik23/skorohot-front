@@ -14,9 +14,11 @@
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1637745161.ea53f98",
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/style-resources": "^1.2.1",
     "core-js": "^3.15.1",
     "normalize.css": "^8.0.1",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "stylelint-scss": "^4.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
