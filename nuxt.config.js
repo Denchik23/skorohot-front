@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'skorohot-front',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ru'
     },
     meta: [
       { charset: 'utf-8' },
@@ -18,6 +18,9 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/node_modules/normalize.css/normalize',
+    '~/assets/scss/fonts.scss',
+    '~/assets/scss/global.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -51,7 +54,12 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: 'http://localhost'
+        url: 'http://localhost',
+        endpoints: {
+          login: {
+            url: '/api/login'
+          }
+        }
       }
     }
   },
