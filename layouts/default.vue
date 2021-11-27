@@ -1,12 +1,12 @@
 <template>
-  <div class="page">
+  <div class="lock">
     <div class="wrapper">
-      <header-main/>
-      <nav-top/>
+      <header-main />
+      <nav-top />
       <Nuxt />
       <div class="footer-gradient"></div>
     </div>
-    <footer-main/>
+    <footer-main />
   </div>
 </template>
 

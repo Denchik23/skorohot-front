@@ -7,27 +7,37 @@
             <a href="#" title="Скороход">
               <img src="~/assets/img/logo.svg" alt="Скороход"></a>
           </div>
-          <div class="logo__city">Анапа</div>
+          <div class="logo__city">
+            Анапа
+          </div>
         </div>
         <div class="header__address address">
           <span>ул. Омелькова, 21</span>
           <span>ул. Владимирская, 134</span>
         </div>
         <div class="header__time">
-          <span>ЕЖЕДНЕВНО</span><br/>
+          <span>ЕЖЕДНЕВНО</span><br>
           С 10:00 ДО 00:00
         </div>
         <a href="tel:+79180576767" class="header__phone">
           <img src="~/assets/img/phone-call.svg" alt="phone-call" width="64" height="64">
           <span>+7 (918) 057 67 67</span>
         </a>
-        <div class="menu-burger">
+        <div
+          class="menu-burger"
+          :class="{ 'menu-burger_open' : showMenu }"
+          @click="toggleMenu"
+        >
           <span></span>
         </div>
-        <div class="mobile-menu">
+        <div class="mobile-menu" :class="{ 'mobile-menu_show' : showMenu }">
           <div class="mobile-menu__body basket-body">
-            <button class="basket-body__basket basket">10 500</button>
-            <button class="button button_green basket-body__button">Войти</button>
+            <button class="basket-body__basket basket">
+              10 500
+            </button>
+            <button class="button button_green basket-body__button">
+              Войти
+            </button>
           </div>
           <ul class="nav mobile-menu__links">
             <li><a href="#" class="nav__link nav__link_active">Главная</a></li>
@@ -47,15 +57,20 @@
 
 export default {
   name: 'HeaderMain',
+  components: {
+  },
   data () {
     return {
+      showMenu: false
     }
   },
   computed: {
   },
   methods: {
-  },
-  components: {
+    toggleMenu () {
+      this.showMenu = !this.showMenu
+      document.body.classList.toggle('lock')
+    }
   }
 }
 </script>
@@ -314,10 +329,6 @@ export default {
   &.menu-burger_open span {
     transform: scale(0);
   }
-}
-
-body.lock {
-  overflow: hidden;
 }
 
 @include media-tablet {
