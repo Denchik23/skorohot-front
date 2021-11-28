@@ -12,7 +12,12 @@
     </div>
     <div class="basket-body">
       <button class="nav-top__basket basket-body__basket basket">10 500</button>
-      <button class="nav-top__button basket-body__button button_green button">Войти</button>
+      <ui-base-button
+        class="nav-top__button basket-body__button"
+        green
+      >
+        Войти
+      </ui-base-button>
     </div>
   </div>
 

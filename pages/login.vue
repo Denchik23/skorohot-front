@@ -4,45 +4,26 @@
       <div class="container">
         <div class="auth">
           <div class="auth__form substrate">
-            <div class="auth__choice form-item">
+            <ui-form-item class="auth__choice">
               <div class="radio-group">
                 <div class="radio-group__item">
-                  <input name="delivery" type="radio" id="delivery" checked="checked">
+                  <input
+                    id="delivery"
+                    name="delivery"
+                    type="radio"
+                    checked="checked"
+                    value="LoginAuthorization"
+                    v-model="changeAction"
+                  >
                   <label class="radio-group__button button" for="delivery">Вход</label>
                 </div>
                 <div class="radio-group__item">
-                  <input name="delivery" type="radio" id="pickup">
+                  <input id="pickup" name="delivery" type="radio" value="LoginRegistration" v-model="changeAction">
                   <label class="radio-group__button button" for="pickup">Регистрация</label>
                 </div>
               </div>
-            </div>
-            <div class="auth__body">
-              <div class="auth__title section-title section-title_substrate">Добро <span>пожаловать!</span></div>
-              <div class="form-item">
-                <label class="form-item__label">Номер телефона <span class="required">*</span></label>
-                <input type="text" class="base-input" placeholder="+7 989 776-18-71">
-              </div>
-              <div class="form-item">
-                <label class="form-item__label">Пароль <span class="required">*</span></label>
-                <input type="password" class="base-input" placeholder="Не менее 8 цифр">
-              </div>
-              <div class="form-item">
-                <div class="auth__action">
-                  <button class="auth__forgot">Забыли пароль?</button>
-                  <button class="auth__button button">Войти</button>
-                </div>
-              </div>
-              <div class="auth__social">
-                <div>Или войти с помощью</div>
-                <ul>
-                  <li><a href="#"><img src="~/assets/img/vk-icon.svg" alt="vk-icon" width="41" height="41"></a></li>
-                  <li><a href="#"><img src="~/assets/img/google-plus-icon.svg" alt="google-plus-icon" width="41" height="41"></a></li>
-                  <li><a href="#"><img src="~/assets/img/apple-icon.svg" alt="apple-icon" width="41" height="41"></a></li>
-                  <li><a href="#"><img src="~/assets/img/facebook-icon.svg" alt="facebook-icon" width="41" height="41"></a></li>
-                  <li><a href="#"><img src="~/assets/img/telegram-icon.svg" alt="telegram-icon" width="41" height="41"></a></li>
-                </ul>
-              </div>
-            </div>
+            </ui-form-item>
+            <component v-bind:is="changeAction" />
           </div>
           <div class="auth__content">
             <div class="title">Аккаунт:<br><span class="title_green">его </span><span class="title_red">преимущества</span></div>
@@ -84,21 +65,10 @@ export default {
   name: 'login',
   data () {
     return {
-      email: '',
-      password: ''
+      changeAction: 'LoginAuthorization'
     }
   },
   methods: {
-    async login () {
-      await this.$auth.loginWith('laravelSanctum', {
-        data: {
-          email: 'it.denchik@yandex.ru',
-          password: '123456789'
-        }
-      })
-
-      this.$router.push('/')
-    }
   }
 }
 </script>
@@ -172,7 +142,7 @@ export default {
 
   @include media-tablet {
     &__title {
-      font-size: 40px;
+      font-size: 35px;
     }
   }
 
