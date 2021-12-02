@@ -32,6 +32,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~plugins/vue-js-modal.js',
     '~plugins/vue-common-plugins.js'
     // '~plugins/vue-common-plugins.client.js'
   ],
@@ -57,6 +58,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
+    baseURL: 'http://localhost/api',
     credentials: true
   },
 
@@ -68,6 +70,9 @@ export default {
         endpoints: {
           login: {
             url: '/api/login'
+          },
+          logout: {
+            url: '/api/logout'
           }
         }
       }

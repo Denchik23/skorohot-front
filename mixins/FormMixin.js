@@ -26,6 +26,13 @@ export default {
       }
       this.loaderButton = true
       return true
+    },
+    getResponseErrorMessage (response) {
+      let errorText = 'Сервер не отвечает. Попробуйте ещё раз.'
+      if (typeof response !== 'undefined' && typeof response.data.message !== 'undefined') {
+        errorText = response.data.message
+      }
+      return errorText
     }
   },
   created () {

@@ -12,12 +12,13 @@
     </div>
     <div class="basket-body">
       <button class="nav-top__basket basket-body__basket basket">10 500</button>
-      <ui-base-button
-        class="nav-top__button basket-body__button"
-        green
-      >
-        Войти
-      </ui-base-button>
+      <template v-if="$auth.loggedIn">
+        <div class="avatar">
+          <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+        </div>
+        <button class="authorization" @click="logout"></button>
+      </template>
+      <NuxtLink v-else to="/login" class="nav-top__button basket-body__button button_green button">Войти</NuxtLink>
     </div>
   </div>
 
@@ -25,7 +26,13 @@
 
 <script>
 export default {
-  name: 'NavTop'
+  name: 'NavTop',
+  methods: {
+    async logout () {
+      await this.$auth.logout()
+      await this.$router.push('/')
+    }
+  }
 }
 </script>
 

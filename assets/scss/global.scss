@@ -214,6 +214,7 @@ section {
 .basket-body {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   .basket-body__basket {
     font-weight: 500;
@@ -328,6 +329,17 @@ section {
   overflow: hidden;
 }
 
+.avatar {
+  margin: 0 15px;
+
+  > img {
+    width: 42px;
+    display: block;
+    // border-radius: 50%;
+    // border: 1px solid #3cd52e;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -340,3 +352,5 @@ section {
   background-color: #ff5000;
   border-radius: 5px;
 }
+
+@import '~assets/scss/blocks/modal';

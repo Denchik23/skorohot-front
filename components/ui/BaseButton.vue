@@ -234,7 +234,7 @@ export default {
 
 .circularG-wrap {
   position: absolute;
-  right: 0;
+  right: -10px;
   top: 0;
   visibility: hidden;
 }

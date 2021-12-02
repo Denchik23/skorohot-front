@@ -1,5 +1,5 @@
 <template>
-  <div class="lock">
+  <div>
     <div class="wrapper">
       <header-main />
       <nav-top />
@@ -7,6 +7,7 @@
       <div class="footer-gradient"></div>
     </div>
     <footer-main />
+    <modal-action />
   </div>
 </template>
 
@@ -14,13 +15,15 @@
 import HeaderMain from '~/layouts/HeaderMain'
 import NavTop from '~/layouts/NavTop'
 import FooterMain from '~/layouts/FooterMain'
+import ModalAction from '~/components/modal/Action'
 
 export default {
   name: 'default',
   components: {
     HeaderMain,
     NavTop,
-    FooterMain
+    FooterMain,
+    ModalAction
   }
 }
 </script>

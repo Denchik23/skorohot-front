@@ -68,6 +68,11 @@ export default {
       changeAction: 'LoginAuthorization'
     }
   },
+  created () {
+    if (this.$auth.loggedIn) {
+      this.$router.push('/profile')
+    }
+  },
   methods: {
   }
 }

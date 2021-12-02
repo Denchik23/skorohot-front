@@ -39,9 +39,13 @@
         <button class="auth__forgot">
           Забыли пароль?
         </button>
-        <ui-base-button class="auth__button" :error="errorButton" :loader="loaderButton" @click="login">
-          Войти
-        </ui-base-button>
+        <ui-base-button
+          class="auth__button"
+          title="Войти"
+          :error="errorButton"
+          :loader="loaderButton"
+          @click="login"
+        />
       </div>
     </ui-form-item>
     <div class="auth__social">
@@ -102,7 +106,8 @@ export default {
         data: this.data
       }).finally(() => {
         this.loaderButton = false
-        this.$router.push('/')
+      }).then(() => {
+        this.$router.push('/profile')
       }).catch((error) => {
         let message = 'Произошла ошибка. Попробуйте позднее или обратитесь в техническую поддержку.'
         if (typeof error.response.data.message !== 'undefined') {

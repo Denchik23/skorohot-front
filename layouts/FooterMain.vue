@@ -23,10 +23,10 @@
             </div>
             <div class="footer__aunt">
               <button class="basket"></button>
-              <div class="footer__avatar">
+              <div class="avatar">
                 <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
               </div>
-              <button class="authorization"></button>
+              <button class="authorization" @click="$auth.logout()"></button>
             </div>
             <div class="footer__menu">
               <ul>
@@ -140,17 +140,6 @@ export default {
     color: #fff;
     display: block;
     padding: 4px 0;
-  }
-
-  &__avatar {
-    margin: 0 15px;
-
-    > img {
-      width: 42px;
-      display: block;
-      // border-radius: 50%;
-      // border: 1px solid #3cd52e;
-    }
   }
 
   &__pay {
