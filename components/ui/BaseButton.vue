@@ -181,6 +181,7 @@ export default {
   border: 0;
   width: 35px;
   height: 30px;
+  background-color: unset;
   background-image: url("~assets/img/basket.svg");
   background-repeat: no-repeat;
   background-position: -2px -5px;

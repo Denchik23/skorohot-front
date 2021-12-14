@@ -2,31 +2,40 @@
   <div class="nav-top container">
     <div class="nav-top__menu">
       <ul class="nav nav-top__links">
-        <li><a href="#" class="nav__link nav__link_active">Главная</a></li>
-        <li><a href="#" class="nav__link">Меню</a></li>
+        <li><nuxt-link to="/" class="nav__link">Главная</nuxt-link></li>
+        <li><nuxt-link to="/catalog/pitstsa" class="nav__link">Меню</nuxt-link></li>
         <li><a href="#" class="nav__link">Акции</a></li>
         <li><a href="#" class="nav__link">О нас</a></li>
         <li><a href="#" class="nav__link">Доставка</a></li>
         <li><a href="#" class="nav__link">Контакты</a></li>
       </ul>
     </div>
-    <div class="basket-body">
-      <button class="nav-top__basket basket-body__basket basket">10 500</button>
-      <template v-if="$auth.loggedIn">
-        <div class="avatar">
-          <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
-        </div>
-        <button class="authorization" @click="logout"></button>
-      </template>
-      <NuxtLink v-else to="/login" class="nav-top__button basket-body__button button_green button">Войти</NuxtLink>
-    </div>
+    <client-only>
+      <div class="basket-body">
+        <button class="nav-top__basket basket-body__basket basket" @click="$router.push('/cart')">{{ total }}</button>
+        <template v-if="$auth.loggedIn">
+          <div class="avatar">
+            <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+          </div>
+          <button class="authorization" @click="logout"></button>
+        </template>
+        <NuxtLink v-else to="/login" class="nav-top__button basket-body__button button_green button">Войти</NuxtLink>
+      </div>
+    </client-only>
   </div>
 
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'NavTop',
+  computed: {
+    ...mapGetters({
+      total: 'cart/getTotalWithSpaces'
+    })
+  },
   methods: {
     async logout () {
       await this.$auth.logout()

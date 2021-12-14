@@ -31,17 +31,19 @@
           <span></span>
         </div>
         <div class="mobile-menu" :class="{ 'mobile-menu_show' : showMenu }">
-          <div class="mobile-menu__body basket-body">
-            <button class="basket-body__basket basket">
-              10 500
-            </button>
-            <button class="button button_green basket-body__button">
-              Войти
-            </button>
-          </div>
+          <client-only>
+            <div class="mobile-menu__body basket-body">
+              <button class="basket-body__basket basket">
+                {{ total }}
+              </button>
+              <button class="button button_green basket-body__button">
+                Войти
+              </button>
+            </div>
+          </client-only>
           <ul class="nav mobile-menu__links">
-            <li><a href="#" class="nav__link nav__link_active">Главная</a></li>
-            <li><a href="#" class="nav__link">Меню</a></li>
+            <li><nuxt-link to="/" class="nav__link">Главная</nuxt-link></li>
+            <li><nuxt-link to="/catalog/pitstsa" class="nav__link">Меню</nuxt-link></li>
             <li><a href="#" class="nav__link">Акции</a></li>
             <li><a href="#" class="nav__link">О нас</a></li>
             <li><a href="#" class="nav__link">Доставка</a></li>
@@ -55,6 +57,8 @@
 
 <script>
 
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'HeaderMain',
   components: {
@@ -65,6 +69,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      total: 'cart/getTotalWithSpaces'
+    })
   },
   methods: {
     toggleMenu () {

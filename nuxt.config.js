@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV !== 'production'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -30,6 +32,10 @@ export default {
     ]
   },
 
+  router: {
+    linkActiveClass: 'nav__link_active'
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/vue-js-modal.js',
@@ -53,7 +59,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    ['nuxt-vuex-localstorage', {
+      ...(isDev && {
+        mode: 'debug'
+      }),
+      localStorage: ['cart'] //  If not entered, “localStorage” is the default value
+    }]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
