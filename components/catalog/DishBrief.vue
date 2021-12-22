@@ -9,7 +9,8 @@
       <div class="card__name">{{ data.name }}</div>
       <div class="card__rating" v-if="!isMini">{{ data.rated }}</div>
     </div>
-    <div class="ingredients">
+    <slot />
+<!--    <div class="ingredients">
       <div class="ingredients__col">
         <div class="ingredients__item">Угорь</div>
       </div>
@@ -19,7 +20,7 @@
       <div class="ingredients__col">
         <div class="ingredients__item">Яркий</div>
       </div>
-    </div>
+    </div>-->
     <div class="card__intro" :class="{'card-mini__intro': isMini}">
       {{ data.description }}...
       <nuxt-link :to="`/dish/${data.alias}`">Далее</nuxt-link>
@@ -281,27 +282,6 @@ export default {
     &__count {
       font-size: 32px;
     }
-  }
-}
-
-.size-pizza {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-
-  &__item {
-    border: 1px solid #3cd52e;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 18px;
-    padding: 4px;
-    font-weight: 500;
-    background: none;
-    width: 30%;
-  }
-
-  &__item_active {
-    background: #3cd52e;
   }
 }
 

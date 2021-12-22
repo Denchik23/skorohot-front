@@ -15,13 +15,19 @@
           <button class="filter__button filter__button_active">Без грибов</button>
           <button class="filter__button">Не ем свинину</button>
         </div>
-        <catalog-in-pizza v-if="$route.params.CatalogSlug === 'pitstsa'" />
+        <catalog-in-pizza v-if="isCategoryPizza" />
         <div class="card-list">
           <div
             class="card-list__col"
-            v-for="dish in dishes"
+            v-for="(dish, index) in dishes"
             :key="dish.id">
-            <catalog-dish-brief :data="dish" />
+            <catalog-dish-brief :data="dish">
+              <switching-pizza-size
+                v-if="dish.merge.length && isCategoryPizza"
+                :current-dish="dish"
+                :current-index="index"
+                @switchSize="switchSizePizza"/>
+            </catalog-dish-brief>
           </div>
         </div>
       </div>
@@ -30,7 +36,19 @@
 </template>
 
 <script>
+import SwitchingPizzaSize from '@/components/catalog/SwitchingPizzaSize'
 export default {
+  components: { SwitchingPizzaSize },
+  data () {
+    return {
+      dishes: []
+    }
+  },
+  computed: {
+    isCategoryPizza () {
+      return this.$route.params.CatalogSlug === 'pitstsa'
+    }
+  },
   async asyncData ({ app, route, params, error, store }) {
     await store.dispatch('getCategoriesList').catch(() => {
       return error({
@@ -39,8 +57,32 @@ export default {
       })
     })
     const categoryId = store.state.categoriesList.filter(item => item.alias === route.params.CatalogSlug)
-    const dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+    let dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+    // добавляем текущий размер пиццы
+    if (route.params.CatalogSlug === 'pitstsa') {
+      dishes = dishes.map((dish) => {
+        dish.merge.push({
+          id: dish.id,
+          name: dish.name,
+          price: dish.price,
+          weight: dish.weight
+        })
+        dish.merge.sort((a, b) => { return a.weight - b.weight })
+        return dish
+      })
+    }
     return { dishes }
+  },
+  methods: {
+    switchSizePizza (switchSize) {
+      if (typeof this.dishes[switchSize.index] === 'object') {
+        const indexDish = switchSize.index
+        this.dishes[indexDish].id = switchSize.id
+        this.dishes[indexDish].name = switchSize.name
+        this.dishes[indexDish].price = switchSize.price
+        this.dishes[indexDish].weight = switchSize.weight
+      }
+    }
   }
 }
 </script>
