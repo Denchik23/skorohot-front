@@ -1,27 +1,20 @@
 <template>
   <div class="card" :class="{'card-mini': isMini, 'substrate': !isMini}">
     <div class="card__img">
-      <nuxt-link :to="`/dish/${data.alias}`">
-        <img src="~/assets/img/card-img.png" width="239" height="208" alt="card">
+      <nuxt-link :to="`/dish/${data.alias}`" :title="data.name">
+        <img :src="getPreview" width="375" height="300" :alt="data.name">
       </nuxt-link>
     </div>
     <div class="card__head" :class="{'card-mini__head': isMini}">
       <div class="card__name">{{ data.name }}</div>
       <div class="card__rating" v-if="!isMini">{{ data.rated }}</div>
     </div>
-    <slot />
-<!--    <div class="ingredients">
-      <div class="ingredients__col">
-        <div class="ingredients__item">Угорь</div>
+    <div v-if="data.ingredients.length" class="ingredients">
+      <div v-for="(ingredient, index) in data.ingredients" :key="index" class="ingredients__col">
+        <div class="ingredients__item">{{ ingredient.name }}</div>
       </div>
-      <div class="ingredients__col">
-        <div class="ingredients__item">Сливочный</div>
-      </div>
-      <div class="ingredients__col">
-        <div class="ingredients__item">Яркий</div>
-      </div>
-    </div>-->
-    <div class="card__intro" :class="{'card-mini__intro': isMini}">
+    </div>
+    <div v-if="isDescription" class="card__intro" :class="{'card-mini__intro': isMini}">
       {{ data.description }}...
       <nuxt-link :to="`/dish/${data.alias}`">Далее</nuxt-link>
     </div>
@@ -37,15 +30,16 @@
           <button class="button-count__del" @click="quantityDown">-</button>
         </div>
         <ui-base-button
-          v-if="!isMini"
+          v-if="!showDeleteButton"
           class="card__button-bay button_icon"
+          :class="{'card-mini__buy': isMini}"
           :title="isProductAdded ? 'В корзине' : 'В корзину'"
           :green="isProductAdded"
           :disabled="isProductAdded"
           @click="buyClickHandler">
           <i class="icon-basket"></i>
         </ui-base-button>
-        <button v-if="isMini" class="card__button-delete" @click="deleteCartItem">
+        <button v-if="showDeleteButton" class="card__button-delete" @click="deleteCartItem">
           <i class="icon-delete"></i>
         </button>
       </div>
@@ -66,6 +60,14 @@ export default {
     isMini: {
       type: Boolean,
       default: false
+    },
+    isDescription: {
+      type: Boolean,
+      default: true
+    },
+    showDeleteButton: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -79,6 +81,13 @@ export default {
     }),
     isProductAdded () {
       return typeof this.cart.find(dish => dish.id === this.data.id) !== 'undefined'
+    },
+    getPreview () {
+      if (this.data.preview !== null) {
+        return 'http://localhost/storage/images/thumbnail/' + this.data.preview.file_name
+      } else {
+        return 'http://localhost/storage/images/not_found.jpg'
+      }
     }
   },
   methods: {
@@ -103,6 +112,7 @@ export default {
     },
     buyClickHandler () {
       this.addDish({ product: this.data, quantity: this.quantity })
+      this.$emit('addCartItem', this.data)
     },
     addedClickHandler () {
       // this.$modal.show('customer-cart', { addedProduct: this.product.id })
@@ -113,6 +123,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.data)
     if (this.isProductAdded) {
       this.quantity = this.cart.find(dish => dish.id === this.data.id).quantity
     }
@@ -124,11 +135,6 @@ export default {
 .card {
   &__img {
     text-align: center;
-    height: 208px;
-  }
-
-  &__img_pizza {
-    height: 310px;
   }
 
   &__head {
@@ -192,6 +198,12 @@ export default {
   &__button-delete {
     background: unset;
     border: none;
+  }
+
+  @include media-laptop {
+    &__img {
+      height: 307px;
+    }
   }
 
   @include media-desktop {

@@ -20,5 +20,10 @@ export const actions = {
   // eslint-disable-next-line no-empty-pattern
   getDishesByAlias ({}, slug) {
     return this.$axios.$get('/dish/' + slug)
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  getRecommendations ({}) {
+    return this.$axios.$get('/dish/recommendations')
   }
 }

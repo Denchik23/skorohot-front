@@ -7,7 +7,7 @@
     </main>
     <section>
       <div class="container">
-        <div class="filter">
+        <div v-if="isCategoryPizza" class="filter">
           <button class="filter__button">Для детей</button>
           <button class="filter__button">Острое</button>
           <button class="filter__button">Без лука</button>
@@ -23,7 +23,7 @@
             :key="dish.id">
             <catalog-dish-brief :data="dish">
               <switching-pizza-size
-                v-if="dish.merge.length && isCategoryPizza"
+                v-if="isCategoryPizza && dish.merge.length"
                 :current-dish="dish"
                 :current-index="index"
                 @switchSize="switchSizePizza"/>
