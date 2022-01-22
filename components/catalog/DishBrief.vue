@@ -123,7 +123,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.data)
     if (this.isProductAdded) {
       this.quantity = this.cart.find(dish => dish.id === this.data.id).quantity
     }

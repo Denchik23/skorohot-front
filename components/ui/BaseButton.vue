@@ -139,7 +139,7 @@ export default {
 
   @include media-laptop {
     height: auto;
-    padding: 15px 30px;
+    padding: 15px 40px;
     font-size: 24px;
 
     &:hover {
