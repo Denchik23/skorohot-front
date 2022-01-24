@@ -1,10 +1,10 @@
 export const deliveryOptions = [
   {
-    value: 'delivery',
+    value: 1,
     label: 'Доставка'
   },
   {
-    value: 'pickup',
+    value: 0,
     label: 'Самовывоз'
   }
 ]
