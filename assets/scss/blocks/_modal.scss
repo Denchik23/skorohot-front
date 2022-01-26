@@ -8,7 +8,6 @@
   }
 
   &__body {
-    text-align: center;
   }
 
   &__close {
@@ -19,13 +18,14 @@
 
   &__title {
     margin-bottom: 24px;
+    text-align: center;
   }
 
   &__subtitle {
     margin: 24px 0;
   }
 
-  &__button {
+  .modal__button {
     margin: 0 auto;
     display: block;
   }

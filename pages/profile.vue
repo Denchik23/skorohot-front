@@ -62,37 +62,9 @@
       <div class="container">
         <div class="shopping-data">
           <profile-present />
-          <div class="profile-address substrate">
-            <div class="section-title section-title_substrate">Адрес <span>доставки</span></div>
-            <div class="profile-address__item">
-              <div class="profile-address__body">
-                <span>Дом</span>
-                ул. Ленина 195, кв 163, этаж 9
-              </div>
-              <div class="profile-address__edit">
-                <button><i class="icon-edit"></i></button>
-              </div>
-            </div>
-            <div class="profile-address__item">
-              <div class="profile-address__body">
-                <span>Дом который на котором в котором за котор...</span>
-                ул. Ленина 195, кв 163, этаж 9
-              </div>
-              <div class="profile-address__edit">
-                <button><i class="icon-edit"></i></button>
-              </div>
-            </div>
-            <div class="profile-address__item">
-              <div class="profile-address__body">
-                <span>Дом</span>
-                ул. Ленина 195, кв 163, этаж 9 ул. Ленина 9...
-              </div>
-              <div class="profile-address__edit">
-                <button><i class="icon-edit"></i></button>
-              </div>
-            </div>
-            <button class="button button_green">Добавить адрес</button>
-          </div>
+          <client-only>
+            <profile-addresses />
+          </client-only>
         </div>
       </div>
     </section>
@@ -219,40 +191,6 @@ export default {
     &__intention {
       margin: 0 250px 60px 0;
       text-align: justify;
-    }
-  }
-}
-
-.profile-address {
-  width: 100%;
-
-  &__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 30px 0;
-  }
-
-  &__body {
-    > span {
-      display: block;
-      font-weight: bold;
-    }
-  }
-
-  &__edit {
-    > button {
-      border: none;
-      background: unset;
-      padding: 0 0 8px 15px;
-    }
-  }
-
-  @include media-laptop {
-    width: 36%;
-
-    &__item {
-      margin: 35px 0;
     }
   }
 }
