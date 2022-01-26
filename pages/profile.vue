@@ -164,208 +164,11 @@
         </div>
       </div>
     </main>
-    <section class="section-substrate">
-      <div class="container">
-
-      </div>
-    </section>
-    <section class="section-substrate">
-      <div class="container">
-        <div class="shopping-basket">
-          <div class="section-title section-title_substrate">История <span>заказов!</span></div>
-          <div class="shopping-basket__body">
-            <div class="shopping-basket__item">
-              <div class="history substrate">
-                <div class="history__score">+ 30<br>баллов</div>
-                <div class="history__title section-title">Статус: <span>Готовится</span></div>
-                <div class="history__date-time">
-                  <span>01.01.2021</span>
-                  <span>23:23</span>
-                </div>
-                <ul class="history__list">
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Сливочная курочка"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                </ul>
-                <div class="history__button">
-                  <button class="button button_shadow">Повторить</button>
-                </div>
-              </div>
-            </div>
-            <div class="shopping-basket__item">
-              <div class="history substrate">
-                <div class="history__score">+ 30<br>баллов</div>
-                <div class="history__title section-title">Статус: <span>Готовится</span></div>
-                <div class="history__date-time">
-                  <span>01.01.2021</span>
-                  <span>23:23</span>
-                </div>
-                <ul class="history__list">
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Сливочная курочка"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                </ul>
-                <div class="history__button">
-                  <button class="button button_shadow">Повторить</button>
-                </div>
-              </div>
-            </div>
-            <div class="shopping-basket__item">
-              <div class="history substrate">
-                <div class="history__score">+ 30<br>баллов</div>
-                <div class="history__title section-title">Статус: <span>Готовится</span></div>
-                <div class="history__date-time">
-                  <span>01.01.2021</span>
-                  <span>23:23</span>
-                </div>
-                <ul class="history__list">
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Сливочная курочка"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                </ul>
-                <div class="history__button">
-                  <button class="button button_shadow">Повторить</button>
-                </div>
-              </div>
-            </div>
-            <div class="shopping-basket__item">
-              <div class="history substrate">
-                <div class="history__score">+ 30<br>баллов</div>
-                <div class="history__title section-title">Статус: <span>Готовится</span></div>
-                <div class="history__date-time">
-                  <span>01.01.2021</span>
-                  <span>23:23</span>
-                </div>
-                <ul class="history__list">
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Сливочная курочка"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="history__name">Пицца "Охотник"</div>
-                    <div class="history__data">
-                      <span>1 шт.</span>
-                      <span>300 руб.</span>
-                    </div>
-                  </li>
-                </ul>
-                <div class="history__button">
-                  <button class="button button_shadow">Повторить</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <profile-history :data="orders"/>
     <section>
       <div class="container">
         <div class="shopping-data">
-          <div class="present substrate">
-            <div class="present__body">
-              <div class="section-title section-title_substrate">Вы еще не забрали<br><span>свой подарок?</span></div>
-              <div class="present__intro">Подарок в приложении! Установи его себе бесплатно и получи подарок к следующему заказу.<br>
-                <span>Доступно как для Ios, так и для android.</span>
-              </div>
-              <div class="present__link-apps">
-                <a href="#"><img src="~/assets/img/link-buy-apple.png" alt="link" width="279" height="86"></a>
-                <a href="#"><img src="~/assets/img/link-buy-google.png" alt="link" width="279" height="86"></a>
-              </div>
-            </div>
-          </div>
+          <profile-present />
           <div class="profile-address substrate">
             <div class="section-title section-title_substrate">Адрес <span>доставки</span></div>
             <div class="profile-address__item">
@@ -405,7 +208,16 @@
 
 <script>
 export default {
-  name: 'profile'
+  name: 'profile',
+  data () {
+    return {
+      orders: []
+    }
+  },
+  async asyncData ({ app, route, params, error, store }) {
+    const orders = await store.dispatch('order/getOrders')
+    return { orders }
+  }
 }
 </script>
 
@@ -513,107 +325,6 @@ export default {
       margin: 0 250px 60px 0;
       text-align: justify;
     }
-  }
-}
-
-.history {
-  position: relative;
-  background: #181818;
-  box-shadow: none;
-
-  &__score {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: #1c1c1c;
-    text-align: center;
-    padding: 12px;
-    border-radius: 10px;
-    line-height: 1.4;
-    font-size: 14px;
-    font-weight: bold;
-  }
-
-  &__title {
-    font-size: 20px;
-    margin: 0 0 8px 0;
-    padding: 0 50px 0 0;
-  }
-
-  &__date-time {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 30px 0 0;
-
-    > span {
-      font-weight: 300;
-    }
-  }
-
-  &__list {
-    overflow: overlay;
-    height: 200px;
-    padding: 0 30px 0 0;
-    list-style: none;
-    margin: 30px 0;
-
-    > li {
-      padding: 8px 0;
-    }
-  }
-
-  &__name {
-    color: #3cd52e;
-  }
-
-  &__data {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__button {
-    text-align: center;
-  }
-}
-
-.present {
-  width: 100%;
-  margin: 0 0 15px 0;
-
-  &__body {
-    background: url("~assets/img/Vector.svg") #1c1c1c no-repeat right;
-    background-size: contain;
-  }
-
-  &__intro {
-    margin: 15px 0;
-    font-weight: 300;
-
-    > span {
-      display: block;
-      margin: 15px 0 0 0;
-      font-weight: bold;
-    }
-  }
-
-  &__link-apps {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 70px 0 0 0;
-
-    > a {
-      width: 48%;
-      display: block;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
-  }
-
-  @include media-laptop {
-    width: 62%;
   }
 }
 
