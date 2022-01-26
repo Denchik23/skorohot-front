@@ -1,6 +1,6 @@
 <template>
   <button v-if="!link" class="button" :class="className" :disabled="disabled" @click.prevent="$emit('click')">
-    <span>{{ title }}</span>
+    <span v-if="title.length">{{ title }}</span>
     <slot />
     <span v-if="loader !== null" class="circularG-wrap">
       <span class="circularG circularG_1" />

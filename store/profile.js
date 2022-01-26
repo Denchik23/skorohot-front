@@ -14,5 +14,10 @@ export const actions = {
   // eslint-disable-next-line no-empty-pattern
   confirmSMSCode ({}, payload) {
     return this.$axios.$post('/sms-code/confirm', payload)
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  getBonusDishes ({}) {
+    return this.$axios.$get('/profile/dish')
   }
 }

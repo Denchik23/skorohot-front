@@ -53,114 +53,7 @@
             <i class="icon-intention"></i>
             <span>Баллы можно потратить на оплату 30% стоимости позиций из ассортимента. 1 балл = 1 рубль.  Баллы начисляются с каждого завершенного заказа, за исключением заказа, оплаченного бонусными баллами. Срок существования баллов - 12 месяцев. После чего они сгорают.</span>
           </div>
-          <div class="section-title section-title_substrate">Ваших бонусов <span>достаточно&nbsp;для:</span></div>
-          <div class="profile__card-body shopping-basket__body">
-            <div class="profile__card-item shopping-basket__item">
-              <div class="card-mini card">
-                <img src="~/assets/img/burrito.png" width="288" height="165" alt="burrito-card" class="card-mini__img">
-                <div class="card-mini__head card__head">
-                  <div class="card-mini__name card__name">борито с угрем</div>
-                </div>
-                <div class="ingredients">
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Угорь</div>
-                  </div>
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Яркий</div>
-                  </div>
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Сливочный</div>
-                  </div>
-                </div>
-                <div class="card-mini__intro card__intro">
-                  Желаете легкий, но питательный перекус? Тогда...
-                  <a href="#">Далее</a>
-                </div>
-                <div class="card-mini__data card__data">
-                  <div class="card__count">237 гр.<br>8 шт.</div>
-                  <div class="card__prices">299 руб.</div>
-                </div>
-                <div class="card__buttons">
-                  <div class="card-mini__count button-count">
-                    <button class="button-count__add">+</button>
-                    <span class="button-count__count">1</span>
-                    <button class="button-count__del">-</button>
-                  </div>
-                  <button class="card-mini__buy card__button-bay button"><i class="icon-basket"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="profile__card-item shopping-basket__item">
-              <div class="card-mini card">
-                <img src="~/assets/img/burrito.png" width="288" height="165" alt="burrito-card" class="card-mini__img">
-                <div class="card-mini__head card__head">
-                  <div class="card-mini__name card__name">борито с угрем</div>
-                </div>
-                <div class="ingredients">
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Угорь</div>
-                  </div>
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Яркий</div>
-                  </div>
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Сливочный</div>
-                  </div>
-                </div>
-                <div class="card-mini__intro card__intro">
-                  Желаете легкий, но питательный перекус? Тогда...
-                  <a href="#">Далее</a>
-                </div>
-                <div class="card-mini__data card__data">
-                  <div class="card__count">237 гр.<br>8 шт.</div>
-                  <div class="card__prices">299 руб.</div>
-                </div>
-                <div class="card__buttons">
-                  <div class="card-mini__count button-count">
-                    <button class="button-count__add">+</button>
-                    <span class="button-count__count">1</span>
-                    <button class="button-count__del">-</button>
-                  </div>
-                  <button class="card-mini__buy card__button-bay button"><i class="icon-basket"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="profile__card-item shopping-basket__item">
-              <div class="card-mini card">
-                <img src="~/assets/img/burrito.png" width="288" height="165" alt="burrito-card" class="card-mini__img">
-                <div class="card-mini__head card__head">
-                  <div class="card-mini__name card__name">борито с угрем</div>
-                </div>
-                <div class="ingredients">
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Угорь</div>
-                  </div>
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Яркий</div>
-                  </div>
-                  <div class="ingredients__col">
-                    <div class="ingredients__item">Сливочный</div>
-                  </div>
-                </div>
-                <div class="card-mini__intro card__intro">
-                  Желаете легкий, но питательный перекус? Тогда...
-                  <a href="#">Далее</a>
-                </div>
-                <div class="card-mini__data card__data">
-                  <div class="card__count">237 гр.<br>8 шт.</div>
-                  <div class="card__prices">299 руб.</div>
-                </div>
-                <div class="card__buttons">
-                  <div class="card-mini__count button-count">
-                    <button class="button-count__add">+</button>
-                    <span class="button-count__count">1</span>
-                    <button class="button-count__del">-</button>
-                  </div>
-                  <button class="card-mini__buy card__button-bay button"><i class="icon-basket"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <profile-bonuses-enough v-if="bonusDishes.length" :data="bonusDishes"/>
         </div>
       </div>
     </main>
@@ -211,12 +104,14 @@ export default {
   name: 'profile',
   data () {
     return {
-      orders: []
+      orders: [],
+      bonusDishes: []
     }
   },
   async asyncData ({ app, route, params, error, store }) {
     const orders = await store.dispatch('order/getOrders')
-    return { orders }
+    const bonusDishes = await store.dispatch('profile/getBonusDishes')
+    return { orders, bonusDishes }
   }
 }
 </script>

@@ -6,8 +6,12 @@
         <span>Доступно как для Ios, так и для android.</span>
       </div>
       <div class="present__link-apps">
-        <a href="#"><img src="~/assets/img/link-buy-apple.png" alt="link" width="279" height="86"></a>
-        <a href="#"><img src="~/assets/img/link-buy-google.png" alt="link" width="279" height="86"></a>
+        <a href="https://apps.apple.com/ru/app/%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%85%D0%BE%D1%82/id1481242900" target="_blank" rel="noreferrer">
+          <img src="~/assets/img/link-buy-apple.png" alt="link" width="279" height="86">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=online.skorohot.app" target="_blank" rel="noreferrer">
+          <img src="~/assets/img/link-buy-google.png" alt="link" width="279" height="86">
+        </a>
       </div>
     </div>
   </div>

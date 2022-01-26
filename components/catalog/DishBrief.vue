@@ -31,9 +31,9 @@
         </div>
         <ui-base-button
           v-if="!showDeleteButton"
-          class="card__button-bay button_icon"
           :class="{'card-mini__buy': isMini}"
-          :title="isProductAdded ? 'В корзине' : 'В корзину'"
+          class="card__button-bay button_icon"
+          :title="titleButtonBuy"
           :green="isProductAdded"
           :disabled="isProductAdded"
           @click="buyClickHandler">
@@ -65,6 +65,10 @@ export default {
       type: Boolean,
       default: true
     },
+    isMiniButtonBuy: {
+      type: Boolean,
+      default: false
+    },
     showDeleteButton: {
       type: Boolean,
       default: false
@@ -81,6 +85,15 @@ export default {
     }),
     isProductAdded () {
       return typeof this.cart.find(dish => dish.id === this.data.id) !== 'undefined'
+    },
+    titleButtonBuy () {
+      if (this.isMiniButtonBuy) {
+        return ''
+      } else if (this.isProductAdded) {
+        return 'В корзине'
+      } else {
+        return 'В корзину'
+      }
     },
     getPreview () {
       if (this.data.preview !== null) {
@@ -314,7 +327,7 @@ export default {
     font-size: 16px;
   }
 
-  &__buy {
+  .card-mini__buy {
     font-size: 20px;
   }
 
@@ -338,7 +351,7 @@ export default {
       height: 48px;
     }
 
-    &__buy {
+    .card-mini__buy {
       font-size: 24px;
       height: 48px;
     }
