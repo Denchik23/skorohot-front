@@ -36,7 +36,10 @@
     </ui-form-item>
     <ui-form-item>
       <div class="auth__action">
-        <button class="auth__forgot">
+        <button
+          class="auth__forgot"
+          @click="$emit('passwordRecovery')"
+        >
           Забыли пароль?
         </button>
         <ui-base-button
@@ -68,13 +71,17 @@ import { required, minLength } from 'vuelidate/lib/validators'
 import { TheMask } from 'vue-the-mask'
 import { isPhone } from '~/utils/validationUtils'
 import FormMixin from '~/mixins/FormMixin'
+import ModalMixin from '@/mixins/ModalMixin'
 
 export default {
   name: 'Authorization',
   components: {
     TheMask
   },
-  mixins: [FormMixin],
+  mixins: [
+    FormMixin,
+    ModalMixin
+  ],
   data () {
     return {
       defaultData: {
@@ -109,11 +116,12 @@ export default {
       }).then(() => {
         this.$router.push('/profile')
       }).catch((error) => {
-        let message = 'Произошла ошибка. Попробуйте позднее или обратитесь в техническую поддержку.'
-        if (typeof error.response.data.message !== 'undefined') {
-          message = error.response.data.message
+        const textError = this.getResponseErrorMessage(error.response)
+        if (textError === 'Unauthenticated.') {
+          this.showModalError('Пароль не верный', 'Ошибка авторизации')
+        } else {
+          this.showModalError(textError)
         }
-        console.log(message)
       })
     }
   }

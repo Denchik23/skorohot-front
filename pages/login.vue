@@ -9,41 +9,59 @@
                 <div class="radio-group__item">
                   <input
                     id="delivery"
+                    v-model="changeAction"
                     name="delivery"
                     type="radio"
                     checked="checked"
                     value="LoginAuthorization"
-                    v-model="changeAction"
                   >
                   <label class="radio-group__button button" for="delivery">Вход</label>
                 </div>
                 <div class="radio-group__item">
-                  <input id="pickup" name="delivery" type="radio" value="LoginRegistration" v-model="changeAction">
+                  <input
+                    id="pickup"
+                    v-model="changeAction"
+                    name="delivery"
+                    type="radio"
+                    value="LoginRegistration"
+                  >
                   <label class="radio-group__button button" for="pickup">Регистрация</label>
                 </div>
               </div>
             </ui-form-item>
-            <component v-bind:is="changeAction" />
+            <component v-bind:is="changeAction" @passwordRecovery="changeAction = 'LoginPasswordRecovery'" />
           </div>
           <div class="auth__content">
-            <div class="title">Аккаунт:<br><span class="title_green">его </span><span class="title_red">преимущества</span></div>
-            <div class="intro">Стать частью семьи скорохот позволяет накапливать бонусы, которые можно потратить на частичную оплату заказа, сохранять адреса доставки, получать эксклюзивные предложения и акции, а также избавляет наших клиентов от ввода информации при оформлении заказа - <strong>заказывай в один клик!</strong></div>
+            <div class="title">
+              Аккаунт:<br><span class="title_green">его </span><span class="title_red">преимущества</span>
+            </div>
+            <div class="intro">
+              Стать частью семьи скорохот позволяет накапливать бонусы, которые можно потратить на частичную оплату заказа, сохранять адреса доставки, получать эксклюзивные предложения и акции, а также избавляет наших клиентов от ввода информации при оформлении заказа - <strong>заказывай в один клик!</strong>
+            </div>
             <div class="auth-advantages">
               <div class="auth-advantages__item">
                 <img src="~/assets/img/present-icon.svg" alt="click-icon" class="auth-advantages__icon" width="80" height="80">
-                <div class="auth-advantages__text">Можно оплатить часть заказа бонусами</div>
+                <div class="auth-advantages__text">
+                  Можно оплатить часть заказа бонусами
+                </div>
               </div>
               <div class="auth-advantages__item">
                 <img src="~/assets/img/click-icon.svg" alt="click-icon" class="auth-advantages__icon" width="80" height="80">
-                <div class="auth-advantages__text">Заказывайте в один клик</div>
+                <div class="auth-advantages__text">
+                  Заказывайте в один клик
+                </div>
               </div>
               <div class="auth-advantages__item">
                 <img src="~/assets/img/free-icon-promotions.svg" alt="free-icon-promotions" class="auth-advantages__icon" width="80" height="80">
-                <div class="auth-advantages__text">Эксклюзивные предложения и акции</div>
+                <div class="auth-advantages__text">
+                  Эксклюзивные предложения и акции
+                </div>
               </div>
               <div class="auth-advantages__item">
                 <img src="~/assets/img/address-icon.svg" alt="address-icon" class="auth-advantages__icon" width="80" height="80">
-                <div class="auth-advantages__text">Сохраняйте несколько адресов для удобства</div>
+                <div class="auth-advantages__text">
+                  Сохраняйте несколько адресов для удобства
+                </div>
               </div>
             </div>
           </div>
@@ -62,7 +80,7 @@
 
 <script>
 export default {
-  name: 'login',
+  name: 'Login',
   data () {
     return {
       changeAction: 'LoginAuthorization'
@@ -72,8 +90,6 @@ export default {
     if (this.$auth.loggedIn) {
       this.$router.push('/profile')
     }
-  },
-  methods: {
   }
 }
 </script>

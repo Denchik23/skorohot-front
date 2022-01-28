@@ -2,7 +2,7 @@
   <div class="auth__body">
     <template v-if="!checkCodeLayout">
       <div class="auth__title section-title section-title_substrate">
-        Быстрая <span>регистрация!</span>
+        Восстановление <span>пароля!</span>
       </div>
       <ui-form-item
         label="Имя"
@@ -30,7 +30,7 @@
         </template>
       </ui-form-item>
       <ui-form-item
-        label="Пароль"
+        label="Новый пароль"
         required
         :error="$v.data.password.$error"
       >
@@ -116,63 +116,16 @@
 </template>
 
 <script>
-import RegistrationFormMixin from '~/mixins/RegistrationFormMixin'
+import RegistrationFormMixin from '@/mixins/RegistrationFormMixin'
 
 export default {
-  name: 'Registration',
+  name: 'PasswordRecovery',
   mixins: [
     RegistrationFormMixin
   ]
 }
 </script>
 
-<style lang="scss">
-.auth {
-  .auth__back,
-  .auth__button-confirm {
-    width: 100%;
-  }
-  &__back {
-    position: relative;
-    padding: 0 0 0 70px;
-    &:after {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 3px;
-      width: 50px;
-      height: 16px;
-      background: url("~assets/img/vector-arrow.svg") no-repeat center;
-    }
-  }
-  &__intention {
-    color: #464646;
-    // font-size: 16px;
-    text-align: center;
-  }
-  .auth__repeat {
-    width: auto;
-    position: relative;
-    padding: 0 0 0 38px;
-    margin: 0 auto;
-    display: block;
-    &:after {
-      position: absolute;
-      content: "";
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' class='sc-pckDb hBIdyw'%3E%3Cpath fill='%23333' fill-rule='evenodd' d='M6.843 7.257h2.121v1H5.136V4.43h1v2.12l.207-.207a8 8 0 1 1-2.33 6.098l.998-.055A7 7 0 1 0 7.05 7.05l-.208.207z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
-    }
-  }
-  @include media-mobile {
-    .auth__back {
-      width: 38%;
-    }
-    .auth__button-confirm {
-      width: 60%;
-    }
-  }
-}
+<style scoped>
+
 </style>
