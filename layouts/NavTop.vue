@@ -2,8 +2,16 @@
   <div class="nav-top container">
     <div class="nav-top__menu">
       <ul class="nav nav-top__links">
-        <li><nuxt-link to="/" class="nav__link">Главная</nuxt-link></li>
-        <li><nuxt-link to="/catalog/pitstsa" class="nav__link">Меню</nuxt-link></li>
+        <li>
+          <nuxt-link to="/" class="nav__link">
+            Главная
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/catalog/pitstsa" class="nav__link">
+            Меню
+          </nuxt-link>
+        </li>
         <li><a href="#" class="nav__link">Акции</a></li>
         <li><a href="#" class="nav__link">О нас</a></li>
         <li><a href="#" class="nav__link">Доставка</a></li>
@@ -12,18 +20,23 @@
     </div>
     <client-only>
       <div class="basket-body">
-        <button class="nav-top__basket basket-body__basket basket" @click="$router.push('/cart')">{{ total }}</button>
+        <button class="nav-top__basket basket-body__basket basket" @click="$router.push('/cart')">
+          {{ total }}
+        </button>
         <template v-if="$auth.loggedIn">
           <div class="avatar">
-            <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+            <NuxtLink to="/profile">
+              <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+            </NuxtLink>
           </div>
-          <button class="authorization" @click="logout"></button>
+          <button class="authorization" @click="logout" />
         </template>
-        <NuxtLink v-else to="/login" class="nav-top__button basket-body__button button_green button">Войти</NuxtLink>
+        <NuxtLink v-else to="/login" class="nav-top__button basket-body__button button_green button">
+          Войти
+        </NuxtLink>
       </div>
     </client-only>
   </div>
-
 </template>
 
 <script>

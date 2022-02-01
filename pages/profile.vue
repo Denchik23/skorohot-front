@@ -2,52 +2,10 @@
   <div>
     <main class="section-substrate">
       <div class="container profile">
-        <div class="profile__data substrate">
-          <div class="profile__avatar">
-            <img src="~/assets/img/ava-girls.png" alt="user avatar" width="300" height="300">
-          </div>
-          <div class="form-item">
-            <div class="input-icon">
-              <input type="text" value="Мария" class="base-input" placeholder="+7 989 776-18-71" disabled="disabled">
-              <i class="icon-edit"></i>
-            </div>
-          </div>
-          <div class="form-item">
-            <label class="form-item__label profile__label">Мой номер</label>
-            <div class="input-icon">
-              <input type="text" value="+7 989 776-18-71" class="base-input" placeholder="+7 989 776-18-71" disabled="disabled">
-              <i class="icon-edit"></i>
-            </div>
-          </div>
-          <div class="form-item">
-            <label class="form-item__label profile__label">E-mail</label>
-            <div class="input-icon">
-              <input type="text" value="afwsocial.work@gmail.com" class="base-input" placeholder="+7 989 776-18-71" disabled="disabled">
-              <i class="icon-edit"></i>
-            </div>
-          </div>
-          <div class="form-item">
-            <label class="form-item__label profile__label">Пароль</label>
-            <div class="input-icon">
-              <input type="password" value="123456789" class="base-input" disabled="disabled">
-              <i class="icon-edit"></i>
-            </div>
-          </div>
-          <div class="profile__gender">
-            <div class="form-item">
-              <label class="form-item__label profile__label">Пол</label>
-              <button class="profile__gender-button">Укажите пол</button>
-            </div>
-            <div class="form-item">
-              <label class="form-item__label profile__label">Дата рождения</label>
-              <button class="profile__gender-button">Укажите дату</button>
-            </div>
-          </div>
-          <button class="button button_green">Сохранить изменения</button>
-        </div>
+        <profile-data-form />
         <div class="profile__score shopping-basket">
           <div class="profile__score-substrate">
-            10 009<br>баллов
+            {{ scoreParser }}<br>баллов
           </div>
           <div class="profile__intention intention">
             <i class="icon-intention"></i>
@@ -74,10 +32,16 @@
 <script>
 export default {
   name: 'profile',
+  middleware: 'authenticated',
   data () {
     return {
       orders: [],
       bonusDishes: []
+    }
+  },
+  computed: {
+    scoreParser () {
+      return this.$auth.user.score ? this.$auth.user.score.toLocaleString('ru') : 0
     }
   },
   async asyncData ({ app, route, params, error, store }) {
@@ -92,6 +56,10 @@ export default {
 .profile {
   .form-item {
     margin: 30px 0;
+    .form-item__label {
+      color: #464646;
+      font-weight: 300;
+    }
   }
 
   &__avatar {
@@ -102,11 +70,6 @@ export default {
       border-radius: 50%;
       border: 2px solid #3cd52e;
     }
-  }
-
-  .profile__label {
-    color: #464646;
-    font-weight: 300;
   }
 
   &__gender-button {

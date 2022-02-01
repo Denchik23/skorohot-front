@@ -90,13 +90,17 @@
             </div>
             <ui-form-item label="Номер телефона" required>
               <div class="input-icon">
-                <input
+                <the-mask
+                  id="phone"
+                  ref="phone"
                   v-model="phone"
-                  type="text"
+                  name="phone"
+                  mask="+7 (###) ###-##-##"
                   class="base-input"
-                  placeholder="+7 989 776-18-71"
+                  placeholder="+7 (999) 888-77-55"
+                  type="tel"
                   disabled="disabled"
-                >
+                />
                 <i class="icon-edit" />
               </div>
             </ui-form-item>
@@ -170,6 +174,7 @@
 <script>
 import { mapState } from 'vuex'
 import { maxLength, required, requiredIf } from 'vuelidate/lib/validators'
+import { TheMask } from 'vue-the-mask'
 import FormMixin from '@/mixins/FormMixin'
 import ModalMixin from '@/mixins/ModalMixin'
 import { deliveryOptions, timeOptions, timeList, paymentOptions } from '@/vocabularies/deliveryOptions'
@@ -180,6 +185,9 @@ export default {
     FormMixin,
     ModalMixin
   ],
+  components: {
+    TheMask
+  },
   data () {
     return {
       addressesUser: [],
@@ -188,7 +196,7 @@ export default {
       timeList,
       paymentOptions,
       isDisabledAddress: false,
-      phone: '9892443390',
+      phone: this.$auth.user.phone,
       data: null,
       defaultData: {
         dishes: [],

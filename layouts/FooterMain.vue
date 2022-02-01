@@ -22,11 +22,15 @@
               <a href="#"><img src="~/assets/img/logo-youtube.svg" alt="youtube" width="25" height="25"></a>
             </div>
             <div class="footer__aunt">
-              <button class="basket"></button>
-              <div class="avatar">
-                <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
-              </div>
-              <button class="authorization" @click="$auth.logout()"></button>
+              <button class="basket" @click="$router.push('/cart')" />
+              <template v-if="$auth.loggedIn">
+                <div class="avatar">
+                  <NuxtLink to="/profile">
+                    <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+                  </NuxtLink>
+                </div>
+                <button class="authorization" @click="logout" />
+              </template>
             </div>
             <div class="footer__menu">
               <ul>
@@ -49,7 +53,9 @@
               <a href="#">Пользовательское соглашение</a>
               <a href="#">Политика конфиденциальности</a>
             </div>
-            <div class="copyright">© {{ currentYear }} skorohot.ru – СКОРО-ХОТ</div>
+            <div class="copyright">
+              © {{ currentYear }} skorohot.ru – СКОРО-ХОТ
+            </div>
           </div>
         </div>
         <a href="#" class="footer__scroll">Вернуться к началу</a>
@@ -70,7 +76,11 @@ export default {
       return new Date().getFullYear()
     }
   },
-  components: {
+  methods: {
+    async logout () {
+      await this.$auth.logout()
+      await this.$router.push('/')
+    }
   }
 }
 </script>

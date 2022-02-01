@@ -56,7 +56,8 @@
 
 <script>
 export default {
-  name: 'thanks'
+  name: 'thanks',
+  middleware: 'authenticated'
 }
 </script>
 
