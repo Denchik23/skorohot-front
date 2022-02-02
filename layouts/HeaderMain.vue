@@ -4,8 +4,9 @@
       <div class="header__body">
         <div class="logo">
           <div class="logo__img">
-            <a href="#" title="Скороход">
-              <img src="~/assets/img/logo.svg" alt="Скороход"></a>
+            <nuxt-link to="/">
+              <img src="~/assets/img/logo.svg" alt="Скороход">
+            </nuxt-link>
           </div>
           <div class="logo__city">
             Анапа

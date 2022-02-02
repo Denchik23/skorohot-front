@@ -193,6 +193,7 @@ export default {
   border: 0;
   width: 31px;
   height: 31px;
+  background-color: unset;
   background-image: url("~assets/img/logout.svg");
   background-repeat: no-repeat;
   background-position: 0px 0px;

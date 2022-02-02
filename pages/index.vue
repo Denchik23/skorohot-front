@@ -7,11 +7,17 @@
           <a href="#"><img src="~/assets/img/logo-instagram.svg" alt="instagram" width="27" height="27"></a>
           <a href="#"><img src="~/assets/img/logo-youtube.svg" alt="youtube" width="25" height="25"></a>
         </div>
-        <div class="home-head__scroll">Листай ниже</div>
+        <div class="home-head__scroll">
+          Листай ниже
+        </div>
       </div>
       <div class="home-head__body">
-        <div class="home-head__title title">только <span class="title_green">свежие</span><br>ингредиенты</div>
-        <div class="home-head__slogan">и вкусная пицца, роллы и десерты</div>
+        <div class="home-head__title title">
+          только <span class="title_green">свежие</span><br>ингредиенты
+        </div>
+        <div class="home-head__slogan">
+          и вкусная пицца, роллы и десерты
+        </div>
         <button class="home-head__button button_shadow button">Закажи доставку</button>
         <div class="home-head__time">
           <span>ЕЖЕДНЕВНО</span><br/>
@@ -27,8 +33,12 @@
       <div class="container">
         <div class="current-action">
           <div class="current-action__item">
-            <div class="section-title">Свежие <span>акции</span></div>
-            <div class="section-intro current-action__intro">Наши лучшие предложения, которые не оставят Вас равнодушными к нам :)</div>
+            <div class="section-title">
+              Свежие <span>акции</span>
+            </div>
+            <div class="section-intro current-action__intro">
+              Наши лучшие предложения, которые не оставят Вас равнодушными к нам :)
+            </div>
           </div>
           <div class="current-action__item">
             <a href="#"><img src="~/assets/img/action-main.png" alt="action"></a>
@@ -45,52 +55,69 @@
         </div>
       </div>
     </section>
+    <main-quick-menu />
+    <client-only>
+      <main-choice-customers />
+    </client-only>
     <section>
       <div class="container">
-        <div class="section-title">Быстрое <span>меню</span></div>
-        <div class="section-intro">Все самое нужное прямо перед глазами на самой главной странице ;)</div>
-        <div class="fast-menu">
-          <div class="fast-menu__col">
-            <div class="fast-menu__item substrate">
-              <div class="fast-menu__icon">
-                <img src="~/assets/img/pizza.svg" alt="icon">
-              </div>
-              <div class="fast-menu__data">
-                <div class="fast-menu__title"><span>Пицца</span><br>Горячая, вкусная и сочная</div>
-                <a href="#" class="button-link"></a>
-              </div>
-            </div>
-          </div>
-          <div class="fast-menu__col">
-            <div class="fast-menu__item substrate">
-              <div class="fast-menu__icon">
-                <img src="~/assets/img/rolls.svg" alt="icon">
-              </div>
-              <div class="fast-menu__data">
-                <div class="fast-menu__title"><span>Роллы</span><br>Много вкусной начинки</div>
-                <a href="#" class="button-link"></a>
-              </div>
-            </div>
-          </div>
-          <div class="fast-menu__col">
-            <div class="fast-menu__item substrate">
-              <div class="fast-menu__icon">
-                <img src="~/assets/img/sushi.svg" alt="icon">
-              </div>
-              <div class="fast-menu__data">
-                <div class="fast-menu__title"><span>Сеты и комбо</span><br>Горячая, вкусная и сочная</div>
-                <a href="#" class="button-link"></a>
-              </div>
-            </div>
-          </div>
+        <div class="section-title">
+          Отзывы <span>наших клиентов</span>
+        </div>
+        <div class="section-intro">
+          Честное мнение о нас со слов других :)
         </div>
       </div>
+      <main-reviews :data="reviews"/>
+      <main-awards />
     </section>
+    <main-contacts />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      reviews: [
+        [
+          {
+            id: 1,
+            name: 'Анна Масекотик',
+            stars: 1
+          },
+          {
+            id: 2,
+            name: 'Мария Быстрова',
+            stars: 3
+          },
+          {
+            id: 3,
+            name: 'Max Pozdnyakov',
+            stars: 5
+          }
+        ],
+        [
+          {
+            id: 1,
+            name: 'Анна Масекотик',
+            stars: 1
+          },
+          {
+            id: 2,
+            name: 'Мария Быстрова',
+            stars: 3
+          },
+          {
+            id: 3,
+            name: 'Max Pozdnyakov',
+            stars: 5
+          }
+        ]
+      ]
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -290,73 +317,6 @@ export default {}
 .application-action {
   @include media-desktop {
     margin-top: 64px;
-  }
-}
-
-.fast-menu {
-  &__col {
-    margin-bottom: 30px;
-  }
-
-  &__icon {
-    text-align: center;
-    margin-bottom: 15px;
-
-    > img {
-      width: 150px;
-    }
-  }
-
-  &__data {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__title {
-    > span {
-      font-weight: bold;
-      color: #3cd52e;
-    }
-  }
-
-  @include media-tablet {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    height: 100%;
-    justify-content: space-around;
-
-    &__col {
-      width: 45%;
-    }
-  }
-
-  @include media-laptop {
-    justify-content: space-between;
-
-    &__col {
-      width: 30%;
-    }
-  }
-
-  @include media-desktop {
-    &__col {
-      width: 366px;
-    }
-
-    &__icon {
-      > img {
-        width: auto;
-      }
-    }
-
-    &__title {
-      line-height: 30px;
-      > span {
-        font-size: 36px;
-      }
-    }
   }
 }
 </style>
