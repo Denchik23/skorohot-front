@@ -33,7 +33,7 @@ export default {
   },
 
   router: {
-    linkActiveClass: 'nav__link_active'
+    linkExactActiveClass: 'nav__link_active'
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

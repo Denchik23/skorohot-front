@@ -15,51 +15,50 @@
       <div class="container">
         <div class="dish">
           <div class="dish__left">
-            <div class="slider-dish">
-              <div class="slider-dish__item"><img src="img/pizza-card.jpg" width="303" height="302" alt="pizza-card"></div>
-              <div class="slider-dish__item"><img src="https://skorohot.ru/images/cache/webp/31cb669cc5dff07286fce181a2fa28bf.webp" alt="pizza-card"></div>
-              <div class="slider-dish__item"><img src="img/pizza-card.jpg" width="303" height="302" alt="pizza-card"></div>
-              <div class="slider-dish__item"><img src="img/pizza-card.jpg" width="303" height="302" alt="pizza-card"></div>
-              <div class="slider-dish__item"><img src="img/pizza-card.jpg" width="303" height="302" alt="pizza-card"></div>
+            <div v-if="dish.images.length === 1" class="slider-dish__item">
+              <img :src="`http://localhost/storage/images/${dish.images[0].file_name}`" width="303" height="302" :alt="dish.name">
             </div>
-            <div class="slider-dish-nav">
-              <img src="img/card-nav.png" class="slider-dish-nav__item" width="96" height="93" alt="slider-dish-nav__item">
-              <img src="https://skorohot.ru/images/cache/webp/31cb669cc5dff07286fce181a2fa28bf.webp" class="slider-dish-nav__item" width="96" height="93" alt="slider-dish-nav__item">
-              <img src="img/card-nav2.png" class="slider-dish-nav__item" width="96" height="93" alt="slider-dish-nav__item">
-              <img src="img/card-nav3.png" class="slider-dish-nav__item" width="96" height="93" alt="slider-dish-nav__item">
-              <img src="img/card-nav4.png" class="slider-dish-nav__item" width="96" height="93" alt="slider-dish-nav__item">
+            <dish-carousel v-else-if="dish.images.length > 1" :images="dish.images"/>
+            <div v-else class="slider-dish__item">
+              <img src="http://localhost/storage/images/not_found.jpg" width="375" height="300" :alt="dish.name">
             </div>
             <button class="dish__video button">Смотреть видео</button>
             <div class="dish__rating">
               <i class="icon-hart"></i>
-              <span>4,5 / 5</span>
+              <span>{{ dish.rated }} / 5</span>
             </div>
           </div>
           <div class="dish__right">
-            <div class="section-title">Сет <span>"Бинго"</span></div>
-            <div class="sauce__intro">Сытный и легкий Бинго сет, сочетает в себе роллы из нежной курочки и роллы из свежайших морепродуктов.</div>
-            <ul class="set-ingredients">
-              <li class="set-ingredients__item"><a href="#">Амай<span class="set-ingredients__chevron"></span></a></li>
-              <li class="set-ingredients__item"><a href="#">Филадельфия лайт<span class="set-ingredients__chevron"></span></a></li>
-              <li class="set-ingredients__item"><a href="#">Унаги лайт<span class="set-ingredients__chevron"></span></a></li>
-              <li class="set-ingredients__item"><a href="#">Чикен ролл<span class="set-ingredients__chevron"></span></a></li>
-              <li class="set-ingredients__item"><a href="#">Филадельфия лайт<span class="set-ingredients__chevron"></span></a></li>
-            </ul>
-            <div class="intro-ingredient substrate">
-              <div class="intro-ingredient__title">Амай</div>
-              <p>Морской окунь в кляре, изумительный снежный краб, сливочный сыр, свежий огурчик, икра Масаго.</p>
-              <a href="#" class="intro-ingredient__link">Подробнее</a>
-            </div>
+            <div class="section-title" v-html="setName"></div>
+            <div class="sauce__intro">{{ dish.description }}</div>
+            <dish-ingredients :data="dish.ingredients" />
             <div class="dish__sushi">
               <div class="dish__prices">
-                1000 гр
-                <span>929 Р.</span>
+                {{ dish.weight}} {{ dish.units}}
+                <span>{{ dish.price}} Р.</span>
               </div>
-              <button class="button_icon button">
-                <span>в корзину</span><i class="icon-basket"></i>
-              </button>
+              <ui-base-button
+                class="button_icon"
+                :title="isProductAdded ? 'В корзине' : 'В корзину'"
+                :green="isProductAdded"
+                :disabled="isProductAdded"
+                @click="buyClickHandler">
+                <i class="icon-basket"></i>
+              </ui-base-button>
             </div>
-
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="tabs">
+          <div class="tabs__header substrate">
+            <a href="#" class="tabs__link tabs__link_active" title="lint-title">С этим товаром покупают</a>
+            <a href="#" class="tabs__link" title="lint-title">Отзывы</a>
+            <a href="#" class="tabs__link" title="lint-title">Доставка и оплата</a>
+          </div>
+          <div class="tabs__body">
           </div>
         </div>
       </div>
@@ -68,7 +67,26 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
+  data () {
+    return {
+      dish: {}
+    }
+  },
+  computed: {
+    ...mapState({
+      cart: state => state.cart.dishes
+    }),
+    setName () {
+      const lastWord = this.dish.name.split(' ').pop()
+      return this.dish.name.split(' ').reverse().slice(1).reverse().join(' ') + ' <span>' + lastWord + '</span>'
+    },
+    isProductAdded () {
+      return typeof this.cart.find(dish => dish.id === this.dish.id) !== 'undefined'
+    }
+  },
   async asyncData ({ app, route, params, error, store }) {
     await store.dispatch('getCategoriesList').catch(() => {
       return error({
@@ -76,8 +94,16 @@ export default {
         message: 'Категории не найдены или сервер не доступен'
       })
     })
-    const data = await store.dispatch('dish/getDish', route.params.DishSlug)
-    return { data }
+    const dish = await store.dispatch('dish/getDishesByAlias', route.params.DishSlug)
+    return { dish }
+  },
+  methods: {
+    ...mapActions({
+      addDish: 'cart/addDish'
+    }),
+    buyClickHandler () {
+      this.addDish({ product: this.dish, quantity: 1 })
+    }
   }
 }
 </script>
@@ -144,6 +170,7 @@ export default {
   &__video {
     width: 100%;
     background: linear-gradient(188.15deg, #ed4b02 -115.8%, #1c1c1c 93.74%);
+    margin: 15px 0 0 0;
   }
 
   &__sushi {
@@ -319,30 +346,69 @@ export default {
   }
 }
 
-.slider-dish {
-  &__item {
+.tabs {
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
     padding: 12px;
-    background: #161514;
-    border-radius: 10px;
-    text-align: center;
   }
 
-  @include media-desktop {
-    &__item {
-      padding: 30px 12px;
+  &__link {
+    color: #fff;
+    display: block;
+    padding: 0 25px 0 0;
+    position: relative;
+    font-weight: 700;
+    margin: 0 15px 12px 0;
+
+    &:last-child {
+      margin: 0 0 12px 0;
+    }
+
+    &::after {
+      border-top: 3px solid #3cd52e;
+      border-right: 3px solid #3cd52e;
+      content: "";
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+      position: absolute;
+      top: 8px;
+      right: 0;
+      transform: rotate(45deg);
+      transition: transform .2s linear;
     }
   }
-}
 
-.slider-dish-nav {
-  margin: 30px 0;
+  &__link_active {
+    &::after {
+      transform: rotate(135deg);
+      top: 5px;
+    }
+  }
 
-  &__item {
-    margin: 0 8px;
-    border-radius: 8px;
+  &__body {
+    background: #161514;
+    padding: 30px 12px;
+    border-radius: 0 0 10px 10px;
+  }
 
-    &.slick-current {
-      opacity: 0.3;
+  @include media-mobile {
+    &__header {
+      justify-content: space-around;
+    }
+  }
+
+  @include media-tablet {
+    &__header {
+      padding: 20px 12px;
+    }
+
+    &__link:last-child,
+    &__link {
+      margin: 0;
     }
   }
 }

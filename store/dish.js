@@ -24,6 +24,6 @@ export const actions = {
 
   // eslint-disable-next-line no-empty-pattern
   getRecommendations ({}) {
-    return this.$axios.$get('/dish/recommendations')
+    return this.$axios.$get('/recommendations')
   }
 }

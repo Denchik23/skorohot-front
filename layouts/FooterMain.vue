@@ -17,9 +17,7 @@
           </div>
           <div class="footer__body">
             <div class="footer__social">
-              <a href="#"><img src="~/assets/img/logo-vk.svg" alt="vk" width="27" height="27"></a>
-              <a href="#"><img src="~/assets/img/logo-instagram.svg" alt="instagram" width="27" height="27"></a>
-              <a href="#"><img src="~/assets/img/logo-youtube.svg" alt="youtube" width="25" height="25"></a>
+              <social-links />
             </div>
             <div class="footer__aunt">
               <button class="basket" @click="$router.push('/cart')" />
@@ -34,12 +32,24 @@
             </div>
             <div class="footer__menu">
               <ul>
-                <li><a href="#" class="footer__menu-item">Главная</a></li>
-                <li><a href="#" class="footer__menu-item">Меню</a></li>
-                <li><a href="#" class="footer__menu-item">Акции</a></li>
-                <li><a href="#" class="footer__menu-item">О нас</a></li>
-                <li><a href="#" class="footer__menu-item">Доставка</a></li>
-                <li><a href="#" class="footer__menu-item">Контакты</a></li>
+                <li>
+                  <NuxtLink to="/" class="footer__menu-item">Главная</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/catalog/pitstsa" class="footer__menu-item">Меню</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/catalog/kombo" class="footer__menu-item">Акции</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/o-nas" class="footer__menu-item">О нас</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/delivery" class="footer__menu-item">Доставка</NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/contacts" class="footer__menu-item">Контакты</NuxtLink>
+                </li>
               </ul>
             </div>
           </div>
@@ -58,7 +68,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="footer__scroll">Вернуться к началу</a>
+        <a href="#" @click.prevent="scrollTopSmooth" class="footer__scroll">Вернуться к началу</a>
       </div>
     </div>
   </footer>
@@ -80,6 +90,12 @@ export default {
     async logout () {
       await this.$auth.logout()
       await this.$router.push('/')
+    },
+    scrollTopSmooth () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }

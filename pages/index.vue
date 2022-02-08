@@ -3,9 +3,7 @@
     <main class="container home-head">
       <div class="home-head__left">
         <div class="home-head__social">
-          <a href="#"><img src="~/assets/img/logo-vk.svg" alt="vk" width="27" height="27"></a>
-          <a href="#"><img src="~/assets/img/logo-instagram.svg" alt="instagram" width="27" height="27"></a>
-          <a href="#"><img src="~/assets/img/logo-youtube.svg" alt="youtube" width="25" height="25"></a>
+          <social-links />
         </div>
         <div class="home-head__scroll">
           Листай ниже
@@ -121,6 +119,23 @@ export default {
 </script>
 
 <style lang="scss">
+.landing {
+  @include media-tablet {
+    background: url("~assets/img/fon.jpg") no-repeat 380px -435px #0d0d0d;
+  }
+
+  @include media-laptop {
+    background: url("~assets/img/fon.jpg") no-repeat 540px 0 #0d0d0d;
+  }
+
+  @include media-desktop {
+    background: url("~assets/img/fon.jpg") no-repeat 670px 0 #0d0d0d;
+  }
+
+  @include media-custom(1400px) {
+    background: url("~assets/img/fon.jpg") no-repeat right top #0d0d0d;
+  }
+}
 .home-head {
   &__left {
     display: none;
@@ -173,7 +188,7 @@ export default {
     &__social {
       display: block;
 
-      > a {
+      a {
         display: block;
         padding: 0 0 6px 0;
       }

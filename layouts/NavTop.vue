@@ -3,19 +3,23 @@
     <div class="nav-top__menu">
       <ul class="nav nav-top__links">
         <li>
-          <nuxt-link to="/" class="nav__link">
-            Главная
-          </nuxt-link>
+          <nuxt-link to="/" class="nav__link">Главная</nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/catalog/pitstsa" class="nav__link">
-            Меню
-          </nuxt-link>
+          <nuxt-link to="/catalog/pitstsa" class="nav__link">Меню</nuxt-link>
         </li>
-        <li><a href="#" class="nav__link">Акции</a></li>
-        <li><a href="#" class="nav__link">О нас</a></li>
-        <li><a href="#" class="nav__link">Доставка</a></li>
-        <li><a href="#" class="nav__link">Контакты</a></li>
+        <li>
+          <nuxt-link to="/catalog/kombo" class="nav__link">Акции</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/o-nas" class="nav__link">О нас</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/delivery" class="nav__link">Доставка</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/contacts" class="nav__link">Контакты</nuxt-link>
+        </li>
       </ul>
     </div>
     <client-only>

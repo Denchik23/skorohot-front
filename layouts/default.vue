@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrapper">
+    <div class="wrapper" :class="{'landing': $route.path === '/'}">
       <header-main />
       <nav-top />
       <Nuxt />

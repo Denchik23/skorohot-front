@@ -62,7 +62,8 @@ export default {
   },
   data () {
     return {
-      dishes: []
+      dishes: [],
+      dishesRecommended: []
     }
   },
   async asyncData ({ app, route, params, error, store }) {
