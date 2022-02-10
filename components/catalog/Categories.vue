@@ -9,10 +9,10 @@
         </li>
       </ul>
     </div>
-    <a href="#" class="menu__search substrate">
+    <nuxt-link to="/search" class="menu__search substrate">
       <span>Поиск по ингредиентам</span>
       <div class="menu__chevron chevron"></div>
-    </a>
+    </nuxt-link>
   </div>
 </template>
 

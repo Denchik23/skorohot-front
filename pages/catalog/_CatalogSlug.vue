@@ -7,27 +7,12 @@
     </main>
     <section>
       <div class="container">
-        <div v-if="isCategoryPizza" class="filter">
-          <button class="filter__button">Для детей</button>
-          <button class="filter__button">Острое</button>
-          <button class="filter__button">Без лука</button>
-          <button class="filter__button filter__button_active">Я веган</button>
-          <button class="filter__button filter__button_active">Без грибов</button>
-          <button class="filter__button">Не ем свинину</button>
-        </div>
-        <catalog-in-pizza v-if="isCategoryPizza" />
         <div class="card-list">
           <div
             class="card-list__col"
-            v-for="(dish, index) in dishes"
+            v-for="dish in dishes"
             :key="dish.id">
-            <catalog-dish-brief :data="dish">
-              <switching-pizza-size
-                v-if="isCategoryPizza && dish.merge.length"
-                :current-dish="dish"
-                :current-index="index"
-                @switchSize="switchSizePizza"/>
-            </catalog-dish-brief>
+            <catalog-dish-brief :data="dish" />
           </div>
         </div>
       </div>
@@ -36,18 +21,13 @@
 </template>
 
 <script>
-import SwitchingPizzaSize from '@/components/catalog/SwitchingPizzaSize'
 export default {
-  components: { SwitchingPizzaSize },
   data () {
     return {
       dishes: []
     }
   },
   computed: {
-    isCategoryPizza () {
-      return this.$route.params.CatalogSlug === 'pitstsa'
-    }
   },
   async asyncData ({ app, route, params, error, store }) {
     await store.dispatch('getCategoriesList').catch(() => {
@@ -57,32 +37,10 @@ export default {
       })
     })
     const categoryId = store.state.categoriesList.filter(item => item.alias === route.params.CatalogSlug)
-    let dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
-    // добавляем текущий размер пиццы
-    if (route.params.CatalogSlug === 'pitstsa') {
-      dishes = dishes.map((dish) => {
-        dish.merge.push({
-          id: dish.id,
-          name: dish.name,
-          price: dish.price,
-          weight: dish.weight
-        })
-        dish.merge.sort((a, b) => { return a.weight - b.weight })
-        return dish
-      })
-    }
+    const dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
     return { dishes }
   },
   methods: {
-    switchSizePizza (switchSize) {
-      if (typeof this.dishes[switchSize.index] === 'object') {
-        const indexDish = switchSize.index
-        this.dishes[indexDish].id = switchSize.id
-        this.dishes[indexDish].name = switchSize.name
-        this.dishes[indexDish].price = switchSize.price
-        this.dishes[indexDish].weight = switchSize.weight
-      }
-    }
   }
 }
 </script>
