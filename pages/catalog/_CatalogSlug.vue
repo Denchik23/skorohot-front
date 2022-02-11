@@ -30,14 +30,18 @@ export default {
   computed: {
   },
   async asyncData ({ app, route, params, error, store }) {
-    await store.dispatch('getCategoriesList').catch(() => {
-      return error({
-        statusCode: 404,
-        message: 'Категории не найдены или сервер не доступен'
+    let dishes = []
+    await store.dispatch('getCategoriesList')
+      .then((response) => {
+        const categoryId = response.filter(item => item.alias === route.params.CatalogSlug)
+        dishes = store.dispatch('dish/getDishesByCategory', categoryId[0].id)
       })
-    })
-    const categoryId = store.state.categoriesList.filter(item => item.alias === route.params.CatalogSlug)
-    const dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+      .catch(() => {
+        return error({
+          statusCode: 404,
+          message: 'Категории не найдены или сервер не доступен'
+        })
+      })
     return { dishes }
   },
   methods: {

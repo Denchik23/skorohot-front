@@ -48,27 +48,29 @@ export default {
   computed: {
   },
   async asyncData ({ app, route, params, error, store }) {
-    await store.dispatch('getCategoriesList').catch(() => {
-      return error({
-        statusCode: 404,
-        message: 'Категории не найдены или сервер не доступен'
-      })
-    })
-    const categoryId = store.state.categoriesList.filter(item => item.alias === 'pitstsa')
-    let dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
-    // добавляем текущий размер пиццы
-    if (route.params.CatalogSlug === 'pitstsa') {
-      dishes = dishes.map((dish) => {
-        dish.merge.push({
-          id: dish.id,
-          name: dish.name,
-          price: dish.price,
-          weight: dish.weight
+    let dishes = []
+    await store.dispatch('getCategoriesList')
+      .then((response) => {
+        const categoryId = response.filter(item => item.alias === 'pitstsa')
+        dishes = store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+        // добавляем текущий размер пиццы
+        dishes = dishes.map((dish) => {
+          dish.merge.push({
+            id: dish.id,
+            name: dish.name,
+            price: dish.price,
+            weight: dish.weight
+          })
+          dish.merge.sort((a, b) => { return a.weight - b.weight })
+          return dish
         })
-        dish.merge.sort((a, b) => { return a.weight - b.weight })
-        return dish
       })
-    }
+      .catch(() => {
+        return error({
+          statusCode: 404,
+          message: 'Категории не найдены или сервер не доступен'
+        })
+      })
     return { dishes }
   },
   methods: {
