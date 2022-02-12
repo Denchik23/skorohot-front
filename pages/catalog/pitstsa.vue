@@ -49,28 +49,29 @@ export default {
   },
   async asyncData ({ app, route, params, error, store }) {
     let dishes = []
-    await store.dispatch('getCategoriesList')
-      .then((response) => {
-        const categoryId = response.filter(item => item.alias === 'pitstsa')
-        dishes = store.dispatch('dish/getDishesByCategory', categoryId[0].id)
-        // добавляем текущий размер пиццы
-        dishes = dishes.map((dish) => {
-          dish.merge.push({
-            id: dish.id,
-            name: dish.name,
-            price: dish.price,
-            weight: dish.weight
-          })
-          dish.merge.sort((a, b) => { return a.weight - b.weight })
-          return dish
-        })
+    let categoryId
+    try {
+      const categoriesList = await store.dispatch('getCategoriesList')
+      categoryId = categoriesList.filter(item => item.alias === 'pitstsa')
+    } catch (er) {
+      return error({
+        statusCode: 404,
+        message: 'Категория не найдена или сервер не доступен'
       })
-      .catch(() => {
-        return error({
-          statusCode: 404,
-          message: 'Категории не найдены или сервер не доступен'
-        })
+    }
+    dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+    // добавляем текущий размер пиццы
+    dishes = dishes.map((dish) => {
+      dish.merge.push({
+        id: dish.id,
+        name: dish.name,
+        price: dish.price,
+        weight: dish.weight
       })
+      dish.merge.sort((a, b) => { return a.weight - b.weight })
+      return dish
+    })
+
     return { dishes }
   },
   methods: {

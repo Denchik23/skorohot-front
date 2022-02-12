@@ -9,9 +9,10 @@
       <div class="container">
         <div class="card-list">
           <div
-            class="card-list__col"
             v-for="dish in dishes"
-            :key="dish.id">
+            :key="dish.id"
+            class="card-list__col"
+          >
             <catalog-dish-brief :data="dish" />
           </div>
         </div>
@@ -22,27 +23,25 @@
 
 <script>
 export default {
+  async asyncData ({ app, route, params, error, store }) {
+    let dishes = []
+    let categoryId
+    try {
+      const categoriesList = await store.dispatch('getCategoriesList')
+      categoryId = categoriesList.filter(item => item.alias === route.params.CatalogSlug)
+    } catch (er) {
+      return error({
+        statusCode: 404,
+        message: 'Категория не найдена или сервер не доступен'
+      })
+    }
+    dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+    return { dishes }
+  },
   data () {
     return {
       dishes: []
     }
-  },
-  computed: {
-  },
-  async asyncData ({ app, route, params, error, store }) {
-    let dishes = []
-    await store.dispatch('getCategoriesList')
-      .then((response) => {
-        const categoryId = response.filter(item => item.alias === route.params.CatalogSlug)
-        dishes = store.dispatch('dish/getDishesByCategory', categoryId[0].id)
-      })
-      .catch(() => {
-        return error({
-          statusCode: 404,
-          message: 'Категории не найдены или сервер не доступен'
-        })
-      })
-    return { dishes }
   },
   methods: {
   }

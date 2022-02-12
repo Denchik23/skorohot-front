@@ -16,19 +16,11 @@ export const mutations = {
 }
 
 export const actions = {
-  getCategoriesList ({ commit, state }) {
+  async getCategoriesList ({ commit, state }) {
     if (!state.categoriesList.length) {
-      return new Promise((resolve, reject) => {
-        this.$axios.$get('/category')
-          .then((response) => {
-            commit('SET_CATEGORIES_LIST', response)
-            resolve(response)
-          })
-          .catch((err) => {
-            console.log(err)
-            reject(err)
-          })
-      })
+      const category = await this.$axios.$get('/category')
+      commit('SET_CATEGORIES_LIST', category)
     }
+    return state.categoriesList
   }
 }

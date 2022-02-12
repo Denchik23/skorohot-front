@@ -4,86 +4,51 @@
       <div class="container">
         <div class="ingredients-search">
           <div class="ingredients-search__close">
-            <button class="close-pic"></button>
+            <button class="close-pic" @click="clearSearchIngredient"/>
           </div>
           <div class="ingredients-search__button">
-            <button class="button_shadow button">Найти по ингредиенту</button>
+            <ui-base-button
+              shadow
+              title="Найти по ингредиенту"
+            />
           </div>
           <div class="ingredients-search__body">
-            <span class="ingredients-search__empty">*Не выбран ингредиент</span>
+            <span v-if="!searchIngredients.length" class="ingredients-search__empty">*Не выбран ингредиент</span>
+            <div
+              v-else
+              v-for="(item, key) in searchIngredients"
+              :key="key"
+              class="ingredients-search__item"
+            >
+              <img :src="`/icons/${item.icon}.svg`" :alt="item.icon" width="45" height="45">
+            </div>
           </div>
         </div>
       </div>
     </main>
     <section
-      v-for="(category, key) in categories"
+      v-for="(ingredient, key) in ingredients"
       :key="key"
     >
       <div class="container">
-        <h2 class="ingredients-title section-title">{{ category.name }}</h2>
+        <h2 class="ingredients-title section-title">
+          {{ ingredient.category }}
+        </h2>
         <div class="composition">
-          <div class="composition__item">
-            <div class="ingredient substrate">
+          <div
+            v-for="(item, ingKey) in ingredient.ingredients"
+            :key="ingKey"
+            class="composition__item"
+          >
+            <div
+              :class="{'ingredient_selected': item.selected}"
+              @click="choiceSearchIngredient({ key, ingKey })"
+              class="ingredient substrate"
+            >
               <div class="ingredient__img">
-                <img src="~/assets/img/bell-pepper.svg" alt="bell-icon" width="79" height="79">
+                <img :src="`/icons/${item.icon}.svg`" :alt="item.icon" width="79" height="79">
               </div>
-              <span>Болгарский перец</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/tomato.svg" alt="tomato-icon" width="79" height="79">
-              </div>
-              <span>Свежие томаты</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/champion.svg" alt="champion-icon" width="79" height="79">
-              </div>
-              <span>Шампиньоны</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/onion.svg" alt="onion-icon" width="79" height="79">
-              </div>
-              <span>Красный лук</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/chili.svg" alt="chili-icon" width="79" height="79">
-              </div>
-              <span>Перчик Халапеньо</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/fungus.svg" alt="fungus-icon" width="79" height="79">
-              </div>
-              <span>Болгарский перец</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/green-tea.svg" alt="green-tea-icon" width="79" height="79">
-              </div>
-              <span>Болгарский перец</span>
-            </div>
-          </div>
-          <div class="composition__item">
-            <div class="ingredient substrate">
-              <div class="ingredient__img">
-                <img src="~/assets/img/olives.svg" alt="olives-icon" width="79" height="79">
-              </div>
-              <span>Болгарский перец</span>
+              <span>{{ item.name }}</span>
             </div>
           </div>
         </div>
@@ -94,10 +59,13 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'search',
+  async asyncData ({ app, route, params, error, store }) {
+    await store.dispatch('ingredient/fetchList')
+  },
   data () {
     return {
       data: null,
@@ -109,12 +77,14 @@ export default {
   computed: {
     ...mapState({
       ingredients: state => state.ingredient.ingredients,
-      categories: state => state.ingredient.categories
+      searchIngredients: state => state.ingredient.searchIngredients
     })
   },
-  async asyncData ({ app, route, params, error, store }) {
-    await store.dispatch('ingredient/fetchList', 'categories')
-    await store.dispatch('ingredient/fetchList', 'ingredients')
+  methods: {
+    ...mapActions({
+      choiceSearchIngredient: 'ingredient/choiceSearchIngredient',
+      clearSearchIngredient: 'ingredient/clearSearchIngredient'
+    })
   }
 }
 </script>
@@ -141,6 +111,15 @@ export default {
     width: 100%;
     padding: 0 12px;
     margin: 15px 0 0 0;
+  }
+
+  &__item {
+    display: inline-block;
+    margin: 0 4px;
+
+    > img {
+      width: 40px;
+    }
   }
 
   &__button {
@@ -250,6 +229,10 @@ export default {
 
   &__img {
     margin: 0 0 8px 0;
+  }
+
+  &_selected {
+    background: linear-gradient(180deg, #0d0d0d, #442315);
   }
 
   @include media-tablet {

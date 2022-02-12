@@ -4,8 +4,8 @@ export const mutations = {}
 
 export const actions = {
   // eslint-disable-next-line no-empty-pattern
-  getDishesByCategory ({}, categoryId) {
-    return this.$axios.$get('/category/' + categoryId)
+  async getDishesByCategory ({}, categoryId) {
+    return await this.$axios.$get('/category/' + categoryId)
   },
 
   // eslint-disable-next-line no-empty-pattern

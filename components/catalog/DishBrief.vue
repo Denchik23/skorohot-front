@@ -19,7 +19,7 @@
       <nuxt-link :to="`/dish/${data.alias}`">Далее</nuxt-link>
     </div>
     <div class="card__data" :class="{'card-mini__data': isMini}">
-      <div class="card__count">{{ data.weight }} {{ data.units }}.<br>8 шт.</div>
+      <div class="card__count">{{ data.weight }} {{ data.units }}</div>
       <div class="card__prices">{{ data.price }} руб.</div>
     </div>
     <client-only>
