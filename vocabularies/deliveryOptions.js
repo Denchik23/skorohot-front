@@ -49,3 +49,14 @@ export const paymentOptions = [
     label: 'Картой курьеру'
   }
 ]
+
+export const auntOptions = [
+  {
+    value: 'LoginAuthorization',
+    label: 'Вход'
+  },
+  {
+    value: 'LoginRegistration',
+    label: 'Регистрация'
+  }
+]

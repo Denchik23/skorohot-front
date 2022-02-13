@@ -4,31 +4,7 @@
       <div class="container">
         <div class="auth">
           <div class="auth__form substrate">
-            <ui-form-item class="auth__choice">
-              <div class="radio-group">
-                <div class="radio-group__item">
-                  <input
-                    id="delivery"
-                    v-model="changeAction"
-                    name="delivery"
-                    type="radio"
-                    checked="checked"
-                    value="LoginAuthorization"
-                  >
-                  <label class="radio-group__button button" for="delivery">Вход</label>
-                </div>
-                <div class="radio-group__item">
-                  <input
-                    id="pickup"
-                    v-model="changeAction"
-                    name="delivery"
-                    type="radio"
-                    value="LoginRegistration"
-                  >
-                  <label class="radio-group__button button" for="pickup">Регистрация</label>
-                </div>
-              </div>
-            </ui-form-item>
+            <ui-base-radio-group class="auth__choice" v-model="changeAction" name="delivery" :options="auntOptions" />
             <component v-bind:is="changeAction" @passwordRecovery="changeAction = 'LoginPasswordRecovery'" />
           </div>
           <div class="auth__content">
@@ -79,10 +55,13 @@
 </template>
 
 <script>
+import { auntOptions } from '@/vocabularies/deliveryOptions'
+
 export default {
   name: 'Login',
   data () {
     return {
+      auntOptions,
       changeAction: 'LoginAuthorization'
     }
   },
