@@ -18,7 +18,7 @@
     <profile-history :data="orders"/>
     <section>
       <div class="container">
-        <div class="shopping-data">
+        <div class="profile-data">
           <profile-present />
           <client-only>
             <profile-addresses />
@@ -156,5 +156,10 @@ export default {
       text-align: justify;
     }
   }
+}
+.profile-data {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>
