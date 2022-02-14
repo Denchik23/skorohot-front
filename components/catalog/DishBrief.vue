@@ -97,9 +97,9 @@ export default {
     },
     getPreview () {
       if (this.data.preview !== null) {
-        return 'http://localhost/storage/images/thumbnail/' + this.data.preview.file_name
+        return process.env.APP_IMAGES_URL + 'thumbnail/' + this.data.preview.file_name
       } else {
-        return 'http://localhost/storage/images/not_found.jpg'
+        return process.env.APP_IMAGES_URL + 'not_found.jpg'
       }
     }
   },

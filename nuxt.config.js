@@ -1,6 +1,10 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
+  env: {
+    APP_API_BASE_URL: process.env.APP_API_BASE_URL || 'http://localhost:3000',
+    APP_API_AUNT_URL: process.env.APP_API_AUNT_URL || 'http://localhost:3000'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'skorohot-front',
@@ -70,7 +74,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost/api',
+    baseURL: process.env.APP_API_BASE_URL,
     credentials: true
   },
 
@@ -78,7 +82,7 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: 'http://localhost',
+        url: process.env.APP_API_AUNT_URL,
         endpoints: {
           login: {
             url: '/api/login'
