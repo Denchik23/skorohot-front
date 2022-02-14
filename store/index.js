@@ -6,6 +6,12 @@ export const state = () => ({
   categoriesList: []
 })
 
+export const getters = {
+  getCategories (state) {
+    return state.categoriesList.filter(item => item.published)
+  }
+}
+
 export const mutations = {
   TOGGLE_MENU (state) {
     state.showMenu = !state.showMenu

@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Categories',
   computed: {
-    ...mapState({
-      categories: 'categoriesList'
+    ...mapGetters({
+      categories: 'getCategories'
     })
   }
 }
