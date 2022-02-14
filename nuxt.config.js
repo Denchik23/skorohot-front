@@ -2,8 +2,9 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
   env: {
-    APP_API_BASE_URL: process.env.APP_API_BASE_URL || 'http://localhost:3000',
-    APP_API_AUNT_URL: process.env.APP_API_AUNT_URL || 'http://localhost:3000'
+    APP_API_BASE_URL: process.env.APP_API_BASE_URL || 'http://localhost/api',
+    APP_API_AUNT_URL: process.env.APP_API_AUNT_URL || 'http://localhost',
+    APP_IMAGES_URL: process.env.APP_IMAGES_URL || 'http://localhost/storage/images/'
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
