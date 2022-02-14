@@ -34,10 +34,10 @@
         required
         :error="$v.data.password.$error"
       >
-        <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 6 цифр">
+        <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 8 цифр">
         <template #error>
           <small v-if="!$v.data.password.required">Обязательное поле</small>
-          <small v-if="!$v.data.password.minLength">Минимальная длина 6 символов</small>
+          <small v-if="!$v.data.password.minLength">Минимальная длина 8 символов</small>
         </template>
       </ui-form-item>
       <ui-form-item

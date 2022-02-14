@@ -9,6 +9,7 @@
       <div class="card__name">{{ data.name }}</div>
       <div class="card__rating" v-if="!isMini">{{ data.rated }}</div>
     </div>
+    <slot />
     <div v-if="data.ingredients.length" class="ingredients">
       <div v-for="(ingredient, index) in data.ingredients" :key="index" class="ingredients__col">
         <div class="ingredients__item">{{ ingredient.name }}</div>
@@ -97,9 +98,9 @@ export default {
     },
     getPreview () {
       if (this.data.preview !== null) {
-        return process.env.APP_IMAGES_URL + '/thumbnail/' + this.data.preview.file_name
+        return this.$config.appImagesUrl + '/thumbnail/' + this.data.preview.file_name
       } else {
-        return process.env.APP_IMAGES_URL + '/not_found.jpg'
+        return this.$config.appImagesUrl + '/not_found.jpg'
       }
     }
   },

@@ -16,11 +16,11 @@
         <div class="dish">
           <div class="dish__left">
             <div v-if="dish.images.length === 1" class="slider-dish__item">
-              <img :src="`http://localhost/storage/images/${dish.images[0].file_name}`" width="303" height="302" :alt="dish.name">
+              <img :src="`${$config.appImagesUrl}/${dish.images[0].file_name}`" width="303" height="302" :alt="dish.name">
             </div>
             <dish-carousel v-else-if="dish.images.length > 1" :images="dish.images"/>
             <div v-else class="slider-dish__item">
-              <img src="http://localhost/storage/images/not_found.jpg" width="375" height="300" :alt="dish.name">
+              <img :src="$config.appImagesUrl + '/not_found.jpg'" width="375" height="300" :alt="dish.name">
             </div>
             <button class="dish__video button">Смотреть видео</button>
             <div class="dish__rating">

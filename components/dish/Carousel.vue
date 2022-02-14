@@ -12,7 +12,7 @@
         :key="image.id"
         class="slider-dish__item"
       >
-        <img :src="`http://localhost/storage/images/${image.file_name}`" width="303" height="302" :alt="image.title">
+        <img :src="`${$config.appImagesUrl}/${image.file_name}`" width="303" height="302" :alt="image.title">
       </div>
     </VueSlickCarousel>
     <VueSlickCarousel
@@ -28,7 +28,7 @@
         :key="image.id"
         class="slider-dish-nav__item"
       >
-        <img :src="`http://localhost/storage/images/thumbnail/${image.file_name}`" width="96" height="93" :alt="image.title">
+        <img :src="`${$config.appImagesUrl}/thumbnail/${image.file_name}`" width="96" height="93" :alt="image.title">
       </div>
     </VueSlickCarousel>
   </div>
