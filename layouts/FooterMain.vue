@@ -21,14 +21,14 @@
             </div>
             <div class="footer__aunt">
               <button class="basket" @click="$router.push('/cart')" />
-              <template v-if="$auth.loggedIn">
+              <div class="basket-aunt" v-show="$auth.loggedIn">
                 <div class="avatar">
                   <NuxtLink to="/profile">
                     <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
                   </NuxtLink>
                 </div>
                 <button class="authorization" @click="logout" />
-              </template>
+              </div>
             </div>
             <div class="footer__menu">
               <ul>
@@ -75,9 +75,11 @@
 </template>
 
 <script>
+import LogoutMixin from '~/mixins/LogoutMixin'
 
 export default {
   name: 'FooterMain',
+  mixins: [LogoutMixin],
   data () {
     return {}
   },
@@ -87,10 +89,6 @@ export default {
     }
   },
   methods: {
-    async logout () {
-      await this.$auth.logout()
-      await this.$router.push('/')
-    },
     scrollTopSmooth () {
       window.scrollTo({
         top: 0,

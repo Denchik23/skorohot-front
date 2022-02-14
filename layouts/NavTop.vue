@@ -27,15 +27,15 @@
         <button class="nav-top__basket basket-body__basket basket" @click="$router.push('/cart')">
           {{ total }}
         </button>
-        <template v-if="$auth.loggedIn">
+        <div class="basket-aunt" v-show="$auth.loggedIn">
           <div class="avatar">
             <NuxtLink to="/profile">
               <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
             </NuxtLink>
           </div>
           <button class="authorization" @click="logout" />
-        </template>
-        <NuxtLink v-else to="/login" class="nav-top__button basket-body__button button_green button">
+        </div>
+        <NuxtLink v-show="!$auth.loggedIn" to="/login" class="nav-top__button basket-body__button button_green button">
           Войти
         </NuxtLink>
       </div>
@@ -45,19 +45,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import LogoutMixin from '~/mixins/LogoutMixin'
 
 export default {
   name: 'NavTop',
+  mixins: [LogoutMixin],
   computed: {
     ...mapGetters({
       total: 'cart/getTotalWithSpaces'
     })
-  },
-  methods: {
-    async logout () {
-      await this.$auth.logout()
-      await this.$router.push('/')
-    }
   }
 }
 </script>

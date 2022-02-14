@@ -37,9 +37,17 @@
               <button class="basket-body__basket basket">
                 {{ total }}
               </button>
-              <button class="button button_green basket-body__button">
+              <div class="basket-aunt" v-show="$auth.loggedIn">
+                <div class="avatar">
+                  <NuxtLink to="/profile">
+                    <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+                  </NuxtLink>
+                </div>
+                <button class="authorization" @click="logout" />
+              </div>
+              <NuxtLink v-show="!$auth.loggedIn" to="/login" class="button button_green basket-body__button">
                 Войти
-              </button>
+              </NuxtLink>
             </div>
           </client-only>
           <ul class="nav mobile-menu__links">
@@ -57,11 +65,12 @@
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex'
+import LogoutMixin from '~/mixins/LogoutMixin'
 
 export default {
   name: 'HeaderMain',
+  mixins: [LogoutMixin],
   components: {
   },
   data () {
