@@ -22,6 +22,11 @@ export const mutations = {
 }
 
 export const actions = {
+  /*
+  async nuxtServerInit ({ dispatch }) {
+    await dispatch('getCategoriesList')
+  },
+  */
   async getCategoriesList ({ commit, state }) {
     if (!state.categoriesList.length) {
       const category = await this.$axios.$get('/category')

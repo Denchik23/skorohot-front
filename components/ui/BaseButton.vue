@@ -1,5 +1,5 @@
 <template>
-  <button v-if="!link" class="button" :class="className" :disabled="disabled" @click.prevent="$emit('click')">
+  <button v-if="!router.length" class="button" :class="className" :disabled="disabled" @click.prevent="$emit('click')">
     <span v-if="title.length">{{ title }}</span>
     <slot />
     <span v-if="loader !== null" class="circularG-wrap">
@@ -13,11 +13,11 @@
       <span class="circularG circularG_8" />
     </span>
   </button>
-  <a v-else :href="link" class="button" target="blank">
+  <nuxt-link v-else :to="router" class="button" :class="className">
     <span>
-      <slot />
+      {{ title }}
     </span>
-  </a>
+  </nuxt-link>
 </template>
 
 <script>
@@ -48,7 +48,10 @@ export default {
       type: Boolean,
       default: false
     },
-    link: String
+    router: {
+      type: String,
+      default: ''
+    }
   },
   computed: {
     className () {

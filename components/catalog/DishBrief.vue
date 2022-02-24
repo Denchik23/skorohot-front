@@ -26,9 +26,9 @@
     <client-only>
       <div class="card__buttons">
         <div class="button-count" :class="{'card-mini__count': isMini}">
-          <button class="button-count__add" @click="quantityUp">+</button>
-          <span class="button-count__count">{{ quantity }}</span>
           <button class="button-count__del" @click="quantityDown">-</button>
+          <span class="button-count__count">{{ quantity }}</span>
+          <button class="button-count__add" @click="quantityUp">+</button>
         </div>
         <ui-base-button
           v-if="!showDeleteButton"
@@ -290,11 +290,11 @@ export default {
   }
 
   &__add {
-    padding: 0 30px 0 0;
+    padding: 0 0 0 30px;
   }
 
   &__del {
-    padding: 0 0 0 30px;
+    padding: 0 30px 0 0;
   }
 
   @include media-desktop {

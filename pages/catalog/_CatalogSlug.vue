@@ -102,32 +102,4 @@ export default {
     }
   }
 }
-
-.card-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 30px -15px 0 -15px;
-
-  &__col {
-    padding: 0 15px;
-    width: 100%;
-    margin: 0 0 30px 0;
-
-    &:last-child {
-      margin: 0;
-    }
-  }
-
-  @include media-tablet {
-    &__col {
-      width: 50%;
-    }
-  }
-
-  @include media-laptop {
-    &__col {
-      width: 33.3%;
-    }
-  }
-}
 </style>

@@ -3,7 +3,11 @@ export const state = () => ({
   searchIngredients: []
 })
 
-export const getters = {}
+export const getters = {
+  getIdSearchIngredients (state) {
+    return state.searchIngredients.map(item => item.id)
+  }
+}
 
 export const mutations = {
   FETCH_LIST (state, payload) {
@@ -60,5 +64,11 @@ export const actions = {
   clearSearchIngredient ({ commit, state }) {
     commit('FETCH_LIST', state.ingredients)
     commit('CLEAR_INGREDIENT')
+  },
+
+  searchByIngredients ({ getters }) {
+    return this.$axios.$get('/dish-search', {
+      params: { query: getters.getIdSearchIngredients }
+    })
   }
 }

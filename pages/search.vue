@@ -9,6 +9,7 @@
           <div class="ingredients-search__button">
             <ui-base-button
               shadow
+              router="searching-results"
               title="Найти по ингредиенту"
             />
           </div>
@@ -97,6 +98,7 @@ export default {
   flex-wrap: wrap;
   position: relative;
   z-index: 5;
+  line-height: 1.15;
 
   &__close {
     padding: 0 12px;
