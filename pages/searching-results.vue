@@ -4,7 +4,7 @@
       <div class="container">
         <div class="menu">
           <div class="menu__links substrate">
-            <div class="title"><span class="title_red">Результаты </span><span class="title_green">поиска</span></div>
+            <div class="menu__search-result title"><span class="title_red">Результаты </span><span class="title_green">поиска</span></div>
           </div>
           <nuxt-link to="/search" class="menu__search substrate">
             <span>Поиск по ингредиентам</span>
