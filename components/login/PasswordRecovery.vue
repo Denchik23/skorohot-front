@@ -34,7 +34,7 @@
         required
         :error="$v.data.password.$error"
       >
-        <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 8 цифр">
+        <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 8 символов">
         <template #error>
           <small v-if="!$v.data.password.required">Обязательное поле</small>
           <small v-if="!$v.data.password.minLength">Минимальная длина 8 символов</small>
@@ -45,7 +45,7 @@
         required
         :error="$v.data.password_confirmation.$error"
       >
-        <input v-model="$v.data.password_confirmation.$model" type="password" class="base-input" placeholder="Не менее 6 цифр">
+        <input v-model="$v.data.password_confirmation.$model" type="password" class="base-input" placeholder="Не менее 8 символов">
         <template #error>
           <small v-if="!$v.data.password_confirmation.required">Обязательное поле</small>
           <small v-if="!$v.data.password_confirmation.sameAsPassword">Пароли должны совпадать</small>

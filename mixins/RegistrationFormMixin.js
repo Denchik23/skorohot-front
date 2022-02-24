@@ -50,7 +50,8 @@ export default {
           sameAsPassword: sameAs('password')
         },
         code: {
-          required: requiredIf(() => this.validSmsCode)
+          required: requiredIf(() => this.validSmsCode),
+          minLength: minLength(4)
         }
       }
     }
