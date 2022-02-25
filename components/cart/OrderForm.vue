@@ -288,11 +288,9 @@ export default {
               street: 'Другой',
               apartment: 'адрес'
             })
-            // устанавливаем адрес если он одни
-            if (response.length > 1) {
-              this.data.address.id = response[1].id
-              this.isDisabledAddress = true
-            }
+            // устанавливаем адрес
+            this.data.address.id = response[0].id
+            this.isDisabledAddress = true
           }
         }).catch((error) => {
           this.showModalError(this.getResponseErrorMessage(error.response))
