@@ -80,7 +80,8 @@
               />
             </ui-form-item>
             <ui-base-checkbox
-              v-model="$v.data.address_save.$model"
+              v-if="data.delivery"
+              v-model="$v.data.address.active.$model"
               label="Сохранить адрес для дальнейших заказов"
             />
           </div>
@@ -203,13 +204,13 @@ export default {
         delivery: 1,
         address: {
           id: null,
+          active: true,
           street: '',
           house: '',
           apartment: '',
           floor: ''
         },
         comment: '',
-        address_save: true,
         delivery_time: 'fast',
         time: '10:30',
         payment: 'cash',
@@ -225,6 +226,7 @@ export default {
       data: {
         address: {
           id: {},
+          active: {},
           street: {
             required: requiredIf(() => this.data.delivery)
           },
@@ -242,7 +244,6 @@ export default {
         comment: {
           maxLength: maxLength(250)
         },
-        address_save: {},
         promo_code: {},
         score: {
           required
@@ -278,17 +279,17 @@ export default {
   },
   methods: {
     getUserAddresses () {
-      this.$store.dispatch('order/getUserAddresses')
+      this.$store.dispatch('address/fetchList')
         .then((response) => {
           if (response.length) {
-            this.addressesUser = response
+            this.addressesUser = response.map((item) => { delete item.name; return item })
             this.addressesUser.unshift({
               id: null,
               street: 'Другой',
               apartment: 'адрес'
             })
             // устанавливаем адрес если он одни
-            if (response.length >= 2) {
+            if (response.length > 1) {
               this.data.address.id = response[1].id
               this.isDisabledAddress = true
             }

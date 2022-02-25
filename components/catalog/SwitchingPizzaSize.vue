@@ -54,6 +54,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  margin: 15px 0 15px 0;
 
   &__item {
     border: 1px solid #3cd52e;
