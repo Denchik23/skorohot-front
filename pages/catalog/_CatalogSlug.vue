@@ -23,20 +23,18 @@
 
 <script>
 export default {
-  async asyncData ({ app, route, params, error, store }) {
-    let dishes = []
-    let categoryId
-    try {
-      const categoriesList = await store.dispatch('getCategoriesList')
-      categoryId = categoriesList.filter(item => item.alias === route.params.CatalogSlug)
-    } catch (er) {
+  asyncData ({ app, route, params, error, store }) {
+    return store.dispatch('getCategoriesList').then((data) => {
+      const categoryId = data.filter(item => item.alias === route.params.CatalogSlug)
+      return store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+    }).then((data) => {
+      return { dishes: data }
+    }).catch((errorMessage) => {
       return error({
         statusCode: 404,
-        message: 'Категория не найдена или сервер не доступен'
+        message: errorMessage
       })
-    }
-    dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
-    return { dishes }
+    })
   },
   data () {
     return {

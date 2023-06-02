@@ -2,7 +2,7 @@
   <div class="card" :class="{'card-mini': isMini, 'substrate': !isMini}">
     <div class="card__img">
       <nuxt-link :to="`/dish/${data.alias}`" :title="data.name">
-        <img :src="getPreview" width="375" height="300" :alt="data.name">
+        <img :src="preview" width="300" height="300" :alt="data.name">
       </nuxt-link>
     </div>
     <div class="card__head" :class="{'card-mini__head': isMini}">
@@ -77,7 +77,8 @@ export default {
   },
   data () {
     return {
-      quantity: 1
+      quantity: 1,
+      preview: ''
     }
   },
   computed: {
@@ -94,13 +95,6 @@ export default {
         return 'В корзине'
       } else {
         return 'В корзину'
-      }
-    },
-    getPreview () {
-      if (this.data.preview !== null) {
-        return this.$config.appImagesUrl + '/thumbnail/' + this.data.preview.file_name
-      } else {
-        return this.$config.appImagesUrl + '/not_found.jpg'
       }
     }
   },
@@ -137,6 +131,11 @@ export default {
     }
   },
   mounted () {
+    if (this.data.image !== null) {
+      this.preview = this.$config.appImagesUrl + '/thumbnail/' + this.data.image.file_name
+    } else {
+      this.preview = this.$config.appImagesUrl + '/no-image.jpg'
+    }
     if (this.isProductAdded) {
       this.quantity = this.cart.find(dish => dish.id === this.data.id).quantity
     }
@@ -211,12 +210,6 @@ export default {
   &__button-delete {
     background: unset;
     border: none;
-  }
-
-  @include media-laptop {
-    &__img {
-      height: 307px;
-    }
   }
 
   @include media-desktop {

@@ -182,13 +182,13 @@ import { deliveryOptions, timeOptions, timeList, paymentOptions } from '@/vocabu
 
 export default {
   name: 'OrderForm',
+  components: {
+    TheMask
+  },
   mixins: [
     FormMixin,
     ModalMixin
   ],
-  components: {
-    TheMask
-  },
   data () {
     return {
       addressesUser: [],
@@ -269,7 +269,7 @@ export default {
         this.data.address.floor = ''
         this.isDisabledAddress = false
       } else {
-        Object.assign(this.data.address, this.addressesUser.find(item => (item.id === value)))
+        Object.assign(this.data.address, this.addressesUser.find(item => item.id === value))
         this.isDisabledAddress = true
       }
     }
@@ -280,20 +280,30 @@ export default {
   methods: {
     getUserAddresses () {
       this.$store.dispatch('address/fetchList')
-        .then((response) => {
-          if (response.length) {
-            this.addressesUser = response.map((item) => { delete item.name; return item })
+        .then((data) => {
+          if (data.length) {
+            this.addressesUser = data.map((item) => {
+              return {
+                id: item.id,
+                street: item.street,
+                house: item.house,
+                apartment: item.apartment,
+                floor: item.floor
+              }
+            })
             this.addressesUser.unshift({
               id: null,
               street: 'Другой',
-              apartment: 'адрес'
+              house: '',
+              apartment: 'адрес',
+              floor: ''
             })
             // устанавливаем адрес
-            this.data.address.id = response[0].id
+            this.data.address.id = data[0].id
             this.isDisabledAddress = true
           }
-        }).catch((error) => {
-          this.showModalError(this.getResponseErrorMessage(error.response))
+        }).catch((errorMessage) => {
+          this.showModalError(errorMessage)
         })
     },
     order () {
@@ -302,18 +312,18 @@ export default {
       }
       this.data.dishes = this.cart.map((item) => { return { id: item.id, quantity: item.quantity } })
       this.data.sum = this.total
-      this.$store.dispatch('order/send', this.data)
-        .finally(() => {
-          this.loaderButton = false
-        })
-        .then((response) => {
-          if (typeof response.success !== 'undefined' && response.success) {
-            this.$router.push('/thanks')
-            this.$store.dispatch('cart/clear')
-          }
-        }).catch((error) => {
-          this.showModalError(this.getResponseErrorMessage(error.response))
-        })
+      console.log(this.data)
+      this.$store.dispatch('order/send', this.data).finally(() => {
+        this.loaderButton = false
+      }).then((response) => {
+        console.log(response)
+        if (typeof response.success !== 'undefined' && response.success) {
+          this.$router.push('/thanks')
+          this.$store.dispatch('cart/clear')
+        }
+      }).catch((errorMessage) => {
+        this.showModalError(errorMessage)
+      })
     }
   }
 }

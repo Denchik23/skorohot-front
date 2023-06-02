@@ -1,3 +1,5 @@
+import { prepareErrorMessage } from '@/utils/globalHelpers'
+
 export const getters = {}
 
 export const mutations = {}
@@ -5,7 +7,17 @@ export const mutations = {}
 export const actions = {
   // eslint-disable-next-line no-empty-pattern
   send ({}, payload) {
-    return this.$axios.$post('/order', payload)
+    return new Promise((resolve, reject) => {
+      const order = Object.assign({}, payload)
+      if (order.delivery === 0) {
+        delete order.address
+      }
+      this.$axios.$post('/order', order).then((response) => {
+        resolve(response)
+      }).catch((error) => {
+        reject(prepareErrorMessage(error))
+      })
+    })
   },
 
   // eslint-disable-next-line no-empty-pattern

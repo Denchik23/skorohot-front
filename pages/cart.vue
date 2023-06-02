@@ -8,15 +8,17 @@
             <template v-if="dishes.length">
               <div class="shopping-basket__body">
                 <div
-                  class="shopping-basket__item"
                   v-for="dish in dishes"
-                  :key="dish.id">
+                  :key="dish.id"
+                  class="shopping-basket__item"
+                >
                   <catalog-dish-brief
                     is-mini
                     :is-description="false"
                     :data="dish"
                     :show-delete-button="true"
-                    @deleteCartItem="deleteCartDish" />
+                    @deleteCartItem="deleteCartDish"
+                  />
                 </div>
               </div>
               <div class="outcome">
@@ -48,16 +50,15 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import ModalMixin from '~/mixins/ModalMixin'
 
 export default {
-  name: 'Cart',
+  name: 'cart',
   mixins: [
     ModalMixin
   ],
-  computed: {
-    ...mapState({
-      cart: state => state.cart.dishes
-    }),
-    ...mapGetters({
-      total: 'cart/getTotalWithSpaces'
+  asyncData ({ app, route, params, error, store }) {
+    return store.dispatch('dish/getRecommendations').then((data) => {
+      return { dishesRecommended: data }
+    }).catch((errorMessage) => {
+      console.log(errorMessage)
     })
   },
   data () {
@@ -66,47 +67,39 @@ export default {
       dishesRecommended: []
     }
   },
-  async asyncData ({ app, route, params, error, store }) {
-    const dishesRecommended = await store.dispatch('dish/getRecommendations')
-    return { dishesRecommended }
+  computed: {
+    ...mapState({
+      cart: state => state.cart.dishes
+    }),
+    ...mapGetters({
+      total: 'cart/getTotalWithSpaces'
+    })
   },
   mounted () {
     const dishesId = this.cart.map((dish) => {
       return dish.id
     })
     if (dishesId.length) {
-      this.getDishesByCategory(dishesId)
+      this.$store.dispatch('dish/getDishes', dishesId).then((response) => {
+        if (response.length !== this.cart.length) {
+          const cart = this.cart
+          cart.forEach((item) => {
+            const findCart = response.filter((cartItem) => { return cartItem.id === item.id })
+            if (findCart.length === 0) {
+              this.removeDish(item)
+            }
+          })
+        }
+        this.dishes = response
+      }).catch((errorMessage) => {
+        this.showModalError(errorMessage)
+      })
     }
   },
   methods: {
     ...mapActions({
       removeDish: 'cart/removeDish'
     }),
-    getDishesByCategory (dishesId) {
-      this.$store.dispatch('dish/getDishes', dishesId)
-        .then((response) => {
-          if (typeof response === 'object') {
-            if (response.length !== this.cart.length) {
-              const cart = this.cart
-              cart.forEach((item) => {
-                const findCart = response.filter((cartItem) => { return cartItem.id === item.id })
-                if (findCart.length === 0) {
-                  this.removeDish(item)
-                }
-              })
-            }
-          }
-          this.dishes = response
-        }).catch((error) => {
-          // this.$store.dispatch('cart/clear')
-          let errorText = 'Ошибка запроса данных блюд. Обратитесь к администратору.'
-          if (typeof error.response !== 'undefined' && typeof error.response.data.message !== 'undefined' &&
-            error.response.data.message !== '') {
-            errorText = error.response.data.message
-          }
-          this.showModalError(errorText)
-        })
-    },
     deleteCartDish (id) {
       this.dishes = this.dishes.filter((dish) => {
         return dish.id !== id

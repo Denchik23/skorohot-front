@@ -18,15 +18,17 @@
         <catalog-in-pizza />
         <div class="card-list">
           <div
-            class="card-list__col"
             v-for="(dish, index) in dishes"
-            :key="dish.id">
+            :key="dish.id"
+            class="card-list__col"
+          >
             <catalog-dish-brief :data="dish">
               <switching-pizza-size
                 v-if="dish.merge.length"
                 :current-dish="dish"
                 :current-index="index"
-                @switchSize="switchSizePizza"/>
+                @switchSize="switchSizePizza"
+              />
             </catalog-dish-brief>
           </div>
         </div>
@@ -40,39 +42,35 @@ import SwitchingPizzaSize from '@/components/catalog/SwitchingPizzaSize'
 export default {
   name: 'pitstsa',
   components: { SwitchingPizzaSize },
+  asyncData ({ error, store }) {
+    return store.dispatch('getCategoriesList').then((data) => {
+      const categoryId = data.filter(item => item.alias === 'pitstsa')
+      return store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+    }).then((data) => {
+      const dishes = data.map((dish) => {
+        dish.merge.push({
+          id: dish.id,
+          name: dish.name,
+          price: dish.price,
+          weight: dish.weight
+        })
+        dish.merge.sort((a, b) => { return a.weight - b.weight })
+        return dish
+      })
+      return { dishes }
+    }).catch((errorMessage) => {
+      return error({
+        statusCode: 404,
+        message: errorMessage
+      })
+    })
+  },
   data () {
     return {
       dishes: []
     }
   },
   computed: {
-  },
-  async asyncData ({ app, route, params, error, store }) {
-    let dishes = []
-    let categoryId
-    try {
-      const categoriesList = await store.dispatch('getCategoriesList')
-      categoryId = categoriesList.filter(item => item.alias === 'pitstsa')
-    } catch (er) {
-      return error({
-        statusCode: 404,
-        message: 'Категория не найдена или сервер не доступен'
-      })
-    }
-    dishes = await store.dispatch('dish/getDishesByCategory', categoryId[0].id)
-    // добавляем текущий размер пиццы
-    dishes = dishes.map((dish) => {
-      dish.merge.push({
-        id: dish.id,
-        name: dish.name,
-        price: dish.price,
-        weight: dish.weight
-      })
-      dish.merge.sort((a, b) => { return a.weight - b.weight })
-      return dish
-    })
-
-    return { dishes }
   },
   methods: {
     switchSizePizza (switchSize) {

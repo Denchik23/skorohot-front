@@ -1,3 +1,5 @@
+import { prepareErrorMessage } from '@/utils/globalHelpers'
+
 export const state = () => ({
   addresses: []
 })
@@ -22,17 +24,15 @@ export const mutations = {
 export const actions = {
   fetchList ({ commit, state }) {
     return new Promise((resolve, reject) => {
-      if (!state.addresses.length) {
-        this.$axios.$get('/address')
-          .then((response) => {
-            commit('FETCH_LIST', response)
-            resolve(response)
-          })
-          .catch((err) => {
-            reject(err)
-          })
-      } else {
+      if (state.addresses.length) {
         resolve(state.addresses)
+      } else {
+        this.$axios.$get('/address').then(({ data }) => {
+          commit('FETCH_LIST', data)
+          resolve(data)
+        }).catch((error) => {
+          reject(prepareErrorMessage(error))
+        })
       }
     })
   },

@@ -15,12 +15,11 @@
       <div class="container">
         <div class="dish">
           <div class="dish__left">
-            <div v-if="dish.images.length === 1" class="slider-dish__item">
-              <img :src="`${$config.appImagesUrl}/${dish.images[0].file_name}`" width="303" height="302" :alt="dish.name">
+            <div v-if="dish.image !== null" class="dish__image">
+              <img :src="`${$config.appImagesUrl}/${dish.image.file_name}`" :alt="dish.name">
             </div>
-            <dish-carousel v-else-if="dish.images.length > 1" :images="dish.images"/>
-            <div v-else class="slider-dish__item">
-              <img :src="$config.appImagesUrl + '/not_found.jpg'" width="375" height="300" :alt="dish.name">
+            <div v-else class="dish__image">
+              <img :src="$config.appImagesUrl + '/no-image.jpg'" :alt="dish.name">
             </div>
             <button class="dish__video button">Смотреть видео</button>
             <div class="dish__rating">
@@ -70,6 +69,18 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  asyncData ({ app, route, params, error, store }) {
+    return store.dispatch('getCategoriesList').then(() => {
+      return store.dispatch('dish/getDishesByAlias', route.params.DishSlug)
+    }).then((dish) => {
+      return { dish }
+    }).catch((errorMessage) => {
+      return error({
+        statusCode: 404,
+        message: errorMessage
+      })
+    })
+  },
   data () {
     return {
       dish: {}
@@ -86,16 +97,6 @@ export default {
     isProductAdded () {
       return typeof this.cart.find(dish => dish.id === this.dish.id) !== 'undefined'
     }
-  },
-  async asyncData ({ app, route, params, error, store }) {
-    await store.dispatch('getCategoriesList').catch(() => {
-      return error({
-        statusCode: 404,
-        message: 'Категории не найдены или сервер не доступен'
-      })
-    })
-    const dish = await store.dispatch('dish/getDishesByAlias', route.params.DishSlug)
-    return { dish }
   },
   methods: {
     ...mapActions({
@@ -145,6 +146,10 @@ export default {
   &__left {
     position: relative;
     margin: 0 0 30px 0;
+  }
+
+  &__image {
+    text-align: center;
   }
 
   &__button {
