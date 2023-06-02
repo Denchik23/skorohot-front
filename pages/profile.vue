@@ -4,18 +4,11 @@
       <div class="container profile">
         <profile-data-form />
         <div class="profile__score shopping-basket">
-          <div class="profile__score-substrate">
-            {{ scoreParser }}<br>баллов
-          </div>
-          <div class="profile__intention intention">
-            <i class="icon-intention"></i>
-            <span>Баллы можно потратить на оплату 30% стоимости позиций из ассортимента. 1 балл = 1 рубль.  Баллы начисляются с каждого завершенного заказа, за исключением заказа, оплаченного бонусными баллами. Срок существования баллов - 12 месяцев. После чего они сгорают.</span>
-          </div>
-          <profile-bonuses-enough v-if="bonusDishes.length" :data="bonusDishes"/>
+          <profile-bonuses-enough v-if="bonusDishes.length" :data="bonusDishes" />
         </div>
       </div>
     </main>
-    <profile-history :data="orders"/>
+    <profile-history :data="orders" />
     <section>
       <div class="container">
         <div class="profile-data">
@@ -30,24 +23,25 @@
 </template>
 
 <script>
+
 export default {
   name: 'profile',
   middleware: 'authenticated',
+  asyncData ({ store, error }) {
+    return store.dispatch('order/getOrders').then((data) => {
+      return { orders: data }
+    }).catch((errorMessage) => {
+      return error({
+        statusCode: 404,
+        message: errorMessage
+      })
+    })
+  },
   data () {
     return {
       orders: [],
       bonusDishes: []
     }
-  },
-  computed: {
-    scoreParser () {
-      return this.$auth.user.score ? this.$auth.user.score.toLocaleString('ru') : 0
-    }
-  },
-  async asyncData ({ app, route, params, error, store }) {
-    const orders = await store.dispatch('order/getOrders')
-    const bonusDishes = await store.dispatch('profile/getBonusDishes')
-    return { orders, bonusDishes }
   }
 }
 </script>
@@ -83,25 +77,6 @@ export default {
 
   &__score {
     margin: 30px 0 0 0;
-  }
-
-  &__score-substrate {
-    border-radius: 15px;
-    font-weight: bold;
-    font-size: 26px;
-    background: linear-gradient(90deg, #276c21 0%, #4e6031 100%);
-    padding: 12px;
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  &__intention {
-    margin: 15px 0;
-
-    > span {
-      color: #464646;
-      font-size: 16px;
-    }
   }
 
   @include media-mobile {
@@ -141,19 +116,6 @@ export default {
     &__score {
       width: 62%;
       margin: 0;
-    }
-
-    &__score-substrate {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 12px 40px;
-      font-size: 46px;
-    }
-
-    &__intention {
-      margin: 0 250px 60px 0;
-      text-align: justify;
     }
   }
 }

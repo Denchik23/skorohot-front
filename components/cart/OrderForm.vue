@@ -131,21 +131,6 @@
                 placeholder="9873ExAm1PLE"
               >
             </ui-form-item>
-            <ui-form-item label="Оплатить часть бонусами" :error="$v.data.score.$error">
-              <div class="range-bonus">
-                <div class="range-bonus__min">0</div>
-                <div class="range-bonus__slider">
-                  <input
-                    v-model="$v.data.score.$model"
-                    class="base-range"
-                    type="range"
-                    min="0"
-                    max="100"
-                  >
-                </div>
-                <div class="range-bonus__max">1000</div>
-              </div>
-            </ui-form-item>
           </div>
         </div>
       </div>
@@ -173,8 +158,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { maxLength, required, requiredIf } from 'vuelidate/lib/validators'
+import { mapGetters, mapState } from 'vuex'
+import { maxLength, requiredIf } from 'vuelidate/lib/validators'
 import { TheMask } from 'vue-the-mask'
 import FormMixin from '@/mixins/FormMixin'
 import ModalMixin from '@/mixins/ModalMixin'
@@ -215,7 +200,6 @@ export default {
         time: '10:30',
         payment: 'cash',
         promo_code: '',
-        score: 0,
         sum: 0,
         source: 'site'
       }
@@ -244,10 +228,7 @@ export default {
         comment: {
           maxLength: maxLength(250)
         },
-        promo_code: {},
-        score: {
-          required
-        }
+        promo_code: {}
       }
     }
   },
@@ -255,10 +236,9 @@ export default {
     ...mapState({
       cart: state => state.cart.dishes
     }),
-    total () {
-      const currentBasket = this.$store.getters['cart/getTotal']
-      return currentBasket - this.data.score
-    }
+    ...mapGetters({
+      total: 'cart/getTotal'
+    })
   },
   watch: {
     'data.address.id' (value) {
@@ -312,11 +292,9 @@ export default {
       }
       this.data.dishes = this.cart.map((item) => { return { id: item.id, quantity: item.quantity } })
       this.data.sum = this.total
-      console.log(this.data)
       this.$store.dispatch('order/send', this.data).finally(() => {
         this.loaderButton = false
       }).then((response) => {
-        console.log(response)
         if (typeof response.success !== 'undefined' && response.success) {
           this.$router.push('/thanks')
           this.$store.dispatch('cart/clear')
@@ -381,26 +359,6 @@ export default {
     &__text {
       font-size: 24px;
     }
-  }
-}
-.range-bonus {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 15px 0 0 0;
-
-  &__slider {
-    width: 58%;
-  }
-
-  @include media-laptop {
-    &__slider {
-      width: 70%;
-    }
-  }
-
-  @include media-desktop {
-    margin: 30px 0 0 0;
   }
 }
 

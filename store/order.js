@@ -22,6 +22,12 @@ export const actions = {
 
   // eslint-disable-next-line no-empty-pattern
   getOrders ({}) {
-    return this.$axios.$get('/order')
+    return new Promise((resolve, reject) => {
+      this.$axios.$get('/order').then(({ data }) => {
+        resolve(data)
+      }).catch((error) => {
+        reject(prepareErrorMessage(error))
+      })
+    })
   }
 }

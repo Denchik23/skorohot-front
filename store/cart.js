@@ -11,10 +11,9 @@ export const state = () => ({
 
 export const getters = {
   getTotal (state) {
-    const total = state.dishes.reduce((sum, current) => {
+    return state.dishes.reduce((sum, current) => {
       return sum + current.price * current.quantity
     }, 0)
-    return total
   },
   getTotalWithSpaces (state, getters) {
     const total = getters.getTotal

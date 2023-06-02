@@ -1,9 +1,6 @@
 <template>
   <div class="shopping-basket__item">
     <div class="history substrate">
-      <div v-if="order.score !== 0" class="history__score">
-        {{ order.score }}<br>баллов
-      </div>
       <div class="history__title section-title">
         Статус: <span>{{ order.status.name }}</span>
       </div>
@@ -79,19 +76,6 @@ export default {
   position: relative;
   background: #181818;
   box-shadow: none;
-
-  &__score {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: #1c1c1c;
-    text-align: center;
-    padding: 12px;
-    border-radius: 10px;
-    line-height: 1.4;
-    font-size: 14px;
-    font-weight: bold;
-  }
 
   &__title {
     font-size: 20px;
