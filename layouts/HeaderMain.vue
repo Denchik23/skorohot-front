@@ -5,7 +5,7 @@
         <div class="logo">
           <div class="logo__img">
             <nuxt-link to="/">
-              <img src="~/assets/img/logo.svg" alt="Скороход">
+              <img src="@/assets/img/logo.svg" alt="Скороход">
             </nuxt-link>
           </div>
           <div class="logo__city">
@@ -21,7 +21,7 @@
           С 10:00 ДО 00:00
         </div>
         <a href="tel:+79180576767" class="header__phone">
-          <img src="~/assets/img/phone-call.svg" alt="phone-call" width="64" height="64">
+          <img src="@/assets/img/phone-call.svg" alt="phone-call" width="64" height="64">
           <span>+7 (918) 057 67 67</span>
         </a>
         <div
@@ -29,7 +29,7 @@
           :class="{ 'menu-burger_open' : showMenu }"
           @click="toggleMenu"
         >
-          <span></span>
+          <span />
         </div>
         <div class="mobile-menu" :class="{ 'mobile-menu_show' : showMenu }">
           <client-only>
@@ -37,10 +37,10 @@
               <button class="basket-body__basket basket">
                 {{ total }}
               </button>
-              <div class="basket-aunt" v-show="$auth.loggedIn">
+              <div v-show="$auth.loggedIn" class="basket-aunt">
                 <div class="avatar">
                   <NuxtLink to="/profile">
-                    <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+                    <img src="@/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
                   </NuxtLink>
                 </div>
                 <button class="authorization" @click="logout" />
@@ -51,12 +51,36 @@
             </div>
           </client-only>
           <ul class="nav mobile-menu__links">
-            <li @click="toggleMenu"><nuxt-link to="/" class="nav__link">Главная</nuxt-link></li>
-            <li @click="toggleMenu"><nuxt-link to="/catalog/pitstsa" class="nav__link">Меню</nuxt-link></li>
-            <li @click="toggleMenu"><nuxt-link to="/catalog/kombo" class="nav__link">Акции</nuxt-link></li>
-            <li @click="toggleMenu"><nuxt-link to="/o-nas" class="nav__link">О нас</nuxt-link></li>
-            <li @click="toggleMenu"><nuxt-link to="/delivery" class="nav__link">Доставка</nuxt-link></li>
-            <li @click="toggleMenu"><nuxt-link to="/contacts" class="nav__link">Контакты</nuxt-link></li>
+            <li @click="toggleMenu">
+              <nuxt-link to="/" class="nav__link">
+                Главная
+              </nuxt-link>
+            </li>
+            <li @click="toggleMenu">
+              <nuxt-link to="/catalog/pitstsa" class="nav__link">
+                Меню
+              </nuxt-link>
+            </li>
+            <li @click="toggleMenu">
+              <nuxt-link to="/promotions" class="nav__link">
+                Акции
+              </nuxt-link>
+            </li>
+            <li @click="toggleMenu">
+              <nuxt-link to="/o-nas" class="nav__link">
+                О нас
+              </nuxt-link>
+            </li>
+            <li @click="toggleMenu">
+              <nuxt-link to="/delivery" class="nav__link">
+                Доставка
+              </nuxt-link>
+            </li>
+            <li @click="toggleMenu">
+              <nuxt-link to="/contacts" class="nav__link">
+                Контакты
+              </nuxt-link>
+            </li>
           </ul>
         </div>
       </div>
@@ -71,8 +95,6 @@ import LogoutMixin from '~/mixins/LogoutMixin'
 export default {
   name: 'HeaderMain',
   mixins: [LogoutMixin],
-  components: {
-  },
   data () {
     return {
       showMenu: false

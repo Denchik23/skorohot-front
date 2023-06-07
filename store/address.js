@@ -39,27 +39,23 @@ export const actions = {
 
   store ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      this.$axios.$post('/address', payload)
-        .then((response) => {
-          commit('ADD_ADDRESS', response)
-          resolve(response)
-        })
-        .catch((err) => {
-          reject(err)
-        })
+      this.$axios.$post('/address', payload).then(({ data }) => {
+        commit('ADD_ADDRESS', data)
+        resolve(data)
+      }).catch((error) => {
+        reject(prepareErrorMessage(error))
+      })
     })
   },
 
   update ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      this.$axios.$put('/address/' + payload.id, payload)
-        .then((response) => {
-          commit('EDIT_ADDRESS', response)
-          resolve(response)
-        })
-        .catch((err) => {
-          reject(err)
-        })
+      this.$axios.$put('/address/' + payload.id, payload).then(({ data }) => {
+        commit('EDIT_ADDRESS', data)
+        resolve(data)
+      }).catch((error) => {
+        reject(prepareErrorMessage(error))
+      })
     })
   }
 }

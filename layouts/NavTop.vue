@@ -3,22 +3,34 @@
     <div class="nav-top__menu">
       <ul class="nav nav-top__links">
         <li>
-          <nuxt-link to="/" class="nav__link">Главная</nuxt-link>
+          <nuxt-link to="/" class="nav__link">
+            Главная
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/catalog/pitstsa" class="nav__link">Меню</nuxt-link>
+          <nuxt-link to="/catalog/pitstsa" class="nav__link">
+            Меню
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/catalog/kombo" class="nav__link">Акции</nuxt-link>
+          <nuxt-link to="/promotions" class="nav__link">
+            Акции
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/o-nas" class="nav__link">О нас</nuxt-link>
+          <nuxt-link to="/o-nas" class="nav__link">
+            О нас
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/delivery" class="nav__link">Доставка</nuxt-link>
+          <nuxt-link to="/delivery" class="nav__link">
+            Доставка
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/contacts" class="nav__link">Контакты</nuxt-link>
+          <nuxt-link to="/contacts" class="nav__link">
+            Контакты
+          </nuxt-link>
         </li>
       </ul>
     </div>
@@ -27,10 +39,10 @@
         <button class="nav-top__basket basket-body__basket basket" @click="$router.push('/cart')">
           {{ total }}
         </button>
-        <div class="basket-aunt" v-show="$auth.loggedIn">
+        <div v-show="$auth.loggedIn" class="basket-aunt">
           <div class="avatar">
             <NuxtLink to="/profile">
-              <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+              <img src="@/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
             </NuxtLink>
           </div>
           <button class="authorization" @click="logout" />

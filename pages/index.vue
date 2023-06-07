@@ -16,14 +16,20 @@
         <div class="home-head__slogan">
           и вкусная пицца, роллы и десерты
         </div>
-        <button class="home-head__button button_shadow button">Закажи доставку</button>
+        <button class="home-head__button button_shadow button">
+          Закажи доставку
+        </button>
         <div class="home-head__time">
-          <span>ЕЖЕДНЕВНО</span><br/>
+          <span>ЕЖЕДНЕВНО</span><br>
           С 10:00 ДО 00:00
         </div>
         <div class="home-head__contacts">
-          <div class="home-head__address">ул. Омелькова, 21</div>
-          <div class="home-head__phone"><a href="tel:+79180576767">+7 (918) 057 67 67</a></div>
+          <div class="home-head__address">
+            ул. Омелькова, 21
+          </div>
+          <div class="home-head__phone">
+            <a href="tel:+79180576767">+7 (918) 057 67 67</a>
+          </div>
         </div>
       </div>
     </main>
@@ -39,24 +45,21 @@
             </div>
           </div>
           <div class="current-action__item">
-            <a href="#"><img src="~/assets/img/action-main.png" alt="action"></a>
+            <a href="#"><img src="@/assets/img/action-main.png" alt="action"></a>
           </div>
           <div class="current-action__item">
-            <a href="#"><img src="~/assets/img/action-main1.png" alt="action"></a>
+            <a href="#"><img src="@/assets/img/action-main1.png" alt="action"></a>
           </div>
           <div class="current-action__item">
-            <a href="#"><img src="~/assets/img/action-main1.png" alt="action"></a>
+            <a href="#"><img src="@/assets/img/action-main1.png" alt="action"></a>
           </div>
         </div>
         <div class="application-action">
-          <a href="#"><img src="~/assets/img/application-action.png" alt="action"></a>
+          <a href="#"><img src="@/assets/img/application-action.png" alt="action"></a>
         </div>
       </div>
     </section>
     <main-quick-menu />
-    <client-only>
-      <main-choice-customers />
-    </client-only>
     <section>
       <div class="container">
         <div class="section-title">
@@ -66,7 +69,7 @@
           Честное мнение о нас со слов других :)
         </div>
       </div>
-      <main-reviews :data="reviews"/>
+      <main-reviews :reviews="reviews" />
       <main-awards />
     </section>
     <main-contacts />
@@ -78,40 +81,21 @@ export default {
   data () {
     return {
       reviews: [
-        [
-          {
-            id: 1,
-            name: 'Анна Масекотик',
-            stars: 1
-          },
-          {
-            id: 2,
-            name: 'Мария Быстрова',
-            stars: 3
-          },
-          {
-            id: 3,
-            name: 'Max Pozdnyakov',
-            stars: 5
-          }
-        ],
-        [
-          {
-            id: 1,
-            name: 'Анна Масекотик',
-            stars: 1
-          },
-          {
-            id: 2,
-            name: 'Мария Быстрова',
-            stars: 3
-          },
-          {
-            id: 3,
-            name: 'Max Pozdnyakov',
-            stars: 5
-          }
-        ]
+        {
+          id: 1,
+          name: 'Анна Масекотик',
+          stars: 1
+        },
+        {
+          id: 2,
+          name: 'Мария Быстрова',
+          stars: 3
+        },
+        {
+          id: 3,
+          name: 'Max Pozdnyakov',
+          stars: 5
+        }
       ]
     }
   }

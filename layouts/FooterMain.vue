@@ -5,7 +5,7 @@
         <div class="footer__left">
           <div class="footer__logo logo">
             <div class="logo__img">
-              <a href="#" title="Скороход"><img src="~/assets/img/logo.svg" alt="Скороход"></a>
+              <a href="#" title="Скороход"><img src="@/assets/img/logo.svg" alt="Скороход"></a>
             </div>
             <div class="logo__city">
               Анапа
@@ -21,10 +21,10 @@
             </div>
             <div class="footer__aunt">
               <button class="basket" @click="$router.push('/cart')" />
-              <div class="basket-aunt" v-show="$auth.loggedIn">
+              <div v-show="$auth.loggedIn" class="basket-aunt">
                 <div class="avatar">
                   <NuxtLink to="/profile">
-                    <img src="~/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+                    <img src="@/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
                   </NuxtLink>
                 </div>
                 <button class="authorization" @click="logout" />
@@ -33,22 +33,34 @@
             <div class="footer__menu">
               <ul>
                 <li>
-                  <NuxtLink to="/" class="footer__menu-item">Главная</NuxtLink>
+                  <NuxtLink to="/" class="footer__menu-item">
+                    Главная
+                  </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/catalog/pitstsa" class="footer__menu-item">Меню</NuxtLink>
+                  <NuxtLink to="/catalog/pitstsa" class="footer__menu-item">
+                    Меню
+                  </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/catalog/kombo" class="footer__menu-item">Акции</NuxtLink>
+                  <NuxtLink to="/catalog/kombo" class="footer__menu-item">
+                    Акции
+                  </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/o-nas" class="footer__menu-item">О нас</NuxtLink>
+                  <NuxtLink to="/o-nas" class="footer__menu-item">
+                    О нас
+                  </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/delivery" class="footer__menu-item">Доставка</NuxtLink>
+                  <NuxtLink to="/delivery" class="footer__menu-item">
+                    Доставка
+                  </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/contacts" class="footer__menu-item">Контакты</NuxtLink>
+                  <NuxtLink to="/contacts" class="footer__menu-item">
+                    Контакты
+                  </NuxtLink>
                 </li>
               </ul>
             </div>
@@ -56,7 +68,7 @@
           <div class="footer__body">
             <div class="footer__pay">
               <span>Мы принимаем:</span>
-              <img src="~/assets/img/footer-pay.svg" alt="footer-pay" width="249" height="28">
+              <img src="@/assets/img/footer-pay.svg" alt="footer-pay" width="249" height="28">
             </div>
             <div class="footer__links">
               <a href="#">Обратная связь</a>
@@ -68,7 +80,7 @@
             </div>
           </div>
         </div>
-        <a href="#" @click.prevent="scrollTopSmooth" class="footer__scroll">Вернуться к началу</a>
+        <a href="#" class="footer__scroll" @click.prevent="scrollTopSmooth">Вернуться к началу</a>
       </div>
     </div>
   </footer>

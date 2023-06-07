@@ -1,22 +1,28 @@
 <template>
   <div class="profile-address substrate">
-    <div class="section-title section-title_substrate">Адрес <span>доставки</span></div>
+    <div class="section-title section-title_substrate">
+      Адрес <span>доставки</span>
+    </div>
     <div class="profile-address__wrapper">
       <div
-        class="profile-address__item"
         v-for="address in addresses"
         :key="address.id"
+        class="profile-address__item"
       >
         <div class="profile-address__body">
           <span>{{ address.name }}</span>
           {{ addressString(address) }}
         </div>
         <div class="profile-address__edit">
-          <button @click="showAddressModal(address)"><i class="icon-edit"></i></button>
+          <button @click="showAddressModal(address)">
+            <i class="icon-edit" />
+          </button>
         </div>
       </div>
     </div>
-    <button class="button button_green" @click="showAddressModal()">Добавить адрес</button>
+    <button class="button button_green" @click="showAddressModal()">
+      Добавить адрес
+    </button>
     <modal-base-modal name="modal-address" title="Адрес">
       <ui-form-item
         label="Название"
@@ -123,6 +129,12 @@ export default {
       addresses: state => state.address.addresses
     })
   },
+  created () {
+    this.getAddresses()
+      .catch((errorMessage) => {
+        this.showModalError(errorMessage)
+      })
+  },
   methods: {
     ...mapActions({
       getAddresses: 'address/fetchList',
@@ -157,16 +169,10 @@ export default {
       }).then(() => {
         this.$modal.hide('modal-address')
         this.formCleaning()
-      }).catch((error) => {
-        this.showModalError(this.getResponseErrorMessage(error.response))
+      }).catch((errorMessage) => {
+        this.showModalError(errorMessage)
       })
     }
-  },
-  created () {
-    this.getAddresses()
-      .catch((error) => {
-        this.showModalError(this.getResponseErrorMessage(error.response))
-      })
   }
 }
 </script>
