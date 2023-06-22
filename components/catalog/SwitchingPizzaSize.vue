@@ -6,7 +6,9 @@
       class="size-pizza__item"
       :class="{'size-pizza__item_active': item.weight === currentDish.weight}"
       @click="switchSize(item.weight)"
-    >{{ dimensions.find(dimension => dimension.weight === item.weight).size }} см</button>
+    >
+      {{ dimensions.find(dimension => dimension.weight === item.weight).size }} см
+    </button>
   </div>
 </template>
 
@@ -29,9 +31,9 @@ export default {
   data () {
     return {
       dimensions: [
-        { size: '30', weight: 450 },
-        { size: '35', weight: 700 },
-        { size: '40', weight: 1000 }
+        { size: '30', weight: 600 },
+        { size: '35', weight: 800 },
+        { size: '40', weight: 1150 }
       ]
     }
   },
