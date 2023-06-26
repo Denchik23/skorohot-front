@@ -21,7 +21,7 @@
           <div class="awards__icon">
             <img src="~/assets/img/google-logo.svg" alt="" width="283" height="93">
           </div>
-          <a href="https://www.google.ru/" target="_blank" class="button-link" />
+          <a href="https://www.google.com/search?q=skorohot&oq=skorohot&aqs=chrome..69i57j0i2i512l3j69i60l4.485j0j7&sourceid=chrome&ie=UTF-8#lrd=0x40ee0bd2877c5ba7:0xe5d67d2fef761774,1,,,," target="_blank" class="button-link" />
         </div>
       </div>
       <div class="awards__item substrate">
@@ -61,7 +61,7 @@
           <div class="awards__icon">
             <img src="~/assets/img/yandex-logo.svg" width="255" height="96" alt="yandex-logo">
           </div>
-          <a href="#" class="button-link" />
+          <a href="https://yandex.ru/maps/org/skorokhot/219373033524/reviews/?add-review=true&ll=37.332341%2C44.877522&z=14" target="_blank" class="button-link" />
         </div>
       </div>
     </div>

@@ -9,7 +9,9 @@
           <div class="intro intro_small">
             платите так, как вам удобно: наличными или картой курьеру
           </div>
-          <p>Мы принимаем карты Visa, MasterCard и Мир, переводом или через терминалы у курьера. Нам важно доставить пиццу горячей и свежей, чтобы наши клиенты получили максимум удовольствия от нашего сервиса: мы доставляем прямо до вашей двери в термо-сумке, бережно перевозим еду, чтобы она не потеряла вид во время поездки.</p>
+          <p>Мы принимаем карты Visa, MasterCard и Мир, переводом или через терминалы у курьера. Нам важно доставить
+            пиццу горячей и свежей, чтобы наши клиенты получили максимум удовольствия от нашего сервиса: мы доставляем
+            прямо до вашей двери в термо-сумке, бережно перевозим еду, чтобы она не потеряла вид во время поездки.</p>
         </div>
         <div class="delivery__img">
           <img src="~/assets/img/Illustration-delivery.svg" width="689" height="816" alt="Illustration-delivery">
@@ -19,21 +21,115 @@
     <section>
       <div class="container">
         <div class="section-title">
-          Расчет <span>стоимости доставки</span>
+          Cтоимости <span>доставки</span>
         </div>
         <div class="delivery-calculation substrate">
-          <select name="" class="delivery-calculation__place base-input">
-            <option value="0" selected="selected">Направление</option>
-            <option value="129">Lorem ipsum 129 st 29</option>
-            <option value="130">Lorem ipsum 130 st 30</option>
-            <option value="150">Lorem ipsum 150 st 50</option>
-          </select>
-          <div class="delivery-calculation__prices">
-            Стоимость: <span>165</span> руб.
-          </div>
-        </div>
-        <div class="delivery-map">
-          <img src="~/assets/img/delivery-map.png" width="1372" height="579" alt="delivery-map">
+          <table class="delivery-calculation__table">
+            <thead>
+              <tr>
+                <th>Направление</th>
+                <th>Стоимость доставки</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>г.Анапа</td>
+                <td>99</td>
+              </tr>
+              <tr>
+                <td>п.Алексеевка</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>ст-ца Анапская</td>
+                <td>180</td>
+              </tr>
+              <tr>
+                <td>п. Су-Псех</td>
+                <td>140</td>
+              </tr>
+              <tr>
+                <td>Пионерский проспект до Золотой Берег до №3</td>
+                <td>160</td>
+              </tr>
+              <tr>
+                <td>Пионерский проспект от Золотой Берег до №28 Технополис Эра</td>
+                <td>250</td>
+              </tr>
+              <tr>
+                <td>Пионерский проспект от №28&nbsp; до №199 (гостевой проезд).</td>
+                <td>350</td>
+              </tr>
+              <tr>
+                <td>Пионерский проспект от №199 (гостевой проезд) до Жемчужины</td>
+                <td>450</td>
+              </tr>
+              <tr>
+                <td>п.Чембурка</td>
+                <td>310</td>
+              </tr>
+              <tr>
+                <td>п.Усатова Балка</td>
+                <td>240</td>
+              </tr>
+              <tr>
+                <td>п.Варваровка</td>
+                <td>260</td>
+              </tr>
+              <tr>
+                <td>х. Просторный</td>
+                <td>300</td>
+              </tr>
+              <tr>
+                <td>Красный Хутор</td>
+                <td>350</td>
+              </tr>
+              <tr>
+                <td>х.Воскресенский</td>
+                <td>350</td>
+              </tr>
+              <tr>
+                <td>х.Пятихатки</td>
+                <td>400</td>
+              </tr>
+              <tr>
+                <td>х.Рассвет</td>
+                <td>350</td>
+              </tr>
+              <tr>
+                <td>п.Сукко</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>п.Гай-Кодзор</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>х.Заря</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>п.Цибанобалка</td>
+                <td>350</td>
+              </tr>
+              <tr>
+                <td>п.Витязево</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>п.Большой Утриш</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>х.Песчанный</td>
+                <td>550</td>
+              </tr>
+              <tr>
+                <td>х.Виноградный</td>
+                <td>600</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -88,50 +184,26 @@ export default {
 
 .delivery-calculation {
   margin: 15px 0;
-
-  &__place {
-    background: #1c1c1c;
-    border: none;
-    padding: 0;
-    margin: 0 0 15px 0;
-  }
-
-  &__prices > span {
-    margin: 0 0 0 8px;
-    font-weight: bold;
-  }
-
-  @include media-tablet {
-    display: flex;
-
-    &__place {
-      width: auto;
-      margin: 0 30px 0 0;
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+      border-bottom: 1px solid #eae9e9;
+      td {
+        padding: 5px;
+        vertical-align: middle;
+      }
+    }
+    tr td:nth-child(even) {
+      text-align: center;
     }
   }
-
   @include media-laptop {
-    margin: 30px 0;
-  }
-
-  @include media-desktop {
-    &__place {
-      margin: 0 80px 0 0;
+    &__table {
+      thead th {
+        font-size: 24px;
+      }
     }
-
-    &__prices,
-    &__place {
-      font-size: 24px;
-      font-weight: 500;
-    }
-  }
-}
-
-.delivery-map {
-  margin: 30px 0 0 0;
-
-  @include media-laptop {
-    margin: 60px 0 0 0;
   }
 }
 

@@ -1,13 +1,13 @@
 <template>
   <div class="size-pizza">
     <button
-      v-for="item in this.currentDish.merge"
+      v-for="item in currentDish.merge"
       :key="item.id"
       class="size-pizza__item"
       :class="{'size-pizza__item_active': item.weight === currentDish.weight}"
       @click="switchSize(item.weight)"
     >
-      {{ dimensions.find(dimension => dimension.weight === item.weight).size }} см
+      {{ getSize(item.weight) }} см
     </button>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
     },
     currentIndex: {
       type: Number,
-      require: true
+      require: true,
+      default: 1
     }
   },
   data () {
@@ -46,6 +47,10 @@ export default {
           this.$emit('switchSize', dimension)
         }
       }
+    },
+    getSize (weight) {
+      const size = this.dimensions.find(dimension => dimension.weight === weight)
+      return size ? size.weight : ''
     }
   }
 }

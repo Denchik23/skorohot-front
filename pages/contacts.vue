@@ -47,6 +47,23 @@
     <section>
       <div class="container">
         <div class="section-title">Мы <span>на карте</span></div>
+        <div class="map-wrapper">
+          <yandex-map
+            :coords="[44.877520488716804,37.332216560753295]"
+            zoom="15"
+            :controls="['fullscreenControl', 'rulerControl', 'typeSelector', 'zoomControl']"
+            :options="{autoFitToViewport: 'always'}"
+            ymap-class="contacts-map"
+          >
+            <ymap-marker
+              marker-id="skorohot"
+              marker-type="placemark"
+              hint-content="СкороХот"
+              :coords="[44.877520488716804,37.332216560753295]"
+              balloon-template="Анапа, Омелькова, 21"
+            />
+          </yandex-map>
+        </div>
       </div>
     </section>
   </div>
@@ -59,6 +76,13 @@ export default {
 </script>
 
 <style lang="scss">
+.map-wrapper {
+  margin: 18px 0 0 0;
+}
+.contacts-map {
+  width: 100%;
+  height: 480px;
+}
 .contact-bond {
   margin: 15px 0;
 

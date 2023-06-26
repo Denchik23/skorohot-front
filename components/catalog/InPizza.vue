@@ -1,19 +1,19 @@
 <template>
   <div class="in-pizza">
     <div class="in-pizza__item">
-      <img src="~/assets/img/premium-icon-soy-flour.svg" alt="premium-icon-soy-flour" width="123" height="123">
+      <img src="@/assets/img/premium-icon-soy-flour.svg" alt="premium-icon-soy-flour" width="123" height="123">
       Мука экстра-класса
     </div>
     <div class="in-pizza__item">
-      <img src="~/assets/img/cheese.svg" alt="cheese" width="123" height="123">
+      <img src="@/assets/img/cheese.svg" alt="cheese" width="123" height="123">
       Натуральные итальянские сыры
     </div>
     <div class="in-pizza__item">
-      <img src="~/assets/img/fish.svg" alt="fish" width="128" height="123">
+      <img src="@/assets/img/fish.svg" alt="fish" width="128" height="123">
       Свежие морепродукты и мясо
     </div>
     <div class="in-pizza__item">
-      <img src="~/assets/img/fruits-and-vegetables.svg" alt="fruits-and-vegetables" width="123" height="123">
+      <img src="@/assets/img/fruits-and-vegetables.svg" alt="fruits-and-vegetables" width="123" height="123">
       Качественные овощи
     </div>
   </div>

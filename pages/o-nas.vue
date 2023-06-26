@@ -2,7 +2,9 @@
   <div>
     <main class="section-substrate">
       <div class="container">
-        <div class="title">Что такое<br><span class="title_green">скоро</span><span class="title_red">хот</span></div>
+        <div class="title">
+          Что такое<br><span class="title_green">скоро</span><span class="title_red">хот</span>
+        </div>
         <div class="intro intro_small">
           <p>
             <strong>Мы — это команда из нескольких десятков людей,</strong>
@@ -14,40 +16,54 @@
     </main>
     <section>
       <div class="container">
-        <div class="section-title">Чем занимается <span>наша команда?</span></div>
+        <div class="section-title">
+          Чем занимается <span>наша команда?</span>
+        </div>
         <div class="team-do">
           <div class="team-do__item">
             <div class="team-do__icon">
-              <img src="~/assets/img/team-pizza.svg" alt="team-pizza" width="159" height="177">
+              <img src="@/assets/img/team-pizza.svg" alt="team-pizza" width="159" height="177">
             </div>
-            <div class="title team-do__title"><span class="title_green">Пиццамейкеры </span>пекут волшебную <span class="title_red">пиццу</span></div>
+            <div class="title team-do__title">
+              <span class="title_green">Пиццамейкеры </span>пекут волшебную <span class="title_red">пиццу</span>
+            </div>
           </div>
           <div class="team-do__item">
             <div class="team-do__icon">
-              <img src="~/assets/img/team-sushi.svg" alt="team-sushi" width="186" height="160">
+              <img src="@/assets/img/team-sushi.svg" alt="team-sushi" width="186" height="160">
             </div>
-            <div class="title team-do__title"><span class="title_green">Сушисты </span>крутят вкусные <span class="title_red">роллы</span></div>
+            <div class="title team-do__title">
+              <span class="title_green">Сушисты </span>крутят вкусные <span class="title_red">роллы</span>
+            </div>
           </div>
           <div class="team-do__item">
             <div class="team-do__icon">
-              <img src="~/assets/img/team-moderator.svg" alt="team-moderator" width="169" height="169">
+              <img src="@/assets/img/team-moderator.svg" alt="team-moderator" width="169" height="169">
             </div>
-            <div class="title team-do__title"><span class="title_green">Операторы </span>принимают заказы <span class="title_red">и пожелания</span></div>
+            <div class="title team-do__title">
+              <span class="title_green">Операторы </span>принимают заказы <span class="title_red">и пожелания</span>
+            </div>
           </div>
           <div class="team-do__item">
             <div class="team-do__icon">
-              <img src="~/assets/img/team-delivery.svg" alt="team-delivery" width="165" height="165">
+              <img src="@/assets/img/team-delivery.svg" alt="team-delivery" width="165" height="165">
             </div>
-            <div class="title team-do__title"><span class="title_green">Доставщики </span>доставляют <span class="title_red">заказы до вашей двери</span></div>
+            <div class="title team-do__title">
+              <span class="title_green">Доставщики </span>доставляют <span class="title_red">заказы до вашей двери</span>
+            </div>
           </div>
         </div>
-        <div class="crewman substrate">
+        <div class="crewman crewman_even substrate">
           <div class="crewman__avatar">
-            <img src="~/assets/img/vladimirе.png" alt="vladimirе" width="667" height="667">
+            <img src="@/assets/img/vladimirе.png" alt="vladimirе" width="667" height="667">
           </div>
           <div class="crewman__text">
-            <div class="crewman__name">Савельев Владимир Васильевич</div>
-            <div class="crewman__intro">С радостью ответит на вопросы по службе доставки и приему заказов</div>
+            <div class="crewman__name">
+              Савельев Владимир Васильевич
+            </div>
+            <div class="crewman__intro">
+              С радостью ответит на вопросы по службе доставки и приему заказов
+            </div>
             <div class="crewman__quotes">
               <span>"</span>
               Мы готовим продукт, который советуют друзьям. Мы рады доставить вам горячую и свежую еду прямо до двери.
@@ -58,13 +74,17 @@
             </ul>
           </div>
         </div>
-        <div class="crewman crewman_odd substrate">
+        <div class="crewman substrate">
           <div class="crewman__avatar">
-            <img src="~/assets/img/evgeniy.png" alt="evgeniy" width="667" height="667">
+            <img src="@/assets/img/evgeniy.png" alt="evgeniy" width="667" height="667">
           </div>
           <div class="crewman__text">
-            <div class="crewman__name">Саликов Евгений Александрович</div>
-            <div class="crewman__intro">С радостью ответит на вопросы и предложения по кухне</div>
+            <div class="crewman__name">
+              Саликов Евгений Александрович
+            </div>
+            <div class="crewman__intro">
+              С радостью ответит на вопросы и предложения по кухне
+            </div>
             <div class="crewman__quotes">
               <span>"</span>
               Предоставить сытный, вкусный и красивый продукт —
@@ -81,26 +101,34 @@
     </section>
     <section>
       <div class="container">
-        <div class="section-title">Хочешь стать частью нашей команды? <span>Присоединяйся!</span></div>
-        <div class="intro intro_big">Мы ждем твое резюме на почту — <a href="#" class="">evgeniy.s@skorohot.ru</a></div>
+        <div class="section-title">
+          Хочешь стать частью нашей команды? <span>Присоединяйся!</span>
+        </div>
+        <div class="intro intro_big">
+          Мы ждем твое резюме на почту — <a href="#" class="">evgeniy.s@skorohot.ru</a>
+        </div>
       </div>
     </section>
     <o-nas-video />
     <section>
       <div class="container">
-        <div class="section-title">Подписывайтесь <span>на нас!</span></div>
-        <div class="intro intro_big">Секретные розыгрыши и акции в наших соцсетях - невозможно упустить!</div>
+        <div class="section-title">
+          Подписывайтесь <span>на нас!</span>
+        </div>
+        <div class="intro intro_big">
+          Секретные розыгрыши и акции в наших соцсетях - невозможно упустить!
+        </div>
         <div class="social-sing">
           <a href="https://www.instagram.com/skorohot_pizza/" class="social-sing__item" target="_blank">
-            <img src="~/assets/img/sing-logo-instagram.svg" alt="sing-logo-instagram" width="147" height="148">
+            <img src="@/assets/img/sing-logo-instagram.svg" alt="sing-logo-instagram" width="147" height="148">
             <span>INSTAGRAM</span>
           </a>
           <a href="https://www.youtube.com/watch?v=UN4xKVzAvf8&ab_channel=%D0%A1%D0%BA%D0%BE%D1%80%D0%BE-Hot" class="social-sing__item" target="_blank">
-            <img src="~/assets/img/sing-logo-youtube.svg" alt="sing-logo-youtube" width="158" height="148">
+            <img src="@/assets/img/sing-logo-youtube.svg" alt="sing-logo-youtube" width="158" height="148">
             <span>YOUTUBE</span>
           </a>
           <a href="https://vk.com/skoro_hot_anapa" target="_blank" class="social-sing__item">
-            <img src="~/assets/img/sing-logo-vk.svg" alt="sing-logo-vk" width="156" height="148">
+            <img src="@/assets/img/sing-logo-vk.svg" alt="sing-logo-vk" width="156" height="148">
             <span>VKONTAKTE</span>
           </a>
         </div>
@@ -214,8 +242,8 @@ export default {
     background: url("~assets/img/social-mail-crewman.svg") no-repeat right;
   }
 
-  &_odd {
-    margin: 42px 0 0 0;
+  &_even {
+    margin: 0 0 42px 0;
   }
 
   @include media-tablet {
@@ -224,6 +252,16 @@ export default {
     &__text,
     &__avatar {
       width: 48%;
+    }
+    &_even {
+      .crewman__avatar {
+        order: 1;
+      }
+      .crewman__text {
+        text-align: right;
+        padding: 0 0 0 20px;
+        order: 0;
+      }
     }
   }
 
@@ -249,17 +287,8 @@ export default {
       width: 64%;
     }
 
-    &_odd {
-      margin: 60px 0 0 0;
-
-      .crewman__avatar {
-        order: 1;
-      }
-      .crewman__text {
-        text-align: right;
-        padding: 0 0 0 20px;
-        order: 0;
-      }
+    &_even {
+      margin: 0 0 60px 0;
     }
   }
 
@@ -267,8 +296,8 @@ export default {
     min-height: 400px;
     margin: 100px 0;
 
-    &_odd {
-      margin: 100px 0 0 0;
+    &_even {
+      margin: 0 0 100px 0;
     }
   }
 }

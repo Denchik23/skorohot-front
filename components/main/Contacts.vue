@@ -32,23 +32,23 @@
           </div>
         </div>
         <div class="contacts__map">
-          <div v-if="isMounted" class="map-wrapper">
-            <yandex-map
+          <yandex-map
+            v-if="isMounted"
+            :coords="[44.877520488716804,37.332216560753295]"
+            zoom="15"
+            :controls="['fullscreenControl', 'rulerControl', 'typeSelector', 'zoomControl']"
+            :options="{autoFitToViewport: 'always'}"
+            ymap-class="contacts-map-main"
+            @map-was-initialized="mapInitialized"
+          >
+            <ymap-marker
+              marker-id="skorohot"
+              marker-type="placemark"
+              hint-content="СкороХот"
               :coords="[44.877520488716804,37.332216560753295]"
-              zoom="15"
-              :controls="['fullscreenControl', 'rulerControl', 'typeSelector', 'zoomControl']"
-              :options="{autoFitToViewport: 'always'}"
-              @map-was-initialized="mapInitialized"
-            >
-              <ymap-marker
-                marker-id="skorohot"
-                marker-type="placemark"
-                hint-content="СкороХот"
-                :coords="[44.877520488716804,37.332216560753295]"
-                balloon-template="Анапа, Омелькова, 21"
-              />
-            </yandex-map>
-          </div>
+              balloon-template="Анапа, Омелькова, 21"
+            />
+          </yandex-map>
           <button class="contacts__router button" @click="buildRoute">
             Построить маршрут
           </button>
@@ -99,16 +99,10 @@ export default {
 </script>
 
 <style lang="scss">
-.ymap-container {
+.contacts-map-main {
   height: 600px;
-  margin: 0;
+  width: 100%;
 }
-
-.map-wrapper {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 .contacts {
   display: flex;
   justify-content: space-between;
