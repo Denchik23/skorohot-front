@@ -32,8 +32,26 @@
           </div>
         </div>
         <div class="contacts__map">
-          <img src="~/assets/img/map.png" alt="map">
-          <a href="#" class="contacts__router button">Построить маршрут</a>
+          <div v-if="isMounted" class="map-wrapper">
+            <yandex-map
+              :coords="[44.877520488716804,37.332216560753295]"
+              zoom="15"
+              :controls="['fullscreenControl', 'rulerControl', 'typeSelector', 'zoomControl']"
+              :options="{autoFitToViewport: 'always'}"
+              @map-was-initialized="mapInitialized"
+            >
+              <ymap-marker
+                marker-id="skorohot"
+                marker-type="placemark"
+                hint-content="СкороХот"
+                :coords="[44.877520488716804,37.332216560753295]"
+                balloon-template="Анапа, Омелькова, 21"
+              />
+            </yandex-map>
+          </div>
+          <button class="contacts__router button" @click="buildRoute">
+            Построить маршрут
+          </button>
         </div>
       </div>
     </div>
@@ -42,11 +60,55 @@
 
 <script>
 export default {
-  name: 'Contacts'
+  name: 'Contacts',
+  data () {
+    return {
+      isMounted: false,
+      coords: [44.894818, 37.316367],
+      yandexMapSkorohot: null
+    }
+  },
+  mounted () {
+    this.isMounted = true
+  },
+  methods: {
+    buildRoute () {
+      // eslint-disable-next-line no-undef
+      ymaps.route([this.coords, [44.877520488716804, 37.332216560753295]], { mapStateAutoApply: true }).then(
+        function (route) {
+          this.yandexMapSkorohot.geoObjects.add(route)
+          this.yandexMapSkorohot.rout = route
+        },
+        // eslint-disable-next-line node/handle-callback-err
+        function (error) {
+          alert('Разрешите, пожалуйста, определение вашего местоположения')
+        }, this
+      )
+    },
+    mapInitialized (payload) {
+      if (window.ymaps) {
+        // eslint-disable-next-line no-undef
+        ymaps.geolocation.get().then((res) => {
+          this.coords = res.geoObjects.get(0).geometry.getCoordinates()
+        })
+      }
+      this.yandexMapSkorohot = payload
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.ymap-container {
+  height: 600px;
+  margin: 0;
+}
+
+.map-wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .contacts {
   display: flex;
   justify-content: space-between;
@@ -56,7 +118,6 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 28px;
   }
 
   &__block {
@@ -101,6 +162,7 @@ export default {
     position: absolute;
     bottom: 6px;
     display: block;
+    z-index: 5;
   }
 
   @include media-tablet {
