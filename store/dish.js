@@ -6,9 +6,11 @@ export const mutations = {}
 
 export const actions = {
   // eslint-disable-next-line no-empty-pattern
-  getDishesByCategory ({}, categoryId) {
+  getDishesByCategory ({}, payload) {
     return new Promise((resolve, reject) => {
-      this.$axios.$get('/category/' + categoryId).then(({ data }) => {
+      this.$axios.$get('/category/' + payload.categoryId,
+        { params: { filter: payload.filter } }
+      ).then(({ data }) => {
         resolve(data)
       }).catch((error) => {
         reject(prepareErrorMessage(error))

@@ -23,10 +23,10 @@
 
 <script>
 export default {
-  asyncData ({ app, route, params, error, store }) {
+  asyncData ({ route, error, store }) {
     return store.dispatch('getCategoriesList').then((data) => {
       const categoryId = data.filter(item => item.alias === route.params.CatalogSlug)
-      return store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+      return store.dispatch('dish/getDishesByCategory', { categoryId: categoryId[0].id, filter: [] })
     }).then((data) => {
       return { dishes: data }
     }).catch((errorMessage) => {

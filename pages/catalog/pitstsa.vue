@@ -8,12 +8,15 @@
     <section>
       <div class="container">
         <div class="filter">
-          <button class="filter__button">Для детей</button>
-          <button class="filter__button">Острое</button>
-          <button class="filter__button">Без лука</button>
-          <button class="filter__button filter__button_active">Я веган</button>
-          <button class="filter__button filter__button_active">Без грибов</button>
-          <button class="filter__button">Не ем свинину</button>
+          <button
+            v-for="filter in filters"
+            :key="filter.id"
+            class="filter__button"
+            :class="{'filter__button_active': selectedFilters.includes(filter.id) }"
+            @click="toggleFilter(filter.id)"
+          >
+            {{ filter.name }}
+          </button>
         </div>
         <catalog-in-pizza />
         <div class="card-list">
@@ -38,16 +41,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import SwitchingPizzaSize from '@/components/catalog/SwitchingPizzaSize'
 export default {
-  name: 'pitstsa',
+  name: 'Pitstsa',
   components: { SwitchingPizzaSize },
   asyncData ({ error, store }) {
+    let dishes = []
     return store.dispatch('getCategoriesList').then((data) => {
       const categoryId = data.filter(item => item.alias === 'pitstsa')
-      return store.dispatch('dish/getDishesByCategory', categoryId[0].id)
+      return store.dispatch('dish/getDishesByCategory', { categoryId: categoryId[0].id, filter: [] })
     }).then((data) => {
-      const dishes = data.map((dish) => {
+      dishes = data.map((dish) => {
         dish.merge.push({
           id: dish.id,
           name: dish.name,
@@ -57,7 +62,12 @@ export default {
         dish.merge.sort((a, b) => { return a.weight - b.weight })
         return dish
       })
-      return { dishes }
+      return store.dispatch('filter/fetchList')
+    }).then((data) => {
+      return {
+        dishes,
+        filters: data
+      }
     }).catch((errorMessage) => {
       return error({
         statusCode: 404,
@@ -67,12 +77,18 @@ export default {
   },
   data () {
     return {
-      dishes: []
+      dishes: [],
+      filters: [],
+      selectedFilters: []
     }
   },
   computed: {
   },
   methods: {
+    ...mapActions({
+      getCategoriesList: 'getCategoriesList',
+      getDishesByCategory: 'dish/getDishesByCategory'
+    }),
     switchSizePizza (switchSize) {
       if (typeof this.dishes[switchSize.index] === 'object') {
         const indexDish = switchSize.index
@@ -81,6 +97,31 @@ export default {
         this.dishes[indexDish].price = switchSize.price
         this.dishes[indexDish].weight = switchSize.weight
       }
+    },
+    toggleFilter (filterId) {
+      const i = this.selectedFilters.findIndex(val => val === filterId)
+      if (i !== -1) {
+        this.selectedFilters.splice(i, 1)
+      } else {
+        this.selectedFilters.push(filterId)
+      }
+      this.getCategoriesList().then((data) => {
+        const categoryId = data.filter(item => item.alias === 'pitstsa')
+        return this.getDishesByCategory({ categoryId: categoryId[0].id, filter: this.selectedFilters })
+      }).then((data) => {
+        this.dishes = data.map((dish) => {
+          dish.merge.push({
+            id: dish.id,
+            name: dish.name,
+            price: dish.price,
+            weight: dish.weight
+          })
+          dish.merge.sort((a, b) => { return a.weight - b.weight })
+          return dish
+        })
+      }).catch((errorMessage) => {
+        this.showModalError(errorMessage)
+      })
     }
   }
 }
