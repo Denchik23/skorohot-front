@@ -50,7 +50,7 @@ export default {
     },
     getSize (weight) {
       const size = this.dimensions.find(dimension => dimension.weight === weight)
-      return size ? size.weight : ''
+      return size ? size.size : ''
     }
   }
 }
