@@ -13,7 +13,7 @@
         ref="phone"
         v-model="$v.data.phone.$model"
         name="phone"
-        mask="+7 (###) ###-##-##"
+        mask="+# (###) ###-##-##"
         class="base-input"
         placeholder="+7 (999) 888-77-55"
         type="tel"
@@ -38,7 +38,7 @@
       <div class="auth__action">
         <button
           class="auth__forgot"
-          @click="$emit('passwordRecovery')"
+          @click="$emit('changeActionForm', 'LoginPasswordRecovery')"
         >
           Забыли пароль?
         </button>
@@ -56,11 +56,11 @@
         Или войти с помощью
       </div>
       <ul>
-        <li><a href="#"><img src="~/assets/img/vk-icon.svg" alt="vk-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="~/assets/img/google-plus-icon.svg" alt="google-plus-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="~/assets/img/apple-icon.svg" alt="apple-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="~/assets/img/facebook-icon.svg" alt="facebook-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="~/assets/img/telegram-icon.svg" alt="telegram-icon" width="41" height="41"></a></li>
+        <li><a href="#"><img src="@/assets/img/vk-icon.svg" alt="vk-icon" width="41" height="41"></a></li>
+        <li><a href="#"><img src="@/assets/img/google-plus-icon.svg" alt="google-plus-icon" width="41" height="41"></a></li>
+        <li><a href="#"><img src="@/assets/img/apple-icon.svg" alt="apple-icon" width="41" height="41"></a></li>
+        <li><a href="#"><img src="@/assets/img/facebook-icon.svg" alt="facebook-icon" width="41" height="41"></a></li>
+        <li><a href="#"><img src="@/assets/img/telegram-icon.svg" alt="telegram-icon" width="41" height="41"></a></li>
       </ul>
     </div>
   </div>

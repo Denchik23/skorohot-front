@@ -4,8 +4,14 @@
       <div class="container">
         <div class="auth">
           <div class="auth__form substrate">
-            <ui-base-radio-group class="auth__choice" v-model="changeAction" name="delivery" :options="auntOptions" />
-            <component v-bind:is="changeAction" @passwordRecovery="changeAction = 'LoginPasswordRecovery'" />
+            <ui-base-radio-group
+              v-if="changeAction === 'LoginAuthorization' || changeAction === 'LoginRegistration'"
+              v-model="changeAction"
+              class="auth__choice"
+              name="delivery"
+              :options="auntOptions"
+            />
+            <component :is="changeAction" @changeActionForm="changeActionForm" />
           </div>
           <div class="auth__content">
             <div class="title">
@@ -16,25 +22,25 @@
             </div>
             <div class="auth-advantages">
               <div class="auth-advantages__item">
-                <img src="~/assets/img/present-icon.svg" alt="click-icon" class="auth-advantages__icon" width="80" height="80">
+                <img src="@/assets/img/present-icon.svg" alt="click-icon" class="auth-advantages__icon" width="80" height="80">
                 <div class="auth-advantages__text">
                   Можно оплатить часть заказа бонусами
                 </div>
               </div>
               <div class="auth-advantages__item">
-                <img src="~/assets/img/click-icon.svg" alt="click-icon" class="auth-advantages__icon" width="80" height="80">
+                <img src="@/assets/img/click-icon.svg" alt="click-icon" class="auth-advantages__icon" width="80" height="80">
                 <div class="auth-advantages__text">
                   Заказывайте в один клик
                 </div>
               </div>
               <div class="auth-advantages__item">
-                <img src="~/assets/img/free-icon-promotions.svg" alt="free-icon-promotions" class="auth-advantages__icon" width="80" height="80">
+                <img src="@/assets/img/free-icon-promotions.svg" alt="free-icon-promotions" class="auth-advantages__icon" width="80" height="80">
                 <div class="auth-advantages__text">
                   Эксклюзивные предложения и акции
                 </div>
               </div>
               <div class="auth-advantages__item">
-                <img src="~/assets/img/address-icon.svg" alt="address-icon" class="auth-advantages__icon" width="80" height="80">
+                <img src="@/assets/img/address-icon.svg" alt="address-icon" class="auth-advantages__icon" width="80" height="80">
                 <div class="auth-advantages__text">
                   Сохраняйте несколько адресов для удобства
                 </div>
@@ -47,7 +53,7 @@
     <section>
       <div class="container">
         <div class="section-image">
-          <img src="~/assets/img/cat.svg" alt="cat" width="620" height="990">
+          <img src="@/assets/img/cat.svg" alt="cat" width="620" height="990">
         </div>
       </div>
     </section>
@@ -68,6 +74,11 @@ export default {
   created () {
     if (this.$auth.loggedIn) {
       this.$router.push('/profile')
+    }
+  },
+  methods: {
+    changeActionForm (form) {
+      this.changeAction = form
     }
   }
 }

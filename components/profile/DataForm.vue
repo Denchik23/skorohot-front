@@ -1,17 +1,16 @@
 <template>
   <div class="profile__data substrate">
     <div class="profile__avatar">
-      <img src="~/assets/img/ava-girls.png" alt="user avatar" width="300" height="300">
+      <img src="@/assets/img/ava-girls.png" alt="user avatar" width="300" height="300">
     </div>
     <ui-form-item
       :error="$v.data.name.$error"
     >
       <div class="input-icon">
         <input v-model="$v.data.name.$model" type="text" class="base-input" disabled="disabled">
-        <i class="icon-edit"></i>
+        <i class="icon-edit" />
       </div>
-      <template #error>
-      </template>
+      <template #error />
     </ui-form-item>
     <ui-form-item
       label="Мой номер"
@@ -24,13 +23,13 @@
           ref="phone"
           v-model="$v.data.phone.$model"
           name="phone"
-          mask="+7 (###) ###-##-##"
+          mask="+# (###) ###-##-##"
           class="base-input"
           placeholder="+7 (999) 888-77-55"
           type="tel"
           disabled="disabled"
         />
-        <i class="icon-edit"></i>
+        <i class="icon-edit" />
       </div>
       <template #error>
         <small v-if="!$v.data.phone.required">Обязательное поле</small>
@@ -44,7 +43,7 @@
     >
       <div class="input-icon">
         <input v-model="$v.data.password.$model" type="password" class="base-input" disabled="disabled">
-        <i class="icon-edit"></i>
+        <i class="icon-edit" />
       </div>
       <template #error>
         <small v-if="!$v.data.password.required">Обязательное поле</small>
@@ -80,12 +79,12 @@ import FormMixin from '@/mixins/FormMixin'
 
 export default {
   name: 'DataForm',
-  mixins: [
-    FormMixin
-  ],
   components: {
     TheMask
   },
+  mixins: [
+    FormMixin
+  ],
   data () {
     return {
       defaultData: {

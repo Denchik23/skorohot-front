@@ -19,7 +19,7 @@
           ref="phone"
           v-model="$v.data.phone.$model"
           name="phone"
-          mask="+7 (###) ###-##-##"
+          mask="+# (###) ###-##-##"
           class="base-input"
           placeholder="+7 (999) 888-77-55"
           type="tel"
@@ -53,8 +53,12 @@
       </ui-form-item>
       <ui-form-item>
         <div class="auth__action">
+          <button class="auth__forgot auth__back" @click="$emit('changeActionForm', 'LoginAuthorization')">
+            Назад
+          </button>
           <ui-base-button
-            title="Регистрация"
+            class="auth__button"
+            title="Отправить"
             :error="errorButton"
             :loader="loaderButton"
             @click="sendSmsCode"
@@ -67,7 +71,7 @@
         Введите <span>4-х значный код</span>
       </div>
       <div class="intro">
-        На номер телефона <strong>+7{{ data.phone }}</strong> придет смс для подтверждения
+        На номер телефона <strong>+{{ data.phone }}</strong> придет смс для подтверждения
       </div>
       <ui-form-item
         label="Код"

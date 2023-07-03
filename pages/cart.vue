@@ -3,7 +3,9 @@
     <main class="section-substrate">
       <div class="container">
         <div class="shopping-basket">
-          <div class="section-title section-title_substrate">Ваша <span>корзина</span></div>
+          <div class="section-title section-title_substrate">
+            Ваша <span>корзина</span>
+          </div>
           <client-only>
             <template v-if="dishes.length">
               <div class="shopping-basket__body">
@@ -23,23 +25,29 @@
               </div>
               <div class="outcome">
                 <div class="outcome__data">
-                  <div class="outcome__total">Итого:</div>
-                  <div class="outcome__prices">{{ total }} руб.<span>({{ dishes.length }} позиций)</span></div>
+                  <div class="outcome__total">
+                    Итого:
+                  </div>
+                  <div class="outcome__prices">
+                    {{ total }} руб.<span>({{ dishes.length }} позиций)</span>
+                  </div>
                 </div>
-                <div class="intention">
+                <!--<div class="intention">
                   <i class="icon-intention"></i>
                   <span>Вам будет начислено 2&nbsp;990&nbsp;бонусов.</span>
-                </div>
+                </div>-->
               </div>
             </template>
-            <p v-else>Корзина пуста</p>
+            <p v-else>
+              Корзина пуста
+            </p>
           </client-only>
         </div>
       </div>
     </main>
-    <cart-recommendations :data="dishesRecommended" @addCartItem="addCartDish"/>
+    <cart-recommendations :data="dishesRecommended" @addCartItem="addCartDish" />
     <client-only>
-      <cart-order-form v-if="cart.length && $auth.loggedIn"/>
+      <cart-order-form v-if="cart.length && $auth.loggedIn" />
       <cart-login-required v-else-if="!$auth.loggedIn" />
     </client-only>
   </div>
@@ -54,7 +62,7 @@ export default {
   mixins: [
     ModalMixin
   ],
-  asyncData ({ app, route, params, error, store }) {
+  asyncData ({ store }) {
     return store.dispatch('dish/getRecommendations').then((data) => {
       return { dishesRecommended: data }
     }).catch((errorMessage) => {

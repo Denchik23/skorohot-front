@@ -5,7 +5,7 @@ export function isPhone (value) {
     return true
   }
   value = value.replace(/\D/g, '')
-  if (value.length !== 10) {
+  if (value.length !== 11) {
     return false
   }
   // Проверка на принадлежность пулу номеров РФ
