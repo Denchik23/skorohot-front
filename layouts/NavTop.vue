@@ -39,10 +39,10 @@
         <button class="nav-top__basket basket-body__basket basket" @click="$router.push('/cart')">
           {{ total }}
         </button>
-        <div v-show="$auth.loggedIn" class="basket-aunt">
+        <div v-if="$auth.loggedIn" class="basket-aunt">
           <div class="avatar">
             <NuxtLink to="/profile">
-              <img src="@/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+              <img :src="getGenderAvatar" alt="user avatar" width="150" height="150">
             </NuxtLink>
           </div>
           <button class="authorization" @click="logout" />
@@ -58,10 +58,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import LogoutMixin from '~/mixins/LogoutMixin'
+import GenderAvatar from '@/mixins/GenderAvatar'
 
 export default {
   name: 'NavTop',
-  mixins: [LogoutMixin],
+  mixins: [LogoutMixin, GenderAvatar],
   computed: {
     ...mapGetters({
       total: 'cart/getTotalWithSpaces'

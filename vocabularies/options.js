@@ -60,3 +60,14 @@ export const auntOptions = [
     label: 'Регистрация'
   }
 ]
+
+export const genderOptions = [
+  {
+    value: 1,
+    label: 'муж'
+  },
+  {
+    value: 0,
+    label: 'жен'
+  }
+]

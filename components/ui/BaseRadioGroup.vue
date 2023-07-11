@@ -3,9 +3,15 @@
     <div v-if="label.length" class="form-item__label">
       {{ label }}
     </div>
-    <div class="radio-group">
+    <div class="radio-group" :class="{'radio-group_mini':isMini}">
       <div v-for="(option, index) in options" :key="index" class="radio-group__item">
-        <input :name="name" type="radio" :id="option.value" :value="option.value" v-model="selected">
+        <input
+          :id="option.value"
+          v-model="selected"
+          :name="name"
+          type="radio"
+          :value="option.value"
+        >
         <label class="radio-group__button button" :for="option.value">{{ option.label }}</label>
       </div>
     </div>
@@ -25,7 +31,7 @@ export default {
       default: ''
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, null],
       default: ''
     },
     options: {
@@ -33,6 +39,10 @@ export default {
       default () {
         return []
       }
+    },
+    isMini: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -49,7 +59,8 @@ export default {
     }
   },
   mounted () {
-    this.selected = this.options.find(option => option.value === this.value).value
+    const selected = this.options.find(option => option.value === this.value)
+    this.selected = typeof selected !== 'undefined' ? selected.value : null
   }
 }
 </script>
@@ -85,6 +96,17 @@ export default {
     height: 100%;
     width: 100%;
     padding: 15px 5px;
+  }
+
+  &_mini {
+    padding: 0;
+    .radio-group__item {
+      margin: 0;
+    }
+    .radio-group__button {
+      padding: 14px 0;
+      font-size: 18px;
+    }
   }
 }
 </style>

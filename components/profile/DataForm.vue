@@ -1,64 +1,87 @@
 <template>
   <div class="profile__data substrate">
     <div class="profile__avatar">
-      <img src="@/assets/img/ava-girls.png" alt="user avatar" width="300" height="300">
+      <img :src="getGenderAvatar" alt="user avatar" width="300" height="300">
     </div>
     <ui-form-item
       :error="$v.data.name.$error"
+      required
     >
-      <div class="input-icon">
-        <input v-model="$v.data.name.$model" type="text" class="base-input" disabled="disabled">
-        <i class="icon-edit" />
-      </div>
-      <template #error />
+      <input v-model="$v.data.name.$model" type="text" class="base-input" :disabled="isSmsCodeSent">
+      <template #error>
+        <small v-if="!$v.data.name.required">Обязательное поле</small>
+      </template>
     </ui-form-item>
     <ui-form-item
       label="Мой номер"
       :error="$v.data.phone.$error"
       required
     >
-      <div class="input-icon">
-        <the-mask
-          id="phone"
-          ref="phone"
-          v-model="$v.data.phone.$model"
-          name="phone"
-          mask="+# (###) ###-##-##"
-          class="base-input"
-          placeholder="+7 (999) 888-77-55"
-          type="tel"
-          disabled="disabled"
-        />
-        <i class="icon-edit" />
-      </div>
+      <the-mask
+        id="phone"
+        ref="phone"
+        v-model="$v.data.phone.$model"
+        name="phone"
+        mask="+# (###) ###-##-##"
+        class="base-input"
+        placeholder="+7 (999) 888-77-55"
+        type="tel"
+        :disabled="isSmsCodeSent"
+      />
       <template #error>
         <small v-if="!$v.data.phone.required">Обязательное поле</small>
         <small v-if="!$v.data.phone.isPhone">Не корретный телефон</small>
       </template>
     </ui-form-item>
     <ui-form-item
-      label="Пароль"
-      required
-      :error="$v.data.password.$error"
+      label="Новый пароль"
+      :error="$v.data.newPassword.$error"
     >
-      <div class="input-icon">
-        <input v-model="$v.data.password.$model" type="password" class="base-input" disabled="disabled">
-        <i class="icon-edit" />
-      </div>
+      <input v-model="$v.data.newPassword.$model" type="password" class="base-input" :disabled="isSmsCodeSent">
       <template #error>
-        <small v-if="!$v.data.password.required">Обязательное поле</small>
-        <small v-if="!$v.data.password.minLength">Минимальная длина 6 символов</small>
+        <small v-if="!$v.data.newPassword.minLength">Минимальная длина 6 символов</small>
       </template>
     </ui-form-item>
     <div class="profile__gender">
-      <div class="form-item">
-        <label class="form-item__label profile__label">Пол</label>
-        <button class="profile__gender-button">Укажите пол</button>
+      <ui-base-radio-group
+        v-model="data.gender"
+        name="gender"
+        :is-mini="true"
+        :options="genderOptions"
+        label="Пол"
+      />
+      <ui-form-item
+        label="Дата рождения"
+        :error="$v.data.birth.$error"
+      >
+        <input v-model="$v.data.birth.$model" type="date" class="base-input" :disabled="isSmsCodeSent">
+        <template #error>
+          <small v-if="!$v.data.birth.minLength">Некорректная дата</small>
+        </template>
+      </ui-form-item>
+    </div>
+    <div v-if="isSmsCodeSent">
+      <div class="intro">
+        На номер телефона <strong>+{{ data.phone }}</strong> придет смс для подтверждения
       </div>
-      <div class="form-item">
-        <label class="form-item__label profile__label">Дата рождения</label>
-        <button class="profile__gender-button">Укажите дату</button>
-      </div>
+      <ui-form-item
+        label="Код из sms"
+        :error="$v.data.code.$error"
+        required
+      >
+        <the-mask
+          id="sms-code"
+          ref="sms-code"
+          v-model="$v.data.code.$model"
+          name="sms-code"
+          mask="####"
+          class="base-input"
+          type="text"
+        />
+        <template #error>
+          <small v-if="!$v.data.code.required">Обязательное поле</small>
+        </template>
+      </ui-form-item>
     </div>
     <ui-base-button
       green
@@ -72,10 +95,13 @@
 </template>
 
 <script>
-import { minLength, required } from 'vuelidate/lib/validators'
+import { minLength, required, requiredIf } from 'vuelidate/lib/validators'
 import { TheMask } from 'vue-the-mask'
 import { isPhone } from '~/utils/validationUtils'
 import FormMixin from '@/mixins/FormMixin'
+import GenderAvatar from '@/mixins/GenderAvatar'
+import ModalMixin from '@/mixins/ModalMixin'
+import { genderOptions } from '@/vocabularies/options'
 
 export default {
   name: 'DataForm',
@@ -83,20 +109,31 @@ export default {
     TheMask
   },
   mixins: [
-    FormMixin
+    FormMixin,
+    GenderAvatar,
+    ModalMixin
   ],
   data () {
     return {
+      genderOptions,
+      isSmsCodeSent: false,
       defaultData: {
+        id: this.$auth.user.id,
         name: this.$auth.user.name,
         phone: this.$auth.user.phone,
-        password: ''
+        newPassword: null,
+        gender: this.$auth.user.gender,
+        birth: this.$auth.user.birth,
+        code: null
       }
     }
   },
   validations () {
     return {
       data: {
+        id: {
+          required
+        },
         name: {
           required
         },
@@ -104,9 +141,15 @@ export default {
           required,
           isPhone
         },
-        password: {
-          required,
-          minLength: minLength(6)
+        newPassword: {
+          minLength: minLength(8)
+        },
+        birth: {
+          // todo валидировать дату
+        },
+        code: {
+          required: requiredIf(() => this.isSmsCodeSent),
+          minLength: minLength(4)
         }
       }
     }
@@ -116,7 +159,19 @@ export default {
       if (!this.beforeSubmit()) {
         return
       }
-      console.log(this.data)
+      this.$store.dispatch('profile/saveData', this.data).then((data) => {
+        if (typeof data.success !== 'undefined' && data.success) {
+          this.isSmsCodeSent = true
+        } else {
+          this.$auth.setUser(data)
+          this.showModalInfo('Данные успешно сохранены')
+          this.isSmsCodeSent = false
+        }
+      }).finally(() => {
+        this.loaderButton = false
+      }).catch((errorMessage) => {
+        this.showModalError(errorMessage)
+      })
     }
   }
 }

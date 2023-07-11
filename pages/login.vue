@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { auntOptions } from '@/vocabularies/deliveryOptions'
+import { auntOptions } from '@/vocabularies/options'
 
 export default {
   name: 'Login',

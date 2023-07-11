@@ -163,7 +163,7 @@ import { maxLength, requiredIf } from 'vuelidate/lib/validators'
 import { TheMask } from 'vue-the-mask'
 import FormMixin from '@/mixins/FormMixin'
 import ModalMixin from '@/mixins/ModalMixin'
-import { deliveryOptions, timeOptions, timeList, paymentOptions } from '@/vocabularies/deliveryOptions'
+import { deliveryOptions, timeOptions, timeList, paymentOptions } from '@/vocabularies/options'
 
 export default {
   name: 'OrderForm',

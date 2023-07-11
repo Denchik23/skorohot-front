@@ -21,10 +21,10 @@
             </div>
             <div class="footer__aunt">
               <button class="basket" @click="$router.push('/cart')" />
-              <div v-show="$auth.loggedIn" class="basket-aunt">
+              <div v-if="$auth.loggedIn" class="basket-aunt">
                 <div class="avatar">
                   <NuxtLink to="/profile">
-                    <img src="@/assets/img/avatar-user.png" alt="user avatar" width="62" height="62">
+                    <img :src="getGenderAvatar" alt="user avatar" width="150" height="150">
                   </NuxtLink>
                 </div>
                 <button class="authorization" @click="logout" />
@@ -88,10 +88,11 @@
 
 <script>
 import LogoutMixin from '~/mixins/LogoutMixin'
+import GenderAvatar from '@/mixins/GenderAvatar'
 
 export default {
   name: 'FooterMain',
-  mixins: [LogoutMixin],
+  mixins: [LogoutMixin, GenderAvatar],
   data () {
     return {}
   },

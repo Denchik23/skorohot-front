@@ -59,20 +59,6 @@ export default {
   &__avatar {
     max-width: 290px;
     margin: 0 auto;
-
-    > img {
-      border-radius: 50%;
-      border: 2px solid #3cd52e;
-    }
-  }
-
-  &__gender-button {
-    font-family: "Roboto", sans-serif;
-    border: none;
-    background: unset;
-    color: #3cd52e;
-    font-size: 18px;
-    font-weight: 400;
   }
 
   &__score {
