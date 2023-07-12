@@ -8,11 +8,12 @@
       >
         <div class="reviews__head">
           <div class="reviews__avatar">
-            <img src="@/assets/img/avatar.png" alt="avatar" width="54" height="53">
+            <img v-if="review.image !== null" :src="`${$config.appImagesUrl}/thumbnail/${review.image.file_name}`" :alt="review.image.title" width="300" height="300">
+            <img v-else src="@/static/unknown-svgrepo.svg" :alt="review.name" width="54" height="54">
           </div>
           <div class="reviews__data">
             <div class="reviews__title">
-              {{ review.name }}<br>Местный эксперт
+              {{ review.name }}<br>{{ review.job_title }}
             </div>
             <div class="reviews__star stars">
               <img v-for="n in review.stars" :key="n" src="@/assets/img/star-sharp.svg" width="15" alt="stars">
@@ -20,7 +21,7 @@
           </div>
         </div>
         <div class="reviews__body">
-          Пицца просто супер. Очень рада, что стала вашим постоянным клиентом) спасибо огромное. Особенно спасибо за то что добавочный перчик халапенье  можно заказать только на одну половинку.)))
+          {{ review.text }}
         </div>
       </div>
     </div>
@@ -34,10 +35,6 @@ export default {
     reviews: {
       type: Array,
       default: () => []
-    }
-  },
-  data () {
-    return {
     }
   }
 }
@@ -67,6 +64,9 @@ export default {
   &__avatar {
     width: 54px;
     margin-right: 20px;
+    > img {
+      border-radius: 50%;
+    }
   }
 
   &__title {

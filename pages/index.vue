@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="application-action">
-          <a href="#"><img src="@/assets/img/application-action.png" alt="action"></a>
+          <a href="#"><img src="@/assets/img/application-action.png" alt="action" width="1372" height="320"></a>
         </div>
       </div>
     </section>
@@ -78,25 +78,19 @@
 
 <script>
 export default {
+  asyncData ({ store, error }) {
+    return store.dispatch('review/fetchList').then((data) => {
+      return { reviews: data }
+    }).catch((errorMessage) => {
+      return error({
+        statusCode: 404,
+        message: errorMessage
+      })
+    })
+  },
   data () {
     return {
-      reviews: [
-        {
-          id: 1,
-          name: 'Анна Масекотик',
-          stars: 1
-        },
-        {
-          id: 2,
-          name: 'Мария Быстрова',
-          stars: 3
-        },
-        {
-          id: 3,
-          name: 'Max Pozdnyakov',
-          stars: 5
-        }
-      ]
+      reviews: []
     }
   }
 }
