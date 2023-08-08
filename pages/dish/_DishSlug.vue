@@ -3,10 +3,18 @@
     <main>
       <div class="container">
         <ul class="bread-crumbs">
-          <li class="bread-crumbs__item"><a href="#">Главная</a></li>
-          <li class="bread-crumbs__item"><a href="#">Меню</a></li>
-          <li class="bread-crumbs__item"><a href="#">Пицца</a></li>
-          <li class="bread-crumbs__item">Пицца "Охотник"</li>
+          <li class="bread-crumbs__item">
+            <a href="#">Главная</a>
+          </li>
+          <li class="bread-crumbs__item">
+            <a href="#">Меню</a>
+          </li>
+          <li class="bread-crumbs__item">
+            <a href="#">Пицца</a>
+          </li>
+          <li class="bread-crumbs__item">
+            Пицца "Охотник"
+          </li>
         </ul>
         <catalog-categories />
       </div>
@@ -21,43 +29,35 @@
             <div v-else class="dish__image">
               <img :src="$config.appImagesUrl + '/no-image.jpg'" :alt="dish.name">
             </div>
-            <button class="dish__video button">Смотреть видео</button>
+            <button class="dish__video button">
+              Смотреть видео
+            </button>
             <div class="dish__rating">
-              <i class="icon-hart"></i>
+              <i class="icon-hart" />
               <span>{{ dish.rated }} / 5</span>
             </div>
           </div>
           <div class="dish__right">
             <div class="section-title" v-html="setName"></div>
-            <div class="sauce__intro">{{ dish.description }}</div>
+            <div class="sauce__intro">
+              {{ dish.description }}
+            </div>
             <dish-ingredients :data="dish.ingredients" />
             <div class="dish__sushi">
               <div class="dish__prices">
-                {{ dish.weight}} {{ dish.units}}
-                <span>{{ dish.price}} Р.</span>
+                {{ dish.weight }} {{ dish.units }}
+                <span>{{ dish.price }} Р.</span>
               </div>
               <ui-base-button
                 class="button_icon"
                 :title="isProductAdded ? 'В корзине' : 'В корзину'"
                 :green="isProductAdded"
                 :disabled="isProductAdded"
-                @click="buyClickHandler">
-                <i class="icon-basket"></i>
+                @click="buyClickHandler"
+              >
+                <i class="icon-basket" />
               </ui-base-button>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="tabs">
-          <div class="tabs__header substrate">
-            <a href="#" class="tabs__link tabs__link_active" title="lint-title">С этим товаром покупают</a>
-            <a href="#" class="tabs__link" title="lint-title">Отзывы</a>
-            <a href="#" class="tabs__link" title="lint-title">Доставка и оплата</a>
-          </div>
-          <div class="tabs__body">
           </div>
         </div>
       </div>
@@ -347,73 +347,6 @@ export default {
       > span:last-child {
         font-size: 24px;
       }
-    }
-  }
-}
-
-.tabs {
-  &__header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    border-radius: 10px 10px 0 0;
-    padding: 12px;
-  }
-
-  &__link {
-    color: #fff;
-    display: block;
-    padding: 0 25px 0 0;
-    position: relative;
-    font-weight: 700;
-    margin: 0 15px 12px 0;
-
-    &:last-child {
-      margin: 0 0 12px 0;
-    }
-
-    &::after {
-      border-top: 3px solid #3cd52e;
-      border-right: 3px solid #3cd52e;
-      content: "";
-      display: inline-block;
-      height: 12px;
-      width: 12px;
-      position: absolute;
-      top: 8px;
-      right: 0;
-      transform: rotate(45deg);
-      transition: transform .2s linear;
-    }
-  }
-
-  &__link_active {
-    &::after {
-      transform: rotate(135deg);
-      top: 5px;
-    }
-  }
-
-  &__body {
-    background: #161514;
-    padding: 30px 12px;
-    border-radius: 0 0 10px 10px;
-  }
-
-  @include media-mobile {
-    &__header {
-      justify-content: space-around;
-    }
-  }
-
-  @include media-tablet {
-    &__header {
-      padding: 20px 12px;
-    }
-
-    &__link:last-child,
-    &__link {
-      margin: 0;
     }
   }
 }
