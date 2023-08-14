@@ -12,7 +12,7 @@
             v-for="filter in filters"
             :key="filter.id"
             class="filter__button"
-            :class="{'filter__button_active': selectedFilters.includes(filter.id) }"
+            :class="{'filter__button_active': filter.active }"
             @click="toggleFilter(filter.id)"
           >
             {{ filter.name }}
@@ -64,9 +64,14 @@ export default {
       })
       return store.dispatch('filter/fetchList')
     }).then((data) => {
+      const filters = data.filter(item => item.filter_category_id === 1)
       return {
         dishes,
-        filters: data
+        filters: filters.map((item) => {
+          const elem = Object.assign({}, item)
+          elem.active = false
+          return elem
+        })
       }
     }).catch((errorMessage) => {
       return error({
@@ -78,8 +83,7 @@ export default {
   data () {
     return {
       dishes: [],
-      filters: [],
-      selectedFilters: []
+      filters: []
     }
   },
   computed: {
@@ -99,15 +103,18 @@ export default {
       }
     },
     toggleFilter (filterId) {
-      const i = this.selectedFilters.findIndex(val => val === filterId)
-      if (i !== -1) {
-        this.selectedFilters.splice(i, 1)
-      } else {
-        this.selectedFilters.push(filterId)
-      }
+      const i = this.filters.findIndex(item => item.id === filterId)
+      this.filters.map((item) => {
+        if (item.id !== filterId) {
+          item.active = false
+        }
+        return item
+      })
+      this.filters[i].active = !this.filters[i].active
+      const filter = this.filters[i].active ? [filterId] : []
       this.getCategoriesList().then((data) => {
         const categoryId = data.filter(item => item.alias === 'pitstsa')
-        return this.getDishesByCategory({ categoryId: categoryId[0].id, filter: this.selectedFilters })
+        return this.getDishesByCategory({ categoryId: categoryId[0].id, filter })
       }).then((data) => {
         this.dishes = data.map((dish) => {
           dish.merge.push({

@@ -14,7 +14,6 @@
         </div>
         <div class="header__address address">
           <span>ул. Омелькова, 21</span>
-          <span>ул. Владимирская, 134</span>
         </div>
         <div class="header__time">
           <span>ЕЖЕДНЕВНО</span><br>
@@ -196,10 +195,6 @@ export default {
       display: block;
       position: relative;
       z-index: 5;
-
-      > span:last-child {
-        margin-left: 18px;
-      }
     }
   }
 

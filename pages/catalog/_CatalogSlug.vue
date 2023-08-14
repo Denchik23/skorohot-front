@@ -7,6 +7,17 @@
     </main>
     <section>
       <div class="container">
+        <div class="filter">
+          <button
+            v-for="filter in filters"
+            :key="filter.id"
+            class="filter__button"
+            :class="{'filter__button_active': filter.active }"
+            @click="toggleFilter(filter.id)"
+          >
+            {{ filter.name }}
+          </button>
+        </div>
         <div class="card-list">
           <div
             v-for="dish in dishes"
@@ -22,13 +33,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   asyncData ({ route, error, store }) {
+    let dishes = []
     return store.dispatch('getCategoriesList').then((data) => {
       const categoryId = data.filter(item => item.alias === route.params.CatalogSlug)
       return store.dispatch('dish/getDishesByCategory', { categoryId: categoryId[0].id, filter: [] })
     }).then((data) => {
-      return { dishes: data }
+      dishes = data
+      return store.dispatch('filter/fetchList')
+    }).then((data) => {
+      return {
+        dishes,
+        filters: data.filter(item => item.filter_category_id === 2)
+      }
     }).catch((errorMessage) => {
       return error({
         statusCode: 404,
@@ -38,10 +58,34 @@ export default {
   },
   data () {
     return {
-      dishes: []
+      dishes: [],
+      filters: []
     }
   },
   methods: {
+    ...mapActions({
+      getCategoriesList: 'getCategoriesList',
+      getDishesByCategory: 'dish/getDishesByCategory'
+    }),
+    toggleFilter (filterId) {
+      const i = this.filters.findIndex(item => item.id === filterId)
+      this.filters.map((item) => {
+        if (item.id !== filterId) {
+          item.active = false
+        }
+        return item
+      })
+      this.filters[i].active = !this.filters[i].active
+      const filter = this.filters[i].active ? [filterId] : []
+      this.getCategoriesList().then((data) => {
+        const categoryId = data.filter(item => item.alias === 'yaponskaya-kuhnya')
+        return this.getDishesByCategory({ categoryId: categoryId[0].id, filter })
+      }).then((data) => {
+        this.dishes = data
+      }).catch((errorMessage) => {
+        this.showModalError(errorMessage)
+      })
+    }
   }
 }
 </script>
