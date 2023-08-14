@@ -1,0 +1,32 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:3
+
+definitions:
+  steps:
+    - step: &commitlint
+        name: Commit lint
+        image: node:16-alpine
+        before_script:
+          - npm install -g @commitlint/cli @commitlint/config-angular
+        script:
+          - npx commitlint -V --from=HEAD~1
+    - step: &deploy
+        name: Deploy
+        deployment: staging
+        script:
+          - ssh develop@81.177.141.80 /var/www/skorohot/html/cicd.sh
+
+pipelines:
+  branches:
+    master:
+      - step: *commitlint
+      - step:
+          <<: *deploy
+          deployment: production
+          trigger: manual
+  default:
+    - step: *commitlint
