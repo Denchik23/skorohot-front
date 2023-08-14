@@ -45,9 +45,13 @@ export default {
       dishes = data
       return store.dispatch('filter/fetchList')
     }).then((data) => {
+      let filters = []
+      if (route.params.CatalogSlug === 'yaponskaya-kuhnya') {
+        filters = data.filter(item => item.filter_category_id === 2)
+      }
       return {
         dishes,
-        filters: data.filter(item => item.filter_category_id === 2)
+        filters
       }
     }).catch((errorMessage) => {
       return error({
