@@ -40,7 +40,8 @@ export default {
   },
 
   router: {
-    linkExactActiveClass: 'nav__link_active'
+    linkExactActiveClass: 'nav__link_active',
+    middleware: ['navigation']
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

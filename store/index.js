@@ -31,5 +31,9 @@ export const actions = {
         })
       }
     })
+  },
+  toggleMenu ({ commit }) {
+    commit('TOGGLE_MENU')
+    document.body.classList.toggle('lock')
   }
 }

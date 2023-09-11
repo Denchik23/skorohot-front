@@ -33,7 +33,7 @@
         <div class="mobile-menu" :class="{ 'mobile-menu_show' : showMenu }">
           <client-only>
             <div class="mobile-menu__body basket-body">
-              <button class="basket-body__basket basket">
+              <button class="basket-body__basket basket" @click="$router.push('/cart')">
                 {{ total }}
               </button>
               <div v-show="$auth.loggedIn" class="basket-aunt">
@@ -50,32 +50,32 @@
             </div>
           </client-only>
           <ul class="nav mobile-menu__links">
-            <li @click="toggleMenu">
+            <li>
               <nuxt-link to="/" class="nav__link">
                 Главная
               </nuxt-link>
             </li>
-            <li @click="toggleMenu">
+            <li>
               <nuxt-link to="/catalog/pitstsa" class="nav__link">
                 Меню
               </nuxt-link>
             </li>
-            <li @click="toggleMenu">
+            <li>
               <nuxt-link to="/promotions" class="nav__link">
                 Акции
               </nuxt-link>
             </li>
-            <li @click="toggleMenu">
+            <li>
               <nuxt-link to="/o-nas" class="nav__link">
                 О нас
               </nuxt-link>
             </li>
-            <li @click="toggleMenu">
+            <li>
               <nuxt-link to="/delivery" class="nav__link">
                 Доставка
               </nuxt-link>
             </li>
-            <li @click="toggleMenu">
+            <li>
               <nuxt-link to="/contacts" class="nav__link">
                 Контакты
               </nuxt-link>
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import LogoutMixin from '~/mixins/LogoutMixin'
 
 export default {
@@ -96,19 +96,20 @@ export default {
   mixins: [LogoutMixin],
   data () {
     return {
-      showMenu: false
     }
   },
   computed: {
+    ...mapState({
+      showMenu: state => state.showMenu
+    }),
     ...mapGetters({
       total: 'cart/getTotalWithSpaces'
     })
   },
   methods: {
-    toggleMenu () {
-      this.showMenu = !this.showMenu
-      document.body.classList.toggle('lock')
-    }
+    ...mapActions({
+      toggleMenu: 'toggleMenu'
+    })
   }
 }
 </script>

@@ -1,10 +1,12 @@
 <template>
   <modal
     name="modal-action"
-    width="480"
+    min-width="356"
+    max-width="480"
+    adaptive
     :classes="['modal']"
     :height="'auto'"
-    :clickToClose="false"
+    :click-to-close="false"
     :scrollable="true"
     @before-open="beforeOpen"
   >
