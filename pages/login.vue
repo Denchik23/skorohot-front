@@ -4,14 +4,16 @@
       <div class="container">
         <div class="auth">
           <div class="auth__form substrate">
-            <ui-base-radio-group
-              v-if="changeAction === 'LoginAuthorization' || changeAction === 'LoginRegistration'"
-              v-model="changeAction"
-              class="auth__choice"
-              name="delivery"
-              :options="auntOptions"
-            />
-            <component :is="changeAction" @changeActionForm="changeActionForm" />
+            <client-only>
+              <ui-base-radio-group
+                v-if="changeAction === 'LoginAuthorization' || changeAction === 'LoginRegistration'"
+                v-model="changeAction"
+                class="auth__choice"
+                name="delivery"
+                :options="auntOptions"
+              />
+              <component :is="changeAction" @changeActionForm="changeActionForm" />
+            </client-only>
           </div>
           <div class="auth__content">
             <div class="title">
