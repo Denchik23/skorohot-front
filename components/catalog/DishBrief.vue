@@ -6,22 +6,34 @@
       </nuxt-link>
     </div>
     <div class="card__head" :class="{'card-mini__head': isMini}">
-      <div class="card__name">{{ data.name }}</div>
-      <div class="card__rating" v-if="!isMini">{{ data.rated }}</div>
+      <div class="card__name">
+        {{ data.name }}
+      </div>
+      <div v-if="!isMini" class="card__rating">
+        {{ data.rated }}
+      </div>
     </div>
     <slot />
     <div v-if="data.ingredients.length" class="ingredients">
       <div v-for="(ingredient, index) in data.ingredients" :key="index" class="ingredients__col">
-        <div class="ingredients__item">{{ ingredient.name }}</div>
+        <div class="ingredients__item">
+          {{ ingredient.name }}
+        </div>
       </div>
     </div>
     <div v-if="isDescription" class="card__intro" :class="{'card-mini__intro': isMini}">
       {{ data.description }}...
-      <nuxt-link :to="`/dish/${data.alias}`">Далее</nuxt-link>
+      <nuxt-link :to="`/dish/${data.alias}`">
+        Далее
+      </nuxt-link>
     </div>
     <div class="card__data" :class="{'card-mini__data': isMini}">
-      <div class="card__count">{{ data.weight }} {{ data.units }}</div>
-      <div class="card__prices">{{ data.price }} руб.</div>
+      <div class="card__count">
+        {{ data.weight }} {{ data.units }}
+      </div>
+      <div class="card__prices">
+        {{ data.price }} руб.
+      </div>
     </div>
     <client-only>
       <div class="card__buttons">
@@ -36,12 +48,12 @@
           class="card__button-bay button_icon"
           :title="titleButtonBuy"
           :green="isProductAdded"
-          :disabled="isProductAdded"
-          @click="buyClickHandler">
-          <i class="icon-basket"></i>
+          @click="buyClickHandler"
+        >
+          <i class="icon-basket" />
         </ui-base-button>
         <button v-if="showDeleteButton" class="card__button-delete" @click="deleteCartItem">
-          <i class="icon-delete"></i>
+          <i class="icon-delete" />
         </button>
       </div>
     </client-only>
@@ -98,6 +110,16 @@ export default {
       }
     }
   },
+  mounted () {
+    if (this.data.image !== null) {
+      this.preview = this.$config.appImagesUrl + '/thumbnail/' + this.data.image.file_name
+    } else {
+      this.preview = this.$config.appImagesUrl + '/no-image.jpg'
+    }
+    if (this.isProductAdded) {
+      this.quantity = this.cart.find(dish => dish.id === this.data.id).quantity
+    }
+  },
   methods: {
     ...mapActions({
       addDish: 'cart/addDish',
@@ -119,25 +141,16 @@ export default {
       }
     },
     buyClickHandler () {
-      this.addDish({ product: this.data, quantity: this.quantity })
-      this.$emit('addCartItem', this.data)
-    },
-    addedClickHandler () {
-      // this.$modal.show('customer-cart', { addedProduct: this.product.id })
+      if (this.isProductAdded) {
+        this.$router.push('/cart')
+      } else {
+        this.addDish({ product: this.data, quantity: this.quantity })
+        this.$emit('addCartItem', this.data)
+      }
     },
     deleteCartItem () {
       this.removeDish(this.data)
       this.$emit('deleteCartItem', this.data.id)
-    }
-  },
-  mounted () {
-    if (this.data.image !== null) {
-      this.preview = this.$config.appImagesUrl + '/thumbnail/' + this.data.image.file_name
-    } else {
-      this.preview = this.$config.appImagesUrl + '/no-image.jpg'
-    }
-    if (this.isProductAdded) {
-      this.quantity = this.cart.find(dish => dish.id === this.data.id).quantity
     }
   }
 }
