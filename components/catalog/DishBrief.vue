@@ -1,9 +1,7 @@
 <template>
   <div class="card" :class="{'card-mini': isMini, 'substrate': !isMini}">
     <div class="card__img">
-      <nuxt-link :to="`/dish/${data.alias}`" :title="data.name">
-        <img :src="preview" width="300" height="300" :alt="data.name" loading="lazy">
-      </nuxt-link>
+      <img :src="preview" width="300" height="300" :alt="data.name" loading="lazy">
     </div>
     <div class="card__head" :class="{'card-mini__head': isMini}">
       <div class="card__name">
@@ -22,10 +20,7 @@
       </div>
     </div>
     <div v-if="isDescription" class="card__intro" :class="{'card-mini__intro': isMini}">
-      {{ data.description }}...
-      <nuxt-link :to="`/dish/${data.alias}`">
-        Далее
-      </nuxt-link>
+      {{ data.description }}
     </div>
     <div class="card__data" :class="{'card-mini__data': isMini}">
       <div class="card__count">
