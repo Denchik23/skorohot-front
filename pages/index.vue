@@ -16,9 +16,9 @@
         <div class="home-head__slogan">
           и вкусная пицца, роллы и десерты
         </div>
-        <button class="home-head__button button_shadow button">
-          Закажи доставку
-        </button>
+        <nuxt-link to="/catalog/pitstsa" class="home-head__button button_shadow button">
+          Меню
+        </nuxt-link>
         <div class="home-head__time">
           <span>ЕЖЕДНЕВНО</span><br>
           С 10:00 ДО 00:00
@@ -35,27 +35,17 @@
     </main>
     <section>
       <div class="container">
-        <div class="current-action">
-          <div class="current-action__item">
-            <div class="section-title">
-              Свежие <span>акции</span>
-            </div>
-            <div class="section-intro current-action__intro">
-              Наши лучшие предложения, которые не оставят Вас равнодушными к нам :)
-            </div>
-          </div>
-          <div class="current-action__item">
-            <a href="#"><img src="@/assets/img/action-main.png" alt="action"></a>
-          </div>
-          <div class="current-action__item">
-            <a href="#"><img src="@/assets/img/action-main1.png" alt="action"></a>
-          </div>
-          <div class="current-action__item">
-            <a href="#"><img src="@/assets/img/action-main1.png" alt="action"></a>
-          </div>
+        <div class="section-title section-title_substrate">
+          Скорохот <span>рекомендует!</span>
         </div>
-        <div class="application-action">
-          <a href="#"><img src="@/assets/img/application-action.png" alt="action" width="1372" height="320"></a>
+        <div class="card-list">
+          <div
+            v-for="dish in dishesRecommended"
+            :key="dish.id"
+            class="card-list__col"
+          >
+            <catalog-dish-brief :data="dish" />
+          </div>
         </div>
       </div>
     </section>
@@ -77,10 +67,19 @@
 </template>
 
 <script>
+
 export default {
+  components: {},
   asyncData ({ store, error }) {
+    let reviews = []
     return store.dispatch('review/fetchList').then((data) => {
-      return { reviews: data }
+      reviews = data
+      return store.dispatch('dish/getRecommendations')
+    }).then((data) => {
+      return {
+        reviews,
+        dishesRecommended: data
+      }
     }).catch((errorMessage) => {
       return error({
         statusCode: 404,
@@ -90,7 +89,8 @@ export default {
   },
   data () {
     return {
-      reviews: []
+      reviews: [],
+      dishesRecommended: []
     }
   }
 }
@@ -204,11 +204,6 @@ export default {
       font-size: 28px;
     }
 
-    &__button {
-      font-weight: 700;
-      font-size: 30px;
-    }
-
     &__scroll {
       font-size: 16px;
       margin-top: 10px;
@@ -275,34 +270,6 @@ export default {
     &__title {
       font-size: 84px;
       line-height: 95px;
-    }
-  }
-}
-
-.current-action {
-  &__intro {
-    padding-bottom: 0;
-  }
-
-  &__item {
-    margin: 0 0 30px 0;
-  }
-
-  @include media-tablet {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    height: 100%;
-    justify-content: space-between;
-
-    &__item {
-      width: 45%;
-    }
-  }
-
-  @include media-desktop {
-    &__item {
-      width: 580px;
     }
   }
 }

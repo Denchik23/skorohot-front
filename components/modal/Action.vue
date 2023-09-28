@@ -1,8 +1,8 @@
 <template>
   <modal
     name="modal-action"
-    min-width="356"
-    max-width="480"
+    :min-width="356"
+    :max-width="480"
     adaptive
     :classes="['modal']"
     :height="'auto'"

@@ -1,13 +1,16 @@
 <template>
-  <div>
+  <div class="layout">
     <div class="wrapper" :class="{'landing': $route.path === '/'}">
       <header-main />
       <nav-top />
       <Nuxt />
-      <div class="footer-gradient"></div>
+      <div class="footer-gradient" />
     </div>
     <footer-main />
     <modal-action />
+    <client-only>
+      <fixed-cart v-if="$route.path !== '/cart'" />
+    </client-only>
   </div>
 </template>
 
@@ -16,6 +19,7 @@ import HeaderMain from '~/layouts/HeaderMain'
 import NavTop from '~/layouts/NavTop'
 import FooterMain from '~/layouts/FooterMain'
 import ModalAction from '~/components/modal/Action'
+import FixedCart from '~/components/FixedCart'
 
 export default {
   name: 'default',
@@ -23,7 +27,14 @@ export default {
     HeaderMain,
     NavTop,
     FooterMain,
-    ModalAction
+    ModalAction,
+    FixedCart
   }
 }
 </script>
+
+<style lang="scss">
+.layout {
+  position: relative;
+}
+</style>

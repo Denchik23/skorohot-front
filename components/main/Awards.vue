@@ -4,7 +4,7 @@
       <div class="awards__item substrate">
         <div class="awards__body">
           <div class="awards__rating">
-            4,8
+            4,6
           </div>
           <div class="awards__star">
             <div class="stars">
@@ -14,7 +14,7 @@
               <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
               <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
             </div>
-            <span>296 отзывов</span>
+            <span>266 отзывов</span>
           </div>
         </div>
         <div class="awards__footer">
@@ -44,7 +44,7 @@
       <div class="awards__item substrate">
         <div class="awards__body">
           <div class="awards__rating">
-            4,8
+            4,9
           </div>
           <div class="awards__star">
             <div class="stars">
@@ -54,7 +54,7 @@
               <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
               <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
             </div>
-            <span>179 отзывов</span>
+            <span>415 отзывов</span>
           </div>
         </div>
         <div class="awards__footer">
