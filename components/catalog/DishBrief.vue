@@ -153,6 +153,7 @@ export default {
 
 <style lang="scss">
 .card {
+  height: 100%;
   &__img {
     text-align: center;
   }
