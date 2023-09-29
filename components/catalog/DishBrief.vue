@@ -7,9 +7,6 @@
       <div class="card__name">
         {{ data.name }}
       </div>
-      <div v-if="!isMini" class="card__rating">
-        {{ data.rated }}
-      </div>
     </div>
     <slot />
     <div v-if="data.ingredients.length" class="ingredients">
@@ -172,12 +169,6 @@ export default {
     padding-right: 3px;
   }
 
-  &__rating {
-    color: #ffe03f;
-    padding-right: 32px;
-    background: url("~assets/img/star.svg") no-repeat right;
-  }
-
   &__intro {
     font-size: 16px;
     margin-top: 15px;
@@ -227,10 +218,6 @@ export default {
     }
 
     &__name {
-      font-size: 24px;
-    }
-
-    &__rating {
       font-size: 24px;
     }
 
