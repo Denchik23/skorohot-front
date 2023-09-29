@@ -2,15 +2,23 @@
   <div>
     <main class="section-substrate">
       <div class="container">
-        <div class="title">Спасибо<br><span class="title_green">за ваш </span><span class="title_red">заказ!</span></div>
-        <div class="intro intro_small">наш оператор свяжется с вами в течение нескольких минут, чтобы уточнить детали</div>
+        <div class="title">
+          Спасибо<br><span class="title_green">за ваш </span><span class="title_red">заказ!</span>
+        </div>
+        <div class="intro intro_small">
+          наш оператор свяжется с вами в течение нескольких минут, чтобы уточнить детали
+        </div>
       </div>
     </main>
     <section class="thanks-block">
       <div class="container">
         <div class="substrate plea">
-          <div class="section-title section-title_substrate">А вы знали, <span>что...</span></div>
-          <div class="intro">Если оставить фотоотзыв, то можно получить подарок при следующем заказе?</div>
+          <div class="section-title section-title_substrate">
+            вы знали, <span>что...</span>
+          </div>
+          <div class="intro">
+            Если оставить фотоотзыв, то можно получить подарок при следующем заказе?
+          </div>
           <ul class="plea__list">
             <li>Сделай фото с привезенной едой от СКОРОХОТ</li>
             <li>
@@ -21,14 +29,18 @@
             </li>
             <li>Укажи в комментариях к следующему заказу ссылку на свой отзыв и получи подарок :)</li>
           </ul>
-          <div class="plea__example-reviews section-title">пример <span>хорошего отзыва:</span></div>
+          <div class="plea__example-reviews section-title">
+            пример <span>хорошего отзыва:</span>
+          </div>
           <div class="plea__reviews reviews">
             <div class="reviews__head">
               <div class="reviews__avatar">
                 <img src="~/assets/img/reviews-avatar-empty.svg" alt="avatar" width="54" height="53">
               </div>
               <div class="reviews__data">
-                <div class="reviews__title">Мария Быстрова</div>
+                <div class="reviews__title">
+                  Мария Быстрова
+                </div>
                 <div class="reviews__star stars">
                   <img src="~/assets/img/star-sharp.svg" alt="star" width="15">
                   <img src="~/assets/img/star-sharp.svg" alt="star" width="15">
@@ -42,11 +54,8 @@
               Сами роллы большие , сытные, оформление на высоте.
               Туристы, местные, только сюда за роллами, не пожалеете.
               За заказ через приложение - подарок.
-              <img src="~/assets/img/image-reviews-body.jpg" width="191" height="151">
+              <img src="~/assets/img/image-reviews-body.jpg" width="191" height="151" alt="image-reviews-body">
             </div>
-          </div>
-          <div class="plea__button">
-            <button class="button button_shadow">Оставить отзыв</button>
           </div>
         </div>
       </div>
@@ -65,7 +74,6 @@ export default {
 .plea {
   &__list {
     margin: 15px 0;
-    // padding: 0;
     padding: 0 0 0 30px;
 
     > li {
@@ -102,14 +110,6 @@ export default {
       font-size: 28px;
       margin: 0 0 30px 0;
     }
-
-    &__reviews {
-      margin: 0 0 60px 0;
-    }
-
-    &__button {
-      text-align: center;
-    }
   }
 
   @include media-desktop {
@@ -119,7 +119,6 @@ export default {
 }
 
 .thanks-block {
-
   @include media-laptop {
     background: url("~assets/img/delivery.svg") no-repeat center;
   }
