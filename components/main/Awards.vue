@@ -27,18 +27,18 @@
       <div class="awards__item substrate">
         <div class="awards__body">
           <div class="awards__rating-tripadvisor">
-            18<span>из 349<br>ресторанов Анапы</span>
+            13<span>из 271<br>ресторанов Анапы</span>
           </div>
           <div class="awards__star">
             <img src="~/assets/img/rating-two.svg" alt="star">
-            <span>61 отзыв</span>
+            <span>63 отзыв</span>
           </div>
         </div>
         <div class="awards__footer">
           <div class="awards__icon">
             <img src="~/assets/img/tripadvisor.svg" alt="" width="283" height="61">
           </div>
-          <a href="#" target="_blank" class="button-link" />
+          <a href="https://www.tripadvisor.ru/UserReviewEdit-g608960-d12618266-Pizzeria_Skorohot-Anapa_Krasnodar_Krai_Southern_District.html" target="_blank" class="button-link" />
         </div>
       </div>
       <div class="awards__item substrate">
