@@ -45,11 +45,11 @@
         </div>
       </div>
     </main>
-    <cart-recommendations :data="dishesRecommended" @addCartItem="addCartDish" />
     <client-only>
       <cart-order-form v-if="cart.length && $auth.loggedIn" />
       <cart-login-required v-else-if="!$auth.loggedIn" />
     </client-only>
+    <cart-recommendations :data="dishesRecommended" @addCartItem="addCartDish" />
   </div>
 </template>
 

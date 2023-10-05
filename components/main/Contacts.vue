@@ -31,27 +31,29 @@
             </div>
           </div>
         </div>
-        <div class="contacts__map">
-          <yandex-map
-            v-if="isMounted"
-            :coords="[44.877520488716804,37.332216560753295]"
-            zoom="15"
-            :controls="['fullscreenControl', 'rulerControl', 'typeSelector', 'zoomControl']"
-            :options="{autoFitToViewport: 'always'}"
-            ymap-class="contacts-map-main"
-            @map-was-initialized="mapInitialized"
-          >
-            <ymap-marker
-              marker-id="skorohot"
-              marker-type="placemark"
-              hint-content="СкороХот"
+        <div ref="contactMap" class="contacts__map">
+          <client-only>
+            <yandex-map
+              v-if="isShowMap"
               :coords="[44.877520488716804,37.332216560753295]"
-              balloon-template="Анапа, Омелькова, 21"
-            />
-          </yandex-map>
-          <button class="contacts__router button" @click="buildRoute">
-            Построить маршрут
-          </button>
+              zoom="15"
+              :controls="['fullscreenControl', 'rulerControl', 'typeSelector', 'zoomControl']"
+              :options="{autoFitToViewport: 'always'}"
+              ymap-class="contacts-map-main"
+              @map-was-initialized="mapInitialized"
+            >
+              <ymap-marker
+                marker-id="skorohot"
+                marker-type="placemark"
+                hint-content="СкороХот"
+                :coords="[44.877520488716804,37.332216560753295]"
+                balloon-template="Анапа, Омелькова, 21"
+              />
+            </yandex-map>
+            <button class="contacts__router button" @click="buildRoute">
+              Построить маршрут
+            </button>
+          </client-only>
         </div>
       </div>
     </div>
@@ -63,13 +65,20 @@ export default {
   name: 'Contacts',
   data () {
     return {
-      isMounted: false,
+      isShowMap: false,
       coords: [44.894818, 37.316367],
       yandexMapSkorohot: null
     }
   },
   mounted () {
-    this.isMounted = true
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.isShowMap = true
+        }
+      })
+    })
+    observer.observe(this.$refs.contactMap)
   },
   methods: {
     buildRoute () {
@@ -80,7 +89,7 @@ export default {
           this.yandexMapSkorohot.rout = route
         },
         // eslint-disable-next-line node/handle-callback-err
-        function (error) {
+        function () {
           alert('Разрешите, пожалуйста, определение вашего местоположения')
         }, this
       )

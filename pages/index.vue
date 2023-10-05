@@ -11,10 +11,10 @@
       </div>
       <div class="home-head__body">
         <div class="home-head__title title">
-          только <span class="title_green">свежие</span><br>ингредиенты
+          Реально <span class="title_green">много</span><br>начинки
         </div>
         <div class="home-head__slogan">
-          и вкусная пицца, роллы и десерты
+          вкусная пицца, роллы и десерты
         </div>
         <nuxt-link to="/catalog/pitstsa" class="home-head__button button_shadow button">
           Меню
