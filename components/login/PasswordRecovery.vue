@@ -19,7 +19,7 @@
           ref="phone"
           v-model="$v.data.phone.$model"
           name="phone"
-          mask="+# (###) ###-##-##"
+          mask="+7 (###) ###-##-##"
           class="base-input"
           placeholder="+7 (999) 888-77-55"
           type="tel"
@@ -71,7 +71,7 @@
         Введите <span>4-х значный код</span>
       </div>
       <div class="intro">
-        На номер телефона <strong>+{{ data.phone }}</strong> придет смс для подтверждения
+        На номер телефона <strong>+7{{ data.phone }}</strong> придет смс для подтверждения
       </div>
       <ui-form-item
         label="Код"

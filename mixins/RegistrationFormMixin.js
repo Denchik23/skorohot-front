@@ -63,20 +63,17 @@ export default {
       this.errorText = ''
     },
     startTimer () {
-      const v = this
-      v.timer = this.timerDefault
-      v.smsTimerShow = true
-      this.secondsTimer = setInterval(function () {
-        if (v.timer > 0) {
-          v.timer--
-          if (v.timer < 10) {
-            v.timer = '0' + v.timer
+      this.timer = this.timerDefault
+      this.smsTimerShow = true
+      this.secondsTimer = setInterval(() => {
+        if (this.timer > 0) {
+          this.timer--
+          if (this.timer < 10) {
+            this.timer = '0' + this.timer
           }
-          // eslint-disable-next-line no-self-assign
-          v.timer = v.timer
         } else {
-          clearInterval(v.secondsTimer)
-          v.smsTimerShow = false
+          clearInterval(this.secondsTimer)
+          this.smsTimerShow = false
         }
       }, 1000)
     },
@@ -90,7 +87,10 @@ export default {
         this.checkCodeLayout = true
         return false
       }
-      this.$store.dispatch('profile/sendSMSCode', this.data)
+      const data = {
+        phone: '7' + this.data.phone
+      }
+      this.$store.dispatch('profile/sendSMSCode', data)
         .finally(() => {
           this.loaderButton = false
         })
@@ -110,14 +110,20 @@ export default {
       if (!this.beforeSubmit()) {
         return
       }
-      this.$store.dispatch('profile/confirmSMSCode', this.data)
+      const data = {
+        phone: '7' + this.data.phone,
+        password: this.data.password,
+        password_confirmation: this.data.password_confirmation,
+        code: this.data.code
+      }
+      this.$store.dispatch('profile/confirmSMSCode', data)
         .finally(() => {
           this.loaderButton = false
         })
         .then((response) => {
           if (typeof response.success !== 'undefined' && response.success) {
             this.$auth.loginWith('laravelSanctum', {
-              data: this.data
+              data
             }).then(() => {
               this.$router.push('/profile')
             }).catch((error) => {

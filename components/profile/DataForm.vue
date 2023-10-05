@@ -22,7 +22,7 @@
         ref="phone"
         v-model="$v.data.phone.$model"
         name="phone"
-        mask="+# (###) ###-##-##"
+        mask="+7 (###) ###-##-##"
         class="base-input"
         placeholder="+7 (999) 888-77-55"
         type="tel"
@@ -62,7 +62,7 @@
     </div>
     <div v-if="isSmsCodeSent">
       <div class="intro">
-        На номер телефона <strong>+{{ data.phone }}</strong> придет смс для подтверждения
+        На номер телефона <strong>+7{{ data.phone }}</strong> придет смс для подтверждения
       </div>
       <ui-form-item
         label="Код из sms"
@@ -159,7 +159,9 @@ export default {
       if (!this.beforeSubmit()) {
         return
       }
-      this.$store.dispatch('profile/saveData', this.data).then((data) => {
+      const data = Object.assign({}, this.data)
+      data.phone = '7' + this.data.phone
+      this.$store.dispatch('profile/saveData', data).then((data) => {
         if (typeof data.success !== 'undefined' && data.success) {
           this.isSmsCodeSent = true
         } else {

@@ -13,7 +13,7 @@
         ref="phone"
         v-model="$v.data.phone.$model"
         name="phone"
-        mask="+# (###) ###-##-##"
+        mask="+7 (###) ###-##-##"
         class="base-input"
         placeholder="+7 (999) 888-77-55"
         type="tel"
@@ -109,8 +109,12 @@ export default {
       if (!this.beforeSubmit()) {
         return
       }
+      const data = {
+        phone: '7' + this.data.phone,
+        password: this.data.password
+      }
       await this.$auth.loginWith('laravelSanctum', {
-        data: this.data
+        data
       }).finally(() => {
         this.loaderButton = false
       }).then(() => {
