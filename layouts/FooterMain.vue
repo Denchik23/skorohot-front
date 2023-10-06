@@ -5,7 +5,7 @@
         <div class="footer__left">
           <div class="footer__logo logo">
             <div class="logo__img">
-              <a href="#" title="Скороход"><img src="@/assets/img/logo.svg" alt="Скороход"></a>
+              <a href="#" title="Скороход"><img src="@/assets/img/logo.svg" alt="Скороход" width="260" height="77"></a>
             </div>
             <div class="logo__city">
               Анапа

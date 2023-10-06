@@ -8,11 +8,11 @@
           </div>
           <div class="awards__star">
             <div class="stars">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="27">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="27" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="27" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="27" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="27" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="27" height="26">
             </div>
             <span>266 отзывов</span>
           </div>
@@ -30,7 +30,7 @@
             13<span>из 271<br>ресторанов Анапы</span>
           </div>
           <div class="awards__star">
-            <img src="~/assets/img/rating-two.svg" alt="star">
+            <img src="~/assets/img/rating-two.svg" alt="star" width="120" height="21">
             <span>63 отзыв</span>
           </div>
         </div>

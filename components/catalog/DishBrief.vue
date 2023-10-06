@@ -104,7 +104,7 @@ export default {
   },
   mounted () {
     if (this.data.image !== null) {
-      this.preview = this.$config.appImagesUrl + '/thumbnail/' + this.data.image.file_name
+      this.preview = this.$config.appImagesUrl + '/thumbnail/' + this.data.image.thumbnail
     } else {
       this.preview = this.$config.appImagesUrl + '/no-image.jpg'
     }

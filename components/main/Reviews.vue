@@ -8,7 +8,7 @@
       >
         <div class="reviews__head">
           <div class="reviews__avatar">
-            <img v-if="review.image !== null" :src="`${$config.appImagesUrl}/thumbnail/${review.image.file_name}`" :alt="review.image.title" width="300" height="300">
+            <img v-if="review.image !== null" :src="`${$config.appImagesUrl}/thumbnail/${review.image.thumbnail}`" :alt="review.image.title" width="300" height="300">
             <img v-else src="@/static/unknown-svgrepo.svg" :alt="review.name" width="54" height="54">
           </div>
           <div class="reviews__data">
@@ -16,7 +16,14 @@
               {{ review.name }}<br>{{ review.job_title }}
             </div>
             <div class="reviews__star stars">
-              <img v-for="n in review.stars" :key="n" src="@/assets/img/star-sharp.svg" width="15" alt="stars">
+              <img
+                v-for="n in review.stars"
+                :key="n"
+                src="@/assets/img/star-sharp.svg"
+                width="15"
+                height="26"
+                alt="stars"
+              >
             </div>
           </div>
         </div>

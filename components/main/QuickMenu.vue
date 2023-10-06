@@ -1,16 +1,22 @@
 <template>
   <section>
     <div class="container">
-      <div class="section-title">Быстрое <span>меню</span></div>
-      <div class="section-intro">Все самое нужное прямо перед глазами на самой главной странице ;)</div>
+      <div class="section-title">
+        Быстрое <span>меню</span>
+      </div>
+      <div class="section-intro">
+        Все самое нужное прямо перед глазами на самой главной странице ;)
+      </div>
       <div class="fast-menu">
         <div class="fast-menu__col">
           <div class="fast-menu__item substrate">
             <div class="fast-menu__icon">
-              <img src="~/assets/img/pizza.svg" alt="icon">
+              <img src="~/assets/img/pizza.svg" alt="icon-pizza" width="208" height="208" title="Пицца">
             </div>
             <div class="fast-menu__data">
-              <div class="fast-menu__title"><span>Пицца</span><br>Горячая, вкусная и сочная</div>
+              <div class="fast-menu__title">
+                <span>Пицца</span><br>Горячая, вкусная и сочная
+              </div>
               <nuxt-link to="/catalog/pitstsa" class="button-link" />
             </div>
           </div>
@@ -18,10 +24,12 @@
         <div class="fast-menu__col">
           <div class="fast-menu__item substrate">
             <div class="fast-menu__icon">
-              <img src="~/assets/img/rolls.svg" alt="icon">
+              <img src="~/assets/img/rolls.svg" alt="icon-rolls" width="208" height="208" title="Роллы">
             </div>
             <div class="fast-menu__data">
-              <div class="fast-menu__title"><span>Роллы</span><br>Много вкусной начинки</div>
+              <div class="fast-menu__title">
+                <span>Роллы</span><br>Много вкусной начинки
+              </div>
               <nuxt-link to="/catalog/yaponskaya-kuhnya" class="button-link" />
             </div>
           </div>
@@ -29,10 +37,12 @@
         <div class="fast-menu__col">
           <div class="fast-menu__item substrate">
             <div class="fast-menu__icon">
-              <img src="~/assets/img/sushi.svg" alt="icon">
+              <img src="~/assets/img/sushi.svg" alt="icon-sushi" width="208" height="208" title="Сеты и комбо">
             </div>
             <div class="fast-menu__data">
-              <div class="fast-menu__title"><span>Сеты и комбо</span><br>Горячая, вкусная и сочная</div>
+              <div class="fast-menu__title">
+                <span>Сеты и комбо</span><br>Горячая, вкусная и сочная
+              </div>
               <nuxt-link to="/catalog/pitstsa" class="button-link" />
             </div>
           </div>

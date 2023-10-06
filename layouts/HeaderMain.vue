@@ -5,7 +5,7 @@
         <div class="logo">
           <div class="logo__img">
             <nuxt-link to="/">
-              <img src="@/assets/img/logo.svg" alt="Скороход">
+              <img src="@/assets/img/logo.svg" alt="Скороход" width="260" height="77">
             </nuxt-link>
           </div>
           <div class="logo__city">
