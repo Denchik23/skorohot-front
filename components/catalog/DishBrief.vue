@@ -1,7 +1,7 @@
 <template>
   <div class="card" :class="{'card-mini': isMini, 'substrate': !isMini}">
     <div class="card__img">
-      <img :src="preview" width="300" height="300" :alt="data.name" loading="lazy">
+      <img :src="preview" width="300" height="300" :alt="data.name" :title="data.name">
     </div>
     <div class="card__head" :class="{'card-mini__head': isMini}">
       <div class="card__name">

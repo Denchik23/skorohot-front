@@ -48,11 +48,11 @@
           </div>
           <div class="awards__star">
             <div class="stars">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
-              <img src="~/assets/img/star-sharp.svg" alt="star" width="20">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="20" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="20" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="20" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="20" height="26">
+              <img src="~/assets/img/star-sharp.svg" alt="star" width="20" height="26">
             </div>
             <span>415 отзывов</span>
           </div>
