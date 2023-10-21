@@ -139,7 +139,10 @@
 
 <script>
 export default {
-  name: 'o-nas'
+  name: 'o-nas',
+  head: {
+    title: 'Информация о кафе Скорохот | Доставка еды СкороХОТ'
+  }
 }
 </script>
 

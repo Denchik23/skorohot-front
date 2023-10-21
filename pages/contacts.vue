@@ -71,7 +71,10 @@
 
 <script>
 export default {
-  name: 'contacts'
+  name: 'contacts',
+  head: {
+    title: 'Контакты кафе СкороХот | Доставка еды СкороХОТ'
+  }
 }
 </script>
 

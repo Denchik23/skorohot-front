@@ -86,6 +86,9 @@ export default {
       filters: []
     }
   },
+  head: {
+    title: 'Меню: пицца, комбо, напитки, десерты в Анапе'
+  },
   computed: {
   },
   methods: {

@@ -138,7 +138,10 @@
 
 <script>
 export default {
-  name: 'delivery'
+  name: 'delivery',
+  head: {
+    title: 'Информация о доставке и оплате | Доставка еды СкороХОТ'
+  }
 }
 </script>
 

@@ -67,6 +67,9 @@ import { auntOptions } from '@/vocabularies/options'
 
 export default {
   name: 'Login',
+  head: {
+    title: 'Авторизация | Доставка еды СкороХОТ'
+  },
   data () {
     return {
       auntOptions,

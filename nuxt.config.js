@@ -10,18 +10,19 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'skorohot-front',
+    title: 'Доставка еды в Анапе | Доставка СкороХот',
     htmlAttrs: {
       lang: 'ru'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: 'Заказать пиццу с доставкой на дом или офис - СкороХот. Выбрать самую вкусную пиццу можете на сайте skorohot.ru или по  ☎: 7 (918) 057-67-67З.' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'keywords', name: 'keywords', content: 'пицца, анапа, доставка, заказать, скорохот, на дом' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ]
   },
 
