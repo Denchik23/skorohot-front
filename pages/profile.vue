@@ -8,7 +8,7 @@
         </div>
       </div>
     </main>
-    <profile-history :data="orders" />
+    <profile-history />
     <section>
       <div class="container">
         <div class="profile-data">
@@ -27,19 +27,8 @@
 export default {
   name: 'profile',
   middleware: 'authenticated',
-  asyncData ({ store, error }) {
-    return store.dispatch('order/getOrders').then((data) => {
-      return { orders: data }
-    }).catch((errorMessage) => {
-      return error({
-        statusCode: 404,
-        message: errorMessage
-      })
-    })
-  },
   data () {
     return {
-      orders: [],
       bonusDishes: []
     }
   }

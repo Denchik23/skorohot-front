@@ -74,7 +74,7 @@
           ref="sms-code"
           v-model="$v.data.code.$model"
           name="sms-code"
-          mask="####"
+          mask="######"
           class="base-input"
           type="text"
         />
@@ -142,14 +142,14 @@ export default {
           isPhone
         },
         newPassword: {
-          minLength: minLength(8)
+          minLength: minLength(6)
         },
         birth: {
           // todo валидировать дату
         },
         code: {
           required: requiredIf(() => this.isSmsCodeSent),
-          minLength: minLength(4)
+          minLength: minLength(6)
         }
       }
     }

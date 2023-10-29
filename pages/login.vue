@@ -5,13 +5,6 @@
         <div class="auth">
           <div class="auth__form substrate">
             <client-only>
-              <ui-base-radio-group
-                v-if="changeAction === 'LoginAuthorization' || changeAction === 'LoginRegistration'"
-                v-model="changeAction"
-                class="auth__choice"
-                name="delivery"
-                :options="auntOptions"
-              />
               <component :is="changeAction" @changeActionForm="changeActionForm" />
             </client-only>
           </div>
@@ -63,22 +56,31 @@
 </template>
 
 <script>
-import { auntOptions } from '@/vocabularies/options'
 
 export default {
   name: 'Login',
-  head: {
-    title: 'Авторизация | Доставка еды СкороХОТ'
-  },
   data () {
     return {
-      auntOptions,
-      changeAction: 'LoginAuthorization'
+      changeAction: 'LoginRegistration'
     }
+  },
+  head: {
+    title: 'Авторизация | Доставка еды СкороХОТ'
   },
   created () {
     if (this.$auth.loggedIn) {
       this.$router.push('/profile')
+    }
+  },
+  mounted () {
+    if (!this.$auth.loggedIn) {
+      const matches = document.cookie.match(new RegExp(
+        '(?:^|; )' + 'auth._token.laravelSanctum'.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'
+      ))
+      const isRegister = matches ? decodeURIComponent(matches[1]) : undefined
+      if (isRegister !== undefined && isRegister === 'false') {
+        this.changeAction = 'LoginAuthorization'
+      }
     }
   },
   methods: {
@@ -107,49 +109,28 @@ export default {
     margin: 30px 0 0 0;
   }
 
-  &__button,
-  &__forgot {
-    width: 100%;
-  }
-
   &__forgot {
     border: none;
     background: unset;
     color: #fff;
     font-size: 18px;
-    margin: 0 0 30px 0;
-    text-align: left;
     font-weight: 300;
+    min-width: 60%;
+    text-align: left;
   }
 
   &__action {
-    margin: 30px 0;
+    margin: 60px 0 0 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
 
-  &__social {
-    margin: 15px 0 0 0;
-
-    > div {
-      text-align: center;
-      font-size: 16px;
-      margin: 0 0 25px 0;
-    }
-
-    > ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-    }
+  &__action_no-back {
+    align-items: center;
   }
 
   @include media-mobile {
-    &__button,
-    &__forgot {
-      width: 49%;
-    }
-
     &__body {
       max-width: 380px;
       margin: 0 auto;

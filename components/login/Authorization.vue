@@ -1,7 +1,7 @@
 <template>
   <div class="auth__body">
     <div class="auth__title section-title section-title_substrate">
-      Добро <span>пожаловать!</span>
+      Мы рады видеть вас <span>снова!</span>
     </div>
     <ui-form-item
       label="Номер телефона"
@@ -28,41 +28,30 @@
       required
       :error="$v.data.password.$error"
     >
-      <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 8 символов">
+      <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 6 символов">
       <template #error>
         <small v-if="!$v.data.password.required">Обязательное поле</small>
-        <small v-if="!$v.data.password.minLength">Минимальная длина 8 символов</small>
+        <small v-if="!$v.data.password.minLength">Минимальная длина 6 символов</small>
       </template>
     </ui-form-item>
+    <ui-form-item class="text-center">
+      <ui-base-button
+        title="Войти"
+        :error="errorButton"
+        :loader="loaderButton"
+        @click="login"
+      />
+    </ui-form-item>
     <ui-form-item>
-      <div class="auth__action">
-        <button
-          class="auth__forgot"
-          @click="$emit('changeActionForm', 'LoginPasswordRecovery')"
-        >
-          Забыли пароль?
-        </button>
+      <div class="auth__action auth__action_no-back">
+        <span class="auth__forgot">Впервые у нас?</span>
         <ui-base-button
           class="auth__button"
-          title="Войти"
-          :error="errorButton"
-          :loader="loaderButton"
-          @click="login"
+          title="Регистрация"
+          @click="$emit('changeActionForm', 'LoginRegistration')"
         />
       </div>
     </ui-form-item>
-    <div class="auth__social">
-      <div>
-        Или войти с помощью
-      </div>
-      <ul>
-        <li><a href="#"><img src="@/assets/img/vk-icon.svg" alt="vk-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="@/assets/img/google-plus-icon.svg" alt="google-plus-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="@/assets/img/apple-icon.svg" alt="apple-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="@/assets/img/facebook-icon.svg" alt="facebook-icon" width="41" height="41"></a></li>
-        <li><a href="#"><img src="@/assets/img/telegram-icon.svg" alt="telegram-icon" width="41" height="41"></a></li>
-      </ul>
-    </div>
   </div>
 </template>
 
@@ -99,7 +88,7 @@ export default {
         },
         password: {
           required,
-          minLength: minLength(8)
+          minLength: minLength(6)
         }
       }
     }

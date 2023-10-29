@@ -2,7 +2,7 @@
   <div class="auth__body">
     <template v-if="!checkCodeLayout">
       <div class="auth__title section-title section-title_substrate">
-        Быстрая <span>регистрация!</span>
+        Добро <span>пожаловать!</span>
       </div>
       <ui-form-item
         label="Имя"
@@ -29,45 +29,31 @@
           <small v-if="!$v.data.phone.isPhone">Не корретный телефон</small>
         </template>
       </ui-form-item>
-      <ui-form-item
-        label="Пароль"
-        required
-        :error="$v.data.password.$error"
-      >
-        <input v-model="$v.data.password.$model" type="password" class="base-input" placeholder="Не менее 8 символов">
-        <template #error>
-          <small v-if="!$v.data.password.required">Обязательное поле</small>
-          <small v-if="!$v.data.password.minLength">Минимальная длина 8 символов</small>
-        </template>
-      </ui-form-item>
-      <ui-form-item
-        label="Повторите пароль"
-        required
-        :error="$v.data.password_confirmation.$error"
-      >
-        <input v-model="$v.data.password_confirmation.$model" type="password" class="base-input" placeholder="Не менее 8 символов">
-        <template #error>
-          <small v-if="!$v.data.password_confirmation.required">Обязательное поле</small>
-          <small v-if="!$v.data.password_confirmation.sameAsPassword">Пароли должны совпадать</small>
-        </template>
+      <ui-form-item class="text-center">
+        <ui-base-button
+          title="Получить код"
+          :error="errorButton"
+          :loader="loaderButton"
+          @click="sendSmsCode"
+        />
       </ui-form-item>
       <ui-form-item>
-        <div class="auth__action">
+        <div class="auth__action auth__action_no-back">
+          <span class="auth__forgot">Были у нас раньше?</span>
           <ui-base-button
-            title="Регистрация"
-            :error="errorButton"
-            :loader="loaderButton"
-            @click="sendSmsCode"
+            class="auth__button"
+            title="Вход"
+            @click="$emit('changeActionForm', 'LoginAuthorization')"
           />
         </div>
       </ui-form-item>
     </template>
     <template v-else>
       <div class="auth__title section-title section-title_substrate">
-        Введите <span>4-х значный код</span>
+        Введите <span>6-х значный код</span>
       </div>
       <div class="intro">
-        На номер телефона <strong>+7{{ data.phone }}</strong> придет смс для подтверждения
+        На номер телефона <strong>+7{{ data.phone }}</strong> придет смс с кодом для подтверждения.<br>Этот код будет паролем пока вы его не смените в настройка профиля.
       </div>
       <ui-form-item
         label="Код"
@@ -79,7 +65,7 @@
           ref="sms-code"
           v-model="$v.data.code.$model"
           name="sms-code"
-          mask="####"
+          mask="######"
           class="base-input"
           type="text"
         />
@@ -131,6 +117,7 @@ export default {
   .auth__back,
   .auth__button-confirm {
     width: 100%;
+    min-width: auto;
   }
   &__back {
     position: relative;
@@ -139,7 +126,7 @@ export default {
       position: absolute;
       content: "";
       left: 0;
-      top: 3px;
+      top: 14px;
       width: 50px;
       height: 16px;
       background: url("~assets/img/vector-arrow.svg") no-repeat center;
@@ -172,6 +159,13 @@ export default {
     }
     .auth__button-confirm {
       width: 60%;
+    }
+  }
+  @include media-laptop {
+    .auth__back {
+      &:after {
+        top: 21px;
+      }
     }
   }
 }

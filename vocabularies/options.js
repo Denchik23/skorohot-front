@@ -50,17 +50,6 @@ export const paymentOptions = [
   }
 ]
 
-export const auntOptions = [
-  {
-    value: 'LoginAuthorization',
-    label: 'Вход'
-  },
-  {
-    value: 'LoginRegistration',
-    label: 'Регистрация'
-  }
-]
-
 export const genderOptions = [
   {
     value: 1,

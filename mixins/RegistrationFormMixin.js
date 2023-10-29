@@ -1,4 +1,4 @@
-import { required, minLength, sameAs, requiredIf } from 'vuelidate/lib/validators'
+import { required, minLength, requiredIf } from 'vuelidate/lib/validators'
 import { TheMask } from 'vue-the-mask'
 import { isPhone } from '~/utils/validationUtils'
 import ModalMixin from '~/mixins/ModalMixin'
@@ -26,8 +26,6 @@ export default {
       defaultData: {
         name: '',
         phone: '',
-        password: '',
-        password_confirmation: '',
         code: ''
       }
     }
@@ -41,17 +39,9 @@ export default {
           required,
           isPhone
         },
-        password: {
-          required,
-          minLength: minLength(8)
-        },
-        password_confirmation: {
-          required,
-          sameAsPassword: sameAs('password')
-        },
         code: {
           required: requiredIf(() => this.validSmsCode),
-          minLength: minLength(4)
+          minLength: minLength(6)
         }
       }
     }
@@ -112,9 +102,8 @@ export default {
       }
       const data = {
         phone: '7' + this.data.phone,
-        password: this.data.password,
-        password_confirmation: this.data.password_confirmation,
-        code: this.data.code
+        code: this.data.code,
+        password: this.data.code
       }
       this.$store.dispatch('profile/confirmSMSCode', data)
         .finally(() => {

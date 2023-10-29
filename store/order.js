@@ -19,11 +19,10 @@ export const actions = {
       })
     })
   },
-
   // eslint-disable-next-line no-empty-pattern
-  getOrders ({}) {
+  getOrders ({}, page = 1) {
     return new Promise((resolve, reject) => {
-      this.$axios.$get('/order').then(({ data }) => {
+      this.$axios.$get('/order', { params: { page } }).then((data) => {
         resolve(data)
       }).catch((error) => {
         reject(prepareErrorMessage(error))
