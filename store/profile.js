@@ -6,7 +6,18 @@ export const mutations = {}
 
 export const actions = {
   // eslint-disable-next-line no-empty-pattern
-  sendSMSCode ({}, payload) {
+  async sendSMSCode ({}, payload) {
+    await this.$auth.request({
+      withCredentials: true,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      url: process.env.APP_API_AUNT_URL + '/sanctum/csrf-cookie'
+    }, {
+      maxRedirects: 0
+    })
     return this.$axios.$post('/sms-code/send', {
       phone: payload.phone,
       password: payload.password

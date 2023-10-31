@@ -72,8 +72,8 @@
             </div>
             <div class="footer__links">
               <a href="#">Обратная связь</a>
-              <a href="/confidentiality.pdf" target="_blank" title="Пользовательское соглашение">Пользовательское соглашение</a>
-              <a href="#">Политика конфиденциальности</a>
+              <a href="#" target="_blank" title="Пользовательское соглашение">Пользовательское соглашение</a>
+              <a href="/confidentiality.pdf" target="_blank" title="Политика конфиденциальности">Политика конфиденциальности</a>
             </div>
             <div class="copyright">
               © {{ currentYear }} skorohot.ru – СКОРО-ХОТ

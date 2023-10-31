@@ -57,6 +57,8 @@
 
 <script>
 
+import { getCookie } from '@/utils/globalHelpers'
+
 export default {
   name: 'Login',
   data () {
@@ -74,10 +76,7 @@ export default {
   },
   mounted () {
     if (!this.$auth.loggedIn) {
-      const matches = document.cookie.match(new RegExp(
-        '(?:^|; )' + 'auth._token.laravelSanctum'.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'
-      ))
-      const isRegister = matches ? decodeURIComponent(matches[1]) : undefined
+      const isRegister = getCookie(document, 'auth._token.laravelSanctum')
       if (isRegister !== undefined && isRegister === 'false') {
         this.changeAction = 'LoginAuthorization'
       }

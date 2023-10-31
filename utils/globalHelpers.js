@@ -5,3 +5,10 @@ export function prepareErrorMessage (error) {
   }
   return message
 }
+
+export function getCookie (document, cookieName) {
+  const matches = document.cookie.match(new RegExp(
+    '(?:^|; )' + cookieName.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'
+  ))
+  return matches ? decodeURIComponent(matches[1]) : undefined
+}
