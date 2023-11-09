@@ -14,9 +14,9 @@ export default {
     return {
       data: null,
       defaultData: {
-        name: 'denis',
-        email: 'email@email.ru',
-        comment: 'email@email.ru email@email.ru'
+        name: '',
+        email: '',
+        comment: ''
       }
     }
   },
@@ -65,7 +65,7 @@ export default {
       label="Ваше Имя"
       :error="$v.data.name.$error"
     >
-      <input v-model="$v.data.name.$model" type="text" class="base-input" placeholder="Иван">
+      <input v-model="$v.data.name.$model" type="text" class="base-input">
       <template #error>
         <small v-if="!$v.data.name.maxlength">Максимально 255 символов</small>
       </template>
@@ -75,7 +75,7 @@ export default {
       :error="$v.data.email.$error"
       required
     >
-      <input v-model="$v.data.email.$model" type="text" class="base-input" placeholder="email@email.ru">
+      <input v-model="$v.data.email.$model" type="text" class="base-input">
       <template #error>
         <small v-if="!$v.data.email.required">Обязательное поле</small>
         <small v-if="!$v.data.email.email">Некорректный E-mail</small>
