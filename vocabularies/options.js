@@ -132,6 +132,10 @@ export const timeList = [
   {
     value: '23:30',
     label: 'К 23:30'
+  },
+  {
+    value: '00:00',
+    label: 'К 00:00'
   }
 ]
 

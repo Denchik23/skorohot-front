@@ -71,8 +71,12 @@
               <img src="@/assets/img/footer-pay.svg" alt="footer-pay" width="249" height="28">
             </div>
             <div class="footer__links">
-              <a href="#">Обратная связь</a>
-              <a href="#" title="Пользовательское соглашение">Пользовательское соглашение</a>
+              <button @click="$modal.show('modal-feedback')">
+                Обратная связь
+              </button>
+              <!--<a href="#" title="Пользовательское соглашение">
+                Пользовательское соглашение
+              </a>-->
               <NuxtLink to="/privacy-policy">
                 Политика конфиденциальности
               </NuxtLink>
@@ -85,6 +89,9 @@
         <a href="#" class="footer__scroll" @click.prevent="scrollTopSmooth">Вернуться к началу</a>
       </div>
     </div>
+    <client-only>
+      <modal-feedback />
+    </client-only>
   </footer>
 </template>
 
@@ -197,10 +204,16 @@ export default {
     width: 100%;
     text-align: center;
 
-    > a {
+    > a, button {
       color: #fff;
       display: block;
       padding: 4px 0;
+    }
+
+    button {
+      background: unset;
+      border: none;
+      width: 100%;
     }
   }
 
@@ -297,6 +310,9 @@ export default {
       width: auto;
       text-align: right;
       order: 2;
+      button {
+        text-align: left;
+      }
     }
   }
 

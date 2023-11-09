@@ -52,7 +52,8 @@ select[disabled] {
   }
 
   &_error input,
-  &_error select {
+  &_error select,
+  &_error textarea {
     border: 1px solid #c00;
   }
 

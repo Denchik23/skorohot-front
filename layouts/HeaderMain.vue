@@ -153,29 +153,26 @@ export default {
     }
   }
 
-  &__address,
-  &__phone {
+  &__address {
     display: none;
   }
 
-  @include media-mobile {
-    &__phone {
+  &__phone {
+    display: block;
+    width: 30px;
+    position: relative;
+    z-index: 5;
+
+    > span {
+      display: none;
+    }
+
+    > img {
       display: block;
-      position: relative;
-      z-index: 5;
     }
+  }
 
-    &__phone {
-      width: 30px;
-
-      > span {
-        display: none;
-      }
-
-      > img {
-        display: block;
-      }
-    }
+  @include media-mobile {
   }
 
   @include media-tablet {

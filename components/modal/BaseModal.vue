@@ -1,10 +1,12 @@
 <template>
   <modal
     :name="name"
-    width="480"
+    :min-width="360"
+    :max-width="480"
+    adaptive
     :classes="['modal']"
     :height="'auto'"
-    :clickToClose="false"
+    :click-to-close="false"
     :scrollable="true"
   >
     <div class="modal__inner">
