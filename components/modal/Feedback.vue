@@ -99,7 +99,7 @@ export default {
     </ui-form-item>
     <ui-base-button
       class="modal__button"
-      title="Сохранить"
+      title="Отправить"
       :error="errorButton"
       :loader="loaderButton"
       @click="sendMessages"

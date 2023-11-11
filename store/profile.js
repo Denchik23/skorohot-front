@@ -43,5 +43,16 @@ export const actions = {
   // eslint-disable-next-line no-empty-pattern
   getBonusDishes ({}) {
     return this.$axios.$get('/profile/dish')
+  },
+
+  // eslint-disable-next-line no-empty-pattern
+  destroyProfile ({}, profileId) {
+    return new Promise((resolve, reject) => {
+      this.$axios.$delete('/profile/' + profileId).then(() => {
+        resolve()
+      }).catch((error) => {
+        reject(prepareErrorMessage(error))
+      })
+    })
   }
 }

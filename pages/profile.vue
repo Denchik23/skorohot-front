@@ -15,6 +15,7 @@
           <profile-present />
           <client-only>
             <profile-addresses />
+            <modal-destroy-profile />
           </client-only>
         </div>
       </div>
@@ -52,6 +53,14 @@ export default {
 
   &__score {
     margin: 30px 0 0 0;
+  }
+
+  &__destroy-button {
+    border: none;
+    background: unset;
+    color: #fff;
+    padding: 3px 0;
+    margin: 15px 0 0 0;
   }
 
   @include media-mobile {

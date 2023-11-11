@@ -83,14 +83,19 @@
         </template>
       </ui-form-item>
     </div>
-    <ui-base-button
-      green
-      class="modal__button"
-      title="Сохранить изменения"
-      :error="errorButton"
-      :loader="loaderButton"
-      @click="saveDataUser"
-    />
+    <div class="text-center">
+      <ui-base-button
+        green
+        class="modal__button"
+        title="Сохранить изменения"
+        :error="errorButton"
+        :loader="loaderButton"
+        @click="saveDataUser"
+      />
+      <button class="profile__destroy-button" @click="$modal.show('modal-destroy-profile')">
+        Удалить профиль
+      </button>
+    </div>
   </div>
 </template>
 
