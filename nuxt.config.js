@@ -82,7 +82,7 @@ export default {
         id: '55256869',
         webvisor: true,
         clickmap: true,
-        debug: true
+        debug: false
       }
     ]
   ],
