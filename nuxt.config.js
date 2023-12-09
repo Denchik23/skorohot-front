@@ -75,7 +75,16 @@ export default {
         mode: 'debug'
       }),
       localStorage: ['cart'] //  If not entered, “localStorage” is the default value
-    }]
+    }],
+    [
+      '@rkaliev/nuxtjs-yandex-metrika',
+      {
+        id: '55256869',
+        webvisor: true,
+        clickmap: true,
+        debug: true
+      }
+    ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
