@@ -43,7 +43,7 @@
               <div class="fast-menu__title">
                 <span>Сеты и комбо</span><br>Горячая, вкусная и сочная
               </div>
-              <nuxt-link to="/catalog/pitstsa" class="button-link" />
+              <nuxt-link to="/catalog/sety" class="button-link" />
             </div>
           </div>
         </div>
