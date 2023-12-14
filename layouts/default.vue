@@ -10,6 +10,7 @@
     <modal-action />
     <client-only>
       <fixed-cart v-if="$route.path !== '/cart'" />
+      <script src="//cdn.callibri.ru/callibri.js" type="text/javascript" charset="utf-8"></script>
     </client-only>
   </div>
 </template>
