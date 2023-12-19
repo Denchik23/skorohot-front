@@ -20,7 +20,7 @@ export const actions = {
     })
     return this.$axios.$post('/sms-code/send', {
       phone: payload.phone,
-      password: payload.password
+      token: payload.token
     })
   },
 

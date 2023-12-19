@@ -1,4 +1,4 @@
-import { required, minLength, requiredIf } from 'vuelidate/lib/validators'
+import { minLength, required, requiredIf } from 'vuelidate/lib/validators'
 import { TheMask } from 'vue-the-mask'
 import { isPhone } from '~/utils/validationUtils'
 import ModalMixin from '~/mixins/ModalMixin'
@@ -67,7 +67,7 @@ export default {
         }
       }, 1000)
     },
-    sendSmsCode () {
+    async sendSmsCode () {
       this.validSmsCode = false
       if (!this.beforeSubmit()) {
         return
@@ -77,8 +77,10 @@ export default {
         this.checkCodeLayout = true
         return false
       }
+      const token = await this.recaptcha()
       const data = {
-        phone: '7' + this.data.phone
+        phone: '7' + this.data.phone,
+        token
       }
       this.$store.dispatch('profile/sendSMSCode', data)
         .finally(() => {
@@ -125,6 +127,10 @@ export default {
         }).catch((error) => {
           this.showModalError(this.getResponseErrorMessage(error.response))
         })
+    },
+    async recaptcha () {
+      await this.$recaptchaLoaded()
+      return await this.$recaptcha('send-sms')
     }
   }
 }
