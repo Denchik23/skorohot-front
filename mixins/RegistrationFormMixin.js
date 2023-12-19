@@ -130,7 +130,7 @@ export default {
     },
     async recaptcha () {
       await this.$recaptchaLoaded()
-      return await this.$recaptcha('send-sms')
+      return await this.$recaptcha('send_sms')
     }
   }
 }
