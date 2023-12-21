@@ -19,7 +19,8 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Заказать пиццу с доставкой на дом или офис - СкороХот. Выбрать самую вкусную пиццу можете на сайте skorohot.ru или по  ☎: 7 (918) 057-67-67З.' },
       { name: 'format-detection', content: 'telephone=no' },
-      { hid: 'keywords', name: 'keywords', content: 'пицца, анапа, доставка, заказать, скорохот, на дом' }
+      { hid: 'keywords', name: 'keywords', content: 'пицца, анапа, доставка, заказать, скорохот, на дом' },
+      { name: 'yandex-verification', content: '1fbafadd3a95fae5' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' }
