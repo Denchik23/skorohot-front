@@ -1,4 +1,4 @@
-# skorohot-front
+# Skorohot-front
 
 ## Build Setup
 
